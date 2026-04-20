@@ -1,0 +1,112 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+function Register() {
+  const navigate = useNavigate();
+
+  // ✅ DIPISAH
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#F8BFBF] via-[#F8FBFB] to-[#E0C3FC] px-6">
+
+      <div className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl p-8 w-full max-w-md">
+
+        {/* TITLE */}
+        <h1 className="text-2xl font-bold text-center text-[#DC1416] mb-2">
+          Gurubermutu
+        </h1>
+
+        <p className="text-center text-gray-500 mb-6">
+          Buat akun baru 🚀
+        </p>
+
+        {/* FORM */}
+        <form className="space-y-5">
+
+          {/* NAMA */}
+          <div className="relative">
+            <label className="text-sm text-gray-600">Nama Lengkap</label>
+            <input
+              type="text"
+              placeholder="Masukkan nama"
+              className="w-full mt-1 px-4 py-2 pl-10 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#DC1416]"
+            />
+            <span className="absolute left-3 top-9 text-gray-400">👤</span>
+          </div>
+
+          {/* EMAIL */}
+          <div className="relative">
+            <label className="text-sm text-gray-600">Email</label>
+            <input
+              type="email"
+              placeholder="Masukkan email"
+              className="w-full mt-1 px-4 py-2 pl-10 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#DC1416]"
+            />
+            <span className="absolute left-3 top-9 text-gray-400">📧</span>
+          </div>
+
+          {/* PASSWORD */}
+          <div className="relative">
+            <label className="text-sm text-gray-600">Password</label>
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Masukkan password"
+              className="w-full mt-1 px-4 py-2 pl-10 pr-10 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#DC1416]"
+            />
+            <span className="absolute left-3 top-9 text-gray-400">🔒</span>
+            <span
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-9 cursor-pointer text-gray-500"
+            >
+              {showPassword ? "Hide" : "Show"}
+            </span>
+          </div>
+
+          {/* CONFIRM PASSWORD */}
+          <div className="relative">
+            <label className="text-sm text-gray-600">Konfirmasi Password</label>
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              placeholder="Ulangi password"
+              className="w-full mt-1 px-4 py-2 pl-10 pr-10 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#DC1416]"
+            />
+            <span className="absolute left-3 top-9 text-gray-400">🔒</span>
+            <span
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute right-3 top-9 cursor-pointer text-gray-500"
+            >
+              {showConfirmPassword ? "Hide" : "Show"}
+            </span>
+          </div>
+
+          {/* BUTTON */}
+          <button
+            type="button"
+            onClick={() => navigate("/dashboard")}
+            className="w-full bg-[#DC1416] text-white py-2 rounded-lg mt-4 shadow-md hover:scale-105 transition"
+          >
+            Daftar
+          </button>
+
+        </form>
+
+        {/* FOOTER */}
+        <p className="text-sm text-center text-gray-500 mt-6">
+          Sudah punya akun?{" "}
+          <span
+            onClick={() => navigate("/login")}
+            className="text-[#DC1416] cursor-pointer hover:underline"
+          >
+            Sign In
+          </span>
+        </p>
+
+      </div>
+
+    </div>
+  );
+}
+
+export default Register;
