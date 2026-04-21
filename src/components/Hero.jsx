@@ -8,23 +8,24 @@ function Hero() {
   return (
     <section
       id="home"
-      className="w-full bg-cover bg-center pt-28 pb-32" // 🔥 tambah pb biar ga ketabrak
+      className="w-full bg-cover bg-center pt-24 md:pt-28 pb-20 md:pb-32"
       style={{ backgroundImage: `url(${bg})` }}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-16 py-16 grid md:grid-cols-2 items-center gap-10">
+      <div className="max-w-7xl mx-auto px-4 md:px-16 py-12 md:py-16 grid md:grid-cols-2 items-center gap-10">
         
-        <div>
-          <h1 className="text-5xl font-bold mb-6 text-gray-800 leading-tight">
+        {/* TEXT */}
+        <div className="text-center md:text-left">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6 text-gray-800 leading-tight">
             Dari Kelas ke Karya,
             <br /> Dari Karya ke Cuan 💸
           </h1>
 
-          <p className="text-gray-600 mb-6 text-lg">
+          <p className="text-gray-600 mb-4 md:mb-6 text-base md:text-lg">
             Ubah cara kamu mengajar jadi lebih produktif. Belajar skill baru,
             ciptakan karya digital, dan hasilkan penghasilan tambahan.
           </p>
 
-          <div className="flex gap-4 mt-6">
+          <div className="flex flex-col md:flex-row gap-3 md:gap-4 mt-4 justify-center md:justify-start">
             
             <button
               onClick={() => navigate("/login")}
@@ -40,11 +41,12 @@ function Hero() {
           </div>
         </div>
 
+        {/* IMAGE */}
         <div className="flex justify-center">
           <img
             src={marica}
             alt="Marica"
-            className="w-80 drop-shadow-2xl"
+            className="w-60 md:w-80"
           />
         </div>
       </div>
