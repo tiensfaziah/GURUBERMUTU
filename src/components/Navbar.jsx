@@ -7,7 +7,7 @@ function Navbar() {
         
         {/* LOGO */}
         <Link to="/" className="font-bold text-xl text-[#DC1416]">
-          Gurubermutu
+          Gurubermutu.id
         </Link>
 
         {/* MENU */}

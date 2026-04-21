@@ -7,6 +7,7 @@ import Features from "./components/Features";
 import CTA from "./components/CTA";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import SocialProof from "./components/SocialProof";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <Hero />
               <ProblemSection />
               <Features />
+              <SocialProof />
               <CTA />
             </>
           }

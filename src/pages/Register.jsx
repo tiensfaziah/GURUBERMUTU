@@ -4,21 +4,21 @@ import { useNavigate } from "react-router-dom";
 function Register() {
   const navigate = useNavigate();
 
-  // ✅ DIPISAH
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#F8BFBF] via-[#F8FBFB] to-[#E0C3FC] px-6">
+    <div className="min-h-screen flex items-center justify-center pt-24 overflow-y-auto bg-gradient-to-br from-[#F8BFBF] via-[#F8FBFB] to-[#E0C3FC] px-4">
 
-      <div className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl p-8 w-full max-w-md">
+      {/* CARD */}
+      <div className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl p-6 sm:p-8 w-full max-w-md mt-10 mb-10">
 
         {/* TITLE */}
-        <h1 className="text-2xl font-bold text-center text-[#DC1416] mb-2">
+        <h1 className="text-2xl sm:text-3xl font-bold text-center text-[#DC1416] mb-2">
           Gurubermutu
         </h1>
 
-        <p className="text-center text-gray-500 mb-6">
+        <p className="text-center text-gray-500 mb-6 text-sm sm:text-base">
           Buat akun baru 🚀
         </p>
 
@@ -26,66 +26,78 @@ function Register() {
         <form className="space-y-5">
 
           {/* NAMA */}
-          <div className="relative">
+          <div>
             <label className="text-sm text-gray-600">Nama Lengkap</label>
-            <input
-              type="text"
-              placeholder="Masukkan nama"
-              className="w-full mt-1 px-4 py-2 pl-10 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#DC1416]"
-            />
-            <span className="absolute left-3 top-9 text-gray-400">👤</span>
+            <div className="relative mt-1">
+              <input
+                type="text"
+                placeholder="Masukkan nama"
+                className="w-full px-4 py-2 pl-10 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#DC1416]"
+              />
+              <span className="absolute left-3 top-2.5 text-gray-400">👤</span>
+            </div>
           </div>
 
           {/* EMAIL */}
-          <div className="relative">
+          <div>
             <label className="text-sm text-gray-600">Email</label>
-            <input
-              type="email"
-              placeholder="Masukkan email"
-              className="w-full mt-1 px-4 py-2 pl-10 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#DC1416]"
-            />
-            <span className="absolute left-3 top-9 text-gray-400">📧</span>
+            <div className="relative mt-1">
+              <input
+                type="email"
+                placeholder="Masukkan email"
+                className="w-full px-4 py-2 pl-10 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#DC1416]"
+              />
+              <span className="absolute left-3 top-2.5 text-gray-400">📧</span>
+            </div>
           </div>
 
           {/* PASSWORD */}
-          <div className="relative">
+          <div>
             <label className="text-sm text-gray-600">Password</label>
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Masukkan password"
-              className="w-full mt-1 px-4 py-2 pl-10 pr-10 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#DC1416]"
-            />
-            <span className="absolute left-3 top-9 text-gray-400">🔒</span>
-            <span
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-9 cursor-pointer text-gray-500"
-            >
-              {showPassword ? "Hide" : "Show"}
-            </span>
+            <div className="relative mt-1">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Masukkan password"
+                className="w-full px-4 py-2 pl-10 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#DC1416]"
+              />
+              <span className="absolute left-3 top-2.5 text-gray-400">🔒</span>
+
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-2 text-sm text-gray-500 hover:text-[#DC1416]"
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
           </div>
 
           {/* CONFIRM PASSWORD */}
-          <div className="relative">
+          <div>
             <label className="text-sm text-gray-600">Konfirmasi Password</label>
-            <input
-              type={showConfirmPassword ? "text" : "password"}
-              placeholder="Ulangi password"
-              className="w-full mt-1 px-4 py-2 pl-10 pr-10 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#DC1416]"
-            />
-            <span className="absolute left-3 top-9 text-gray-400">🔒</span>
-            <span
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="absolute right-3 top-9 cursor-pointer text-gray-500"
-            >
-              {showConfirmPassword ? "Hide" : "Show"}
-            </span>
+            <div className="relative mt-1">
+              <input
+                type={showConfirm ? "text" : "password"}
+                placeholder="Ulangi password"
+                className="w-full px-4 py-2 pl-10 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#DC1416]"
+              />
+              <span className="absolute left-3 top-2.5 text-gray-400">🔒</span>
+
+              <button
+                type="button"
+                onClick={() => setShowConfirm(!showConfirm)}
+                className="absolute right-3 top-2 text-sm text-gray-500 hover:text-[#DC1416]"
+              >
+                {showConfirm ? "Hide" : "Show"}
+              </button>
+            </div>
           </div>
 
           {/* BUTTON */}
           <button
             type="button"
             onClick={() => navigate("/dashboard")}
-            className="w-full bg-[#DC1416] text-white py-2 rounded-lg mt-4 shadow-md hover:scale-105 transition"
+            className="w-full bg-[#DC1416] text-white py-2.5 rounded-lg mt-2 shadow-md hover:scale-105 transition"
           >
             Daftar
           </button>
@@ -104,7 +116,6 @@ function Register() {
         </p>
 
       </div>
-
     </div>
   );
 }
