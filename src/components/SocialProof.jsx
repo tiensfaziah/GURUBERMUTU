@@ -25,10 +25,13 @@ const testimonials = [
 
 const SocialProof = () => {
   return (
-    <section className="py-20 px-6 bg-white text-center overflow-hidden">
+    <section className="relative z-10 py-16 pb-20 px-6 bg-white text-center overflow-hidden">
       
+      {/* FADE KE CTA */}
+      <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-b from-white to-transparent pointer-events-none"></div>
+
       {/* STATS */}
-      <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-8 mb-16">
+      <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-8 mb-12">
         <div>
           <h3 className="text-3xl font-bold text-[#DC1416]">1,200+</h3>
           <p className="text-gray-600">Guru Bergabung</p>
@@ -44,15 +47,13 @@ const SocialProof = () => {
       </div>
 
       {/* TITLE */}
-      <h2 className="text-3xl font-bold mb-10 text-gray-800">
+      <h2 className="text-3xl font-bold mb-8 text-gray-800">
         Apa Kata Mereka? 💬
       </h2>
 
-      {/* SCROLL CONTAINER */}
-      <div className="relative overflow-hidden">
-        
-        <div className="flex gap-6 w-max animate-[scroll_20s_linear_infinite]">
-
+      {/* SCROLL */}
+      <div className="overflow-hidden">
+        <div className="flex gap-6 w-max animate-[scroll_20s_linear_infinite] pb-4">
           {[...testimonials, ...testimonials].map((item, index) => (
             <div
               key={index}
@@ -66,9 +67,7 @@ const SocialProof = () => {
               </h4>
             </div>
           ))}
-
         </div>
-
       </div>
 
     </section>

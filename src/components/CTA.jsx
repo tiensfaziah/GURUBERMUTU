@@ -2,21 +2,14 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const CTA = () => {
-  const navigate = useNavigate(); // 🔥 wajib
+  const navigate = useNavigate();
 
   return (
-    <section className="relative py-24 px-6 text-center overflow-hidden">
+    <section className="relative z-0 py-20 px-6 text-center overflow-hidden -mt-10 bg-gradient-to-b from-white via-[#F8BFBF] to-[#D9A7C7]">
       
-      {/* BACKGROUND GRADIENT */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#F8BFBF] via-[#E0C3FC] to-[#D9A7C7] opacity-90"></div>
-
-      {/* BLUR EFFECT */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-purple-300 rounded-full blur-3xl opacity-30"></div>
-      <div className="absolute bottom-0 right-0 w-72 h-72 bg-pink-300 rounded-full blur-3xl opacity-30"></div>
-
       {/* CONTENT */}
       <div className="relative max-w-3xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-800 leading-tight">
+        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
           Siap Naik Level Jadi Guru Keren? 🚀
         </h2>
 
@@ -27,23 +20,20 @@ const CTA = () => {
 
         <div className="flex justify-center gap-4 flex-wrap">
           
-          {/* 🔥 BUTTON UTAMA */}
           <button
             onClick={() => navigate("/login")}
-            className="bg-[#A64D8B] text-white px-7 py-3 rounded-full shadow-lg hover:scale-105 transition duration-300"
+            className="bg-[#A64D8B] text-white px-7 py-3 rounded-full shadow-lg hover:scale-105 transition"
           >
             🚀 Mulai Sekarang
           </button>
 
-          {/* BUTTON DEMO */}
-          <button
-            className="bg-white text-[#A64D8B] px-7 py-3 rounded-full shadow-lg hover:scale-105 transition duration-300"
-          >
+          <button className="bg-white text-[#A64D8B] px-7 py-3 rounded-full shadow-lg hover:scale-105 transition">
             🎬 Coba Demo
           </button>
 
         </div>
       </div>
+
     </section>
   );
 };
