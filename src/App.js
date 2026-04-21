@@ -1,23 +1,33 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import ProblemSection from "./components/ProblemSection";
 import Features from "./components/Features";
 import CTA from "./components/CTA";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
 import SocialProof from "./components/SocialProof";
 
-function App() {
-  return (
-    <Router>
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
 
-      <Navbar />
+import ProtectedRoute from "./routes/ProtectedRoute";
+
+import SkillTree from "./fitur/SkillTree"; // 🔥 ini udah kamu punya
+
+function Layout() {
+  const location = useLocation();
+
+  const hideNavbar =
+    location.pathname === "/dashboard" ||
+    location.pathname === "/skill-tree";
+
+  return (
+    <>
+      {!hideNavbar && <Navbar />}
 
       <Routes>
-        
-        {/* LANDING PAGE */}
+        {/* LANDING */}
         <Route
           path="/"
           element={
@@ -31,13 +41,38 @@ function App() {
           }
         />
 
-        {/* LOGIN PAGE */}
+        {/* AUTH */}
         <Route path="/login" element={<Login />} />
-
-        {/* REGISTER PAGE */}
         <Route path="/register" element={<Register />} />
-      </Routes>
 
+        {/* DASHBOARD */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* 🔥 SKILL TREE PAGE */}
+        <Route
+          path="/skill-tree"
+          element={
+            <ProtectedRoute>
+              <SkillTree />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Layout />
     </Router>
   );
 }

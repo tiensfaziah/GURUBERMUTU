@@ -1,4 +1,4 @@
- import React from "react";
+import React, { useState } from "react";
 
 const levels = [
   {
@@ -7,6 +7,7 @@ const levels = [
     progress: 80,
     xp: 400,
     badge: "🎖️",
+    desc: "Belajar dasar penggunaan tools digital untuk mengajar.",
   },
   {
     level: "Level 2",
@@ -14,6 +15,7 @@ const levels = [
     progress: 50,
     xp: 250,
     badge: "🥈",
+    desc: "Membuat media pembelajaran interaktif dan menarik.",
   },
   {
     level: "Level 3",
@@ -21,10 +23,13 @@ const levels = [
     progress: 20,
     xp: 100,
     badge: "🔒",
+    desc: "Mengembangkan metode mengajar kreatif dan inovatif.",
   },
 ];
 
 const SkillTree = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
   return (
     <section className="py-24 px-6 bg-gradient-to-br from-[#F8FBFB] via-[#F8BFBF]/40 to-[#E0C3FC]/50">
 
@@ -34,7 +39,7 @@ const SkillTree = () => {
           Gamified Skill Tree 🌱
         </h2>
         <p className="text-gray-600">
-          Pantau perkembangan kompetensimu dan naik level setiap harinya
+          Klik level untuk melihat detail progres kamu
         </p>
       </div>
 
@@ -54,11 +59,18 @@ const SkillTree = () => {
       </div>
 
       {/* ROADMAP */}
-      <div className="max-w-5xl mx-auto space-y-8">
+      <div className="max-w-5xl mx-auto space-y-6">
         {levels.map((item, index) => (
           <div
             key={index}
-            className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition"
+            onClick={() => setActiveIndex(index)}
+            className={`cursor-pointer p-6 rounded-2xl shadow-md transition
+              ${
+                activeIndex === index
+                  ? "bg-white border-2 border-[#A64D8B] shadow-xl scale-[1.02]"
+                  : "bg-white hover:shadow-lg"
+              }
+            `}
           >
             {/* HEADER */}
             <div className="flex justify-between items-center mb-4">
@@ -74,10 +86,10 @@ const SkillTree = () => {
               <div className="text-3xl">{item.badge}</div>
             </div>
 
-            {/* PROGRESS BAR */}
+            {/* PROGRESS */}
             <div className="w-full bg-gray-200 rounded-full h-3">
               <div
-                className="bg-gradient-to-r from-[#A64D8B] to-[#E0C3FC] h-3 rounded-full transition-all"
+                className="bg-gradient-to-r from-[#A64D8B] to-[#E0C3FC] h-3 rounded-full"
                 style={{ width: `${item.progress}%` }}
               ></div>
             </div>
@@ -85,6 +97,13 @@ const SkillTree = () => {
             <p className="text-right text-sm text-gray-500 mt-1">
               {item.progress}% selesai
             </p>
+
+            {/* DETAIL (MUNCUL SAAT DIKLIK) */}
+            {activeIndex === index && (
+              <div className="mt-4 text-gray-600 text-sm">
+                {item.desc}
+              </div>
+            )}
           </div>
         ))}
       </div>
