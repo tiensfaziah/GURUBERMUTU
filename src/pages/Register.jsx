@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import { Eye, EyeOff } from "lucide-react"; // 🔥 icon konsisten
 
 function Register() {
   const navigate = useNavigate();
@@ -13,7 +14,9 @@ function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleRegister = async () => {
+  const handleRegister = async (e) => {
+    e.preventDefault(); // 🔥 biar ga reload
+
     if (password !== confirmPassword) {
       alert("Password tidak sama!");
       return;
@@ -41,7 +44,8 @@ function Register() {
           Buat akun baru 🚀
         </p>
 
-        <form className="space-y-5">
+        {/* 🔥 FORM FIX */}
+        <form onSubmit={handleRegister} className="space-y-5">
 
           {/* EMAIL */}
           <div>
@@ -49,6 +53,7 @@ function Register() {
             <div className="relative mt-1">
               <input
                 type="email"
+                required
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-2 pl-10 border rounded-lg"
               />
@@ -62,55 +67,61 @@ function Register() {
             <div className="relative mt-1">
               <input
                 type={showPassword ? "text" : "password"}
+                required
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-2 pl-10 pr-12 border rounded-lg"
               />
               <span className="absolute left-3 top-2.5 text-gray-400">🔒</span>
 
-              <button
-                type="button"
+              {/* 🔥 ICON MATA */}
+              <span
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-2 text-sm"
+                className="absolute right-3 top-2.5 cursor-pointer text-gray-500"
               >
-                {showPassword ? "Hide" : "Show"}
-              </button>
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </span>
             </div>
           </div>
 
-          {/* CONFIRM */}
+          {/* CONFIRM PASSWORD */}
           <div>
             <label className="text-sm text-gray-600">Konfirmasi Password</label>
             <div className="relative mt-1">
               <input
                 type={showConfirm ? "text" : "password"}
+                required
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 className="w-full px-4 py-2 pl-10 pr-12 border rounded-lg"
               />
               <span className="absolute left-3 top-2.5 text-gray-400">🔒</span>
 
-              <button
-                type="button"
+              {/* 🔥 ICON MATA */}
+              <span
                 onClick={() => setShowConfirm(!showConfirm)}
-                className="absolute right-3 top-2 text-sm"
+                className="absolute right-3 top-2.5 cursor-pointer text-gray-500"
               >
-                {showConfirm ? "Hide" : "Show"}
-              </button>
+                {showConfirm ? <EyeOff size={20} /> : <Eye size={20} />}
+              </span>
             </div>
           </div>
 
+          {/* BUTTON */}
           <button
-            type="button"
-            onClick={handleRegister}
-            className="w-full bg-[#DC1416] text-white py-2.5 rounded-lg"
+            type="submit"
+            className="w-full bg-[#DC1416] text-white py-2.5 rounded-lg hover:scale-105 transition"
           >
             Daftar
           </button>
 
         </form>
 
+        {/* FOOTER */}
         <p className="text-sm text-center mt-6">
           Sudah punya akun?{" "}
-          <span onClick={() => navigate("/login")} className="text-[#DC1416] cursor-pointer">
+          <span
+            onClick={() => navigate("/login")}
+            className="text-[#DC1416] cursor-pointer hover:underline"
+          >
             Sign In
           </span>
         </p>

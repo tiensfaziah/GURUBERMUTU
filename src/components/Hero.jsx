@@ -23,7 +23,7 @@ function Hero() {
             </h1>
 
             <p className="text-gray-600 mb-4 md:mb-6 text-sm md:text-lg">
-              Ubah cara kamu mengajar jadi lebih produktif.
+              Ubah cara kamu mengajar jadi lebih produktif. Belajar skill baru, ciptakan karya digital, dan hasilkan penghasilan tambahan dalam satu platform.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mt-4 justify-center md:justify-start">
