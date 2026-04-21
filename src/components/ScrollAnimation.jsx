@@ -10,12 +10,10 @@ function ScrollAnimation({ children, delay = 0 }) {
         if (entry.isIntersecting) {
           setShow(true);
         } else {
-          setShow(false); // 🔥 ini yang bikin animasi bisa ulang
+          setShow(false);
         }
       },
-      {
-        threshold: 0.2,
-      }
+      { threshold: 0.2 }
     );
 
     if (ref.current) observer.observe(ref.current);
