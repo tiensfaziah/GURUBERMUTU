@@ -6,7 +6,9 @@ body {
   @apply bg-[#F8FBFB];
 }
 
-/* 🔥 TAMBAH INI */
+/* =========================
+   SCROLL TESTIMONIAL
+========================= */
 @keyframes scroll {
   0% {
     transform: translateX(0);
@@ -18,4 +20,51 @@ body {
 
 .animate-scroll {
   animation: scroll 20s linear infinite;
+}
+
+/* =========================
+   FADE UP (MASUK HALUS)
+========================= */
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeUp {
+  animation: fadeUp 0.8s ease-out forwards;
+}
+
+/* =========================
+   FLOATING (GERAK NAIK TURUN)
+========================= */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* =========================
+   DELAY (BIAR BERURUTAN)
+========================= */
+.delay-1 {
+  animation-delay: 0.2s;
+}
+.delay-2 {
+  animation-delay: 0.4s;
+}
+.delay-3 {
+  animation-delay: 0.6s;
 }
