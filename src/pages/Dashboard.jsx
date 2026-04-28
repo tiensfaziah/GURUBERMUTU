@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { auth, db } from "../firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import marica from "../assets/maricadadah.gif";
 import { doc, onSnapshot } from "firebase/firestore";
 
 function Dashboard() {
@@ -145,12 +144,6 @@ function Dashboard() {
                   Lanjut Belajar →
                 </button>
               </div>
-
-             <img 
-                src={marica} 
-                alt="maskot guru bermutu" 
-                className="w-28 hidden md:block" 
-            />
 
               <div className="hidden md:flex flex-col gap-3">
                 <div className="bg-white/20 p-3 rounded-xl text-center">

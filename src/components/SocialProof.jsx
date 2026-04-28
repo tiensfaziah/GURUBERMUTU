@@ -24,6 +24,19 @@ const testimonials = [
   },
 ];
 
+// 🔥 fungsi ambil inisial
+const getInitial = (name) => name.charAt(0);
+
+// 🔥 warna avatar random (biar hidup)
+const colors = [
+  "bg-red-400",
+  "bg-pink-400",
+  "bg-purple-400",
+  "bg-indigo-400",
+  "bg-blue-400",
+  "bg-green-400",
+];
+
 const SocialProof = () => {
   return (
     <section className="relative z-10 py-16 pb-20 px-6 bg-white text-center overflow-hidden">
@@ -56,23 +69,47 @@ const SocialProof = () => {
         </h2>
       </ScrollAnimation>
 
-      {/* SCROLL (INI TETAP SAMA, GA DIUBAH) */}
+      {/* SCROLL */}
       <ScrollAnimation delay={0.3}>
         <div className="overflow-hidden">
           <div className="flex gap-6 w-max animate-[scroll_20s_linear_infinite] pb-4">
-            {[...testimonials, ...testimonials].map((item, index) => (
-              <div
-                key={index}
-                className="bg-gray-50 min-w-[280px] max-w-[280px] p-6 rounded-2xl shadow-md"
-              >
-                <p className="text-gray-600 mb-4 italic">
-                  “{item.text}”
-                </p>
-                <h4 className="font-semibold text-[#DC1416]">
-                  {item.name}
-                </h4>
-              </div>
-            ))}
+
+            {[...testimonials, ...testimonials].map((item, index) => {
+              const color = colors[index % colors.length];
+
+              return (
+                <div
+                  key={index}
+                  className="bg-gray-50 min-w-[280px] max-w-[280px] p-6 rounded-2xl shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+                >
+
+                  {/* ⭐ STARS */}
+                  <div className="flex justify-center mb-3 text-yellow-400 text-lg">
+                    ⭐⭐⭐⭐⭐
+                  </div>
+
+                  {/* TEXT */}
+                  <p className="text-gray-600 mb-5 italic">
+                    “{item.text}”
+                  </p>
+
+                  {/* AVATAR + NAME */}
+                  <div className="flex items-center justify-center gap-3 mt-4">
+
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold ${color}`}>
+                      {getInitial(item.name)}
+                    </div>
+
+                    <h4 className="font-semibold text-[#DC1416] text-sm">
+                      {item.name}
+                    </h4>
+
+                  </div>
+
+                </div>
+              );
+            })}
+
           </div>
         </div>
       </ScrollAnimation>

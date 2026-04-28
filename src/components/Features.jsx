@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import ScrollAnimation from "../components/ScrollAnimation";
 
@@ -29,15 +29,22 @@ const N = features.length;
 
 const Features = () => {
   const [current, setCurrent] = useState(0);
+  const [hovered, setHovered] = useState(false);
+  const intervalRef = useRef(null);
 
-  // autoplay
+  // autoplay 3.5 detik + pause saat hover
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % N);
-    }, 2200);
+    if (!hovered) {
+      intervalRef.current = setInterval(() => {
+        setCurrent((prev) => (prev + 1) % N);
+      }, 2000);
+    }
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearInterval(intervalRef.current);
+  }, [hovered]);
+
+  const next = () => setCurrent((prev) => (prev + 1) % N);
+  const prev = () => setCurrent((prev) => (prev - 1 + N) % N);
 
   return (
     <section id="fitur" className="py-20 px-6 bg-gray-50 text-center">
@@ -48,15 +55,34 @@ const Features = () => {
         </h2>
       </ScrollAnimation>
 
-      {/* 3D SCENE */}
+      {/* CAROUSEL */}
       <div
         className="relative mx-auto"
         style={{
           perspective: "1200px",
           maxWidth: "960px",
-          height: "280px",
+          height: "300px",
         }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
       >
+
+        {/* ARROW LEFT */}
+        <button
+          onClick={prev}
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition"
+        >
+          ←
+        </button>
+
+        {/* ARROW RIGHT */}
+        <button
+          onClick={next}
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition"
+        >
+          →
+        </button>
+
         <div className="relative w-full h-full flex items-center justify-center">
 
           {features.map((item, i) => {
@@ -67,7 +93,7 @@ const Features = () => {
               <motion.div
                 key={i}
                 onClick={() => pos !== 0 && setCurrent(i)}
-                className="absolute bg-white rounded-2xl shadow-md p-6 flex flex-col"
+                className="absolute bg-white rounded-2xl p-6 flex flex-col"
                 style={{
                   width: "280px",
                   height: "240px",
@@ -88,42 +114,47 @@ const Features = () => {
 
                   scale:
                     pos === 0
-                      ? 1
+                      ? 1.1   // 🔥 center lebih besar
                       : pos === 1 || pos === -1
-                      ? 0.75
-                      : 0.5,
+                      ? 0.8
+                      : 0.6,
 
                   rotateY:
                     pos === 0
                       ? 0
                       : pos === 1
-                      ? -40
+                      ? -35
                       : pos === -1
-                      ? 40
+                      ? 35
                       : pos > 0
-                      ? -60
-                      : 60,
+                      ? -50
+                      : 50,
 
                   opacity:
                     pos === 0
                       ? 1
                       : pos === 1 || pos === -1
-                      ? 0.5
+                      ? 0.6
                       : 0,
 
                   filter:
                     pos === 0
                       ? "blur(0px)"
                       : pos === 1 || pos === -1
-                      ? "blur(2px)"
-                      : "blur(4px)",
+                      ? "blur(1px)"
+                      : "blur(3px)",
+
+                  boxShadow:
+                    pos === 0
+                      ? "0px 20px 50px rgba(0,0,0,0.15)" // 🔥 shadow center
+                      : "0px 5px 15px rgba(0,0,0,0.05)",
                 }}
 
                 transition={{
                   type: "spring",
-                  stiffness: 180,   // 🔥 kekuatan dorongan
-                  damping: 18,      // 🔥 bounce control
-                  mass: 0.8,        // 🔥 feel berat ringan
+                  stiffness: 180,
+                  damping: 18,
+                  mass: 0.8,
                 }}
               >
                 <div className="text-4xl mb-4">{item.icon}</div>
@@ -142,14 +173,16 @@ const Features = () => {
         </div>
       </div>
 
-      {/* DOT */}
-      <div className="flex justify-center gap-2 mt-6">
+      {/* DOT / PILL */}
+      <div className="flex justify-center gap-3 mt-8">
         {features.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              i === current ? "bg-gray-800 scale-125" : "bg-gray-300"
+            className={`h-2 rounded-full transition-all duration-300 ${
+              i === current
+                ? "w-8 bg-[#DC1416]"   // 🔥 pill merah
+                : "w-2 bg-gray-300"
             }`}
           />
         ))}
