@@ -1,59 +1,70 @@
 import React, { useState, useEffect } from "react";
-import { getProgress } from "../utils/progress";
+import { auth, db } from "../firebase";
+import { doc, onSnapshot } from "firebase/firestore";
 
-const buildLevels = () => {
-  const progress = getProgress();
-
-  const levels = [
-    {
-      level: "Level 1",
-      title: "Digital Literacy",
-      xp: 400,
-      desc: "Belajar dasar penggunaan tools digital untuk mengajar.",
-      nodes: [
-        { title: "Canva Dasar", key: "0-0" },
-        { title: "Google Classroom", key: "0-1" },
-        { title: "Quizizz", key: "0-2" },
-      ],
-    },
-    {
-      level: "Level 2",
-      title: "Interactive Media",
-      xp: 250,
-      desc: "Membuat media pembelajaran interaktif dan menarik.",
-      nodes: [
-        { title: "Canva Interaktif", key: "1-0" },
-        { title: "Mentimeter", key: "1-1" },
-        { title: "Padlet", key: "1-2" },
-      ],
-    },
-    {
-      level: "Level 3",
-      title: "Creative Teaching",
-      xp: 100,
-      desc: "Mengembangkan metode mengajar kreatif dan inovatif.",
-      nodes: [
-        { title: "Project Based Learning", key: "2-0" },
-        { title: "Gamification Class", key: "2-1" },
-      ],
-    },
-  ];
-
-  return levels.map((lvl) => ({
-    ...lvl,
-    nodes: lvl.nodes.map((node) => ({
-      ...node,
-      done: progress[node.key] || false,
-    })),
-  }));
-};
+const baseLevels = [
+  {
+    level: "Level 1",
+    title: "Digital Literacy",
+    xp: 400,
+    desc: "Belajar dasar penggunaan tools digital untuk mengajar.",
+    nodes: [
+      { title: "Canva Dasar", key: "0-0" },
+      { title: "Google Classroom", key: "0-1" },
+      { title: "Quizizz", key: "0-2" },
+    ],
+  },
+  {
+    level: "Level 2",
+    title: "Interactive Media",
+    xp: 250,
+    desc: "Membuat media pembelajaran interaktif dan menarik.",
+    nodes: [
+      { title: "Canva Interaktif", key: "1-0" },
+      { title: "Mentimeter", key: "1-1" },
+      { title: "Padlet", key: "1-2" },
+    ],
+  },
+  {
+    level: "Level 3",
+    title: "Creative Teaching",
+    xp: 100,
+    desc: "Mengembangkan metode mengajar kreatif dan inovatif.",
+    nodes: [
+      { title: "Project Based Learning", key: "2-0" },
+      { title: "Gamification Class", key: "2-1" },
+    ],
+  },
+];
 
 const SkillTree = () => {
   const [levels, setLevels] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
-    setLevels(buildLevels());
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const userRef = doc(db, "users", user.uid);
+
+    const unsubscribe = onSnapshot(userRef, (docSnap) => {
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        const progress = data.completedNodes || {};
+
+        const updatedLevels = baseLevels.map((lvl) => ({
+          ...lvl,
+          nodes: lvl.nodes.map((node) => ({
+            ...node,
+            done: progress[node.key] || false,
+          })),
+        }));
+
+        setLevels(updatedLevels);
+      }
+    });
+
+    return () => unsubscribe();
   }, []);
 
   const totalXP = levels.reduce((acc, level) => {
