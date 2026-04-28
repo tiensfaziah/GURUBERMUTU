@@ -13,6 +13,7 @@ import Workshop from "./pages/Workshop";
 import WorkshopDetail from "./pages/WorkshopDetail";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import SkillTree from "./fitur/SkillTree";
+import Footer from "./components/Footer";
 
 function Layout() {
   const location = useLocation();
@@ -37,6 +38,7 @@ function Layout() {
               <Features />
               <SocialProof />
               <CTA />
+              <Footer />
             </>
           }
         />

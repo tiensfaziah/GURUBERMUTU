@@ -1,4 +1,4 @@
-import marica from "../assets/marica.gif";
+import guru from "../assets/guru2.png";
 import question from "../assets/tandatanya.png";
 import bg from "../assets/background.png";
 import ScrollAnimation from "../components/ScrollAnimation";
@@ -71,26 +71,36 @@ function ProblemSection() {
 
         </div>
 
-        {/* IMAGE */}
-        <ScrollAnimation delay={0.3}>
-          <div className="relative flex justify-center mt-10 md:mt-0">
+       {/* IMAGE */}
+<ScrollAnimation delay={0.3}>
+  <div className="relative flex justify-center mt-10 md:mt-0">
 
-            {/* STICKER */}
-            <img
-              src={question}
-              alt="question"
-              className="absolute top-0 right-10 w-20 md:w-32 rotate-12 opacity-90 animate-bounce"
-            />
+    {/* BLOB BACKGROUND */}
+    <div className="absolute w-50 h-50 md:w-70 md:h-80 bg-gradient-to-br from-[#FFD6D6] to-[#FEE2E2]
+      rounded-[60%_40%_70%_30%/50%_60%_40%_60%] -z-5 top-6">
+    </div>
 
-            {/* MARICA */}
-            <img
-              src={marica}
-              alt="marica"
-              className="w-48 md:w-80 drop-shadow-xl"
-            />
+    {/* STICKER */}
+    <img
+      src={question}
+      alt="question"
+      className="absolute top-0 right-10 w-20 md:w-32 rotate-12 opacity-90 animate-bounce"
+    />
 
-          </div>
-        </ScrollAnimation>
+    {/* IMAGE WRAPPER (MASK SHAPE) */}
+    <div className="w-52 md:w-80 overflow-hidden 
+      rounded-[60%_40%_70%_30%/50%_60%_40%_60%] shadow-2xl rotate-2">
+
+      <img
+        src={guru}
+        alt="guru gen z"
+        className="w-full h-full object-cover"
+      />
+
+    </div>
+
+  </div>
+</ScrollAnimation>
 
       </div>
 

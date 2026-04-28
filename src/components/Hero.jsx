@@ -1,5 +1,4 @@
-import marica from "../assets/Marica.png";
-import bg from "../assets/background.png";
+import heroImg from "../assets/background2.png";
 import { useNavigate } from "react-router-dom";
 import ScrollAnimation from "../components/ScrollAnimation";
 
@@ -9,52 +8,58 @@ function Hero() {
   return (
     <section
       id="home"
-      className="scroll-mt-24 w-full bg-cover bg-center pt-24 md:pt-28 pb-20 md:pb-32"
-      style={{ backgroundImage: `url(${bg})` }}
+      className="relative scroll-mt-24 w-full pt-24 md:pt-28 pb-20 md:pb-32 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-16 py-16 grid md:grid-cols-2 items-center gap-10">
 
-        {/* TEXT */}
+      {/* BACKGROUND IMAGE */}
+      <div className="absolute inset-0">
+        <img
+  src={heroImg}
+  alt="guru gen z mengajar digital"
+  className="w-full h-full object-cover scale-110 translate-x-20"
+/>
+      </div>
+
+      {/* GRADIENT FADE (BIAR TEKS KELIATAN) */}
+      <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent"></div>
+
+      {/* CONTENT */}
+      <div className="relative max-w-7xl mx-auto px-6 md:px-16 py-16">
+
         <ScrollAnimation>
-          <div className="text-center md:text-left">
+          <div className="max-w-xl text-center md:text-left">
+
             <h1 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6 text-gray-800 leading-tight">
-              Dari Kelas ke Karya,
-              <br /> Dari Karya ke Cuan 💸
+              Mengajar Bukan Sekadar Rutinitas,
+              <br /> Jadi Guru Gen Z yang Relevan di Era Digital
             </h1>
 
             <p className="text-gray-600 mb-4 md:mb-6 text-sm md:text-lg">
-              Ubah cara kamu mengajar jadi lebih produktif. Belajar skill baru, ciptakan karya digital, dan hasilkan penghasilan tambahan dalam satu platform.
+              Tingkatkan cara mengajar dengan pendekatan modern, interaktif,
+              dan berbasis teknologi dalam satu platform yang dirancang
+              khusus untuk guru masa kini.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mt-4 justify-center md:justify-start">
-              
+
               <button
                 onClick={() => navigate("/login")}
-                className="bg-[#DC1416] text-white px-6 py-3 rounded-lg shadow-md hover:scale-105 transition"
+                className="bg-[#DC1416] text-white px-6 py-3 rounded-xl shadow-md hover:scale-105 transition"
               >
-                Mulai Sekarang
+                Mulai Sekarang 🚀
               </button>
 
-              <button className="border px-6 py-3 rounded-lg hover:scale-105 transition">
+              <button className="border border-gray-300 bg-white/80 backdrop-blur px-6 py-3 rounded-xl hover:scale-105 transition">
                 Lihat Demo
               </button>
 
             </div>
-          </div>
-        </ScrollAnimation>
 
-        {/* IMAGE */}
-        <ScrollAnimation delay={0.3}>
-          <div className="flex justify-center md:justify-end">
-            <img
-              src={marica}
-              alt="Marica"
-              className="w-52 md:w-80 drop-shadow-2xl animate-[float_3s_ease-in-out_infinite]"
-            />
           </div>
         </ScrollAnimation>
 
       </div>
+
     </section>
   );
 }
