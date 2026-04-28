@@ -146,7 +146,11 @@ function Dashboard() {
                 </button>
               </div>
 
-              <img src={marica} className="w-28 hidden md:block" />
+             <img 
+                src={marica} 
+                alt="maskot guru bermutu" 
+                className="w-28 hidden md:block" 
+            />
 
               <div className="hidden md:flex flex-col gap-3">
                 <div className="bg-white/20 p-3 rounded-xl text-center">
