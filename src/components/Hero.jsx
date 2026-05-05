@@ -1,9 +1,21 @@
-import heroImg from "../assets/background2.png";
+import heroImg from "../assets/gurugenz.jpg";
 import { useNavigate } from "react-router-dom";
 import ScrollAnimation from "../components/ScrollAnimation";
+import { useEffect, useState } from "react";
 
 function Hero() {
   const navigate = useNavigate();
+
+  const words = ["Relevan", "Kreatif", "Interaktif", "Inovatif"];
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % words.length);
+    }, 2000); // ganti kata tiap 2 detik
+
+    return () => clearInterval(interval);
+  }, [words.length]);
 
   return (
     <section
@@ -16,7 +28,7 @@ function Hero() {
         <img
           src={heroImg}
           alt="guru gen z mengajar digital"
-          className="w-full h-full object-cover object-[75%_80%]"
+          className="w-full h-full object-cover object-[70%_30%]"
         />
       </div>
 
@@ -30,8 +42,13 @@ function Hero() {
           <div className="max-w-xl text-center md:text-left">
 
             <h1 className="text-2xl md:text-5xl font-bold mb-4 md:mb-6 text-gray-800 leading-tight">
-              Mengajar Bukan Sekadar Rutinitas,
-              <br /> Jadi Guru Gen Z yang Relevan di Era Digital
+              <span className="text-[#5B21B6]">Mengajar</span> Bukan Sekadar Rutinitas,
+              <br />
+              Jadi Guru Gen Z yang{" "}
+              <span className="text-[#EC4899] transition-all duration-500">
+                {words[index]}
+              </span>{" "}
+              di Era Digital
             </h1>
 
             <p className="text-gray-600 mb-4 md:mb-6 text-sm md:text-lg">
@@ -44,7 +61,7 @@ function Hero() {
 
               <button
                 onClick={() => navigate("/login")}
-                className="bg-[#DC1416] text-white px-5 py-3 rounded-xl shadow-md hover:scale-105 transition"
+                className="bg-[#5B21B6] text-white px-5 py-3 rounded-xl shadow-md hover:scale-105 transition"
               >
                 Mulai Sekarang 🚀
               </button>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/Logo.png"; // 🔥 tambah logo
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -39,24 +40,28 @@ function Navbar() {
     <nav className="w-full bg-white shadow-sm fixed top-0 left-0 z-50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center">
 
-        <h1
-          onClick={scrollToHome} // 🔥 logo juga scroll
-          className="font-bold text-xl text-[#DC1416] cursor-pointer"
+        {/* 🔥 LOGO + TEXT */}
+        <div
+          onClick={scrollToHome}
+          className="flex items-center gap-2 cursor-pointer"
         >
-          Gurubermutu.id
-        </h1>
+          <img src={logo} alt="logo gurubermutu" className="w-8 h-8" />
+
+          <h1 className="font-bold text-xl text-[#5B21B6]">
+            Gurubermutu.id
+          </h1>
+        </div>
 
         {/* DESKTOP */}
         <div className="ml-auto hidden md:flex items-center gap-8 text-gray-700">
 
-          {/* 🔥 FIX HOME */}
           <button onClick={scrollToHome}>Home</button>
 
           <button onClick={scrollToFitur}>Fitur</button>
 
           <button
             onClick={() => navigate("/login")}
-            className="bg-[#DC1416] text-white px-4 py-2 rounded-lg"
+            className="bg-[#5B21B6] text-white px-4 py-2 rounded-lg"
           >
             Sign in
           </button>
@@ -74,14 +79,13 @@ function Navbar() {
       {open && (
         <div className="md:hidden bg-white px-6 pb-4 space-y-4 shadow-md">
 
-          {/* 🔥 FIX MOBILE */}
           <button onClick={scrollToHome}>Home</button>
 
           <button onClick={scrollToFitur}>Fitur</button>
 
           <button
             onClick={() => navigate("/login")}
-            className="w-full bg-[#DC1416] text-white px-4 py-2 rounded-lg"
+            className="w-full bg-[#5B21B6] text-white px-4 py-2 rounded-lg"
           >
             Sign in
           </button>
