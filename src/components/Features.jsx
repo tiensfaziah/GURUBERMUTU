@@ -47,8 +47,10 @@ const Features = () => {
   const prev = () => setCurrent((prev) => (prev - 1 + N) % N);
 
   return (
-    <section id="fitur" className="py-20 px-4 md:px-6 bg-gray-50 text-center overflow-hidden">
-
+    <section
+      id="fitur"
+      className="py-20 px-4 md:px-6 bg-gray-50 text-center overflow-hidden"
+    >
       <ScrollAnimation>
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-gray-800">
           Fitur Utama Platform
@@ -65,7 +67,6 @@ const Features = () => {
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-
         {/* ARROW */}
         <button
           onClick={prev}
@@ -81,8 +82,8 @@ const Features = () => {
           →
         </button>
 
-        <div className="relative w-full h-full flex items-center justify-center">
-
+        {/* CARDS */}
+        <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
           {features.map((item, i) => {
             const offset = ((i - current) % N + N) % N;
             const pos = offset <= N / 2 ? offset : offset - N;
@@ -96,27 +97,39 @@ const Features = () => {
                   width: isMobile ? "200px" : "280px",
                   height: isMobile ? "200px" : "240px",
                 }}
-
                 animate={{
                   x:
                     pos === 0
                       ? 0
                       : pos === 1
-                      ? (isMobile ? 110 : 220)
+                      ? isMobile
+                        ? 100
+                        : 220
                       : pos === -1
-                      ? (isMobile ? -110 : -220)
-                      : pos === 2
-                      ? (isMobile ? 220 : 400)
-                      : pos === -2
-                      ? (isMobile ? -220 : -400)
-                      : (isMobile ? 300 : 500),
+                      ? isMobile
+                        ? -100
+                        : -220
+                      : pos > 1
+                      ? isMobile
+                        ? 300
+                        : 500
+                      : isMobile
+                      ? -300
+                      : -500,
 
                   scale:
                     pos === 0
                       ? 1
                       : pos === 1 || pos === -1
                       ? 0.85
-                      : 0.7,
+                      : 0.6,
+
+                  opacity:
+                    pos === 0
+                      ? 1
+                      : pos === 1 || pos === -1
+                      ? 0.5
+                      : 0,
 
                   rotateY:
                     isMobile
@@ -124,21 +137,11 @@ const Features = () => {
                       : pos === 0
                       ? 0
                       : pos === 1
-                      ? -35
+                      ? -30
                       : pos === -1
-                      ? 35
-                      : pos > 0
-                      ? -50
-                      : 50,
-
-                  opacity:
-                    pos === 0
-                      ? 1
-                      : pos === 1 || pos === -1
-                      ? 0.6
-                      : 0.3,
+                      ? 30
+                      : 0,
                 }}
-
                 transition={{
                   type: "spring",
                   stiffness: 180,
@@ -157,7 +160,6 @@ const Features = () => {
               </motion.div>
             );
           })}
-
         </div>
       </div>
 
@@ -173,7 +175,6 @@ const Features = () => {
           />
         ))}
       </div>
-
     </section>
   );
 };
