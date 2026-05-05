@@ -3,7 +3,7 @@ import logo from "../assets/Logo.png"; // 🔥 tambah logo
 
 function Footer() {
   return (
-    <footer className="bg-[#F9FAFB] pt-16 pb-8 px-6 md:px-16">
+    <footer className="bg-white pt-16 pb-8 px-6 md:px-16">
 
       <div className="max-w-7xl mx-auto grid md:grid-cols-5 gap-10">
 
