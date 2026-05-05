@@ -29,50 +29,54 @@ const N = features.length;
 
 const Features = () => {
   const [current, setCurrent] = useState(0);
+  const [hovered, setHovered] = useState(false);
   const intervalRef = useRef(null);
 
   const isMobile = window.innerWidth <= 768;
 
   useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % N);
-    }, 2000);
-
+    if (!hovered) {
+      intervalRef.current = setInterval(() => {
+        setCurrent((prev) => (prev + 1) % N);
+      }, 2000);
+    }
     return () => clearInterval(intervalRef.current);
-  }, []);
+  }, [hovered]);
 
   const next = () => setCurrent((prev) => (prev + 1) % N);
   const prev = () => setCurrent((prev) => (prev - 1 + N) % N);
 
   return (
-    <section className="py-20 px-4 md:px-6 bg-gray-50 text-center overflow-hidden">
+    <section id="fitur" className="py-20 px-6 bg-gray-50 text-center overflow-hidden">
 
       <ScrollAnimation>
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-gray-800">
+        <h2 className="text-4xl font-bold mb-12 text-gray-800">
           Fitur Utama Platform
         </h2>
       </ScrollAnimation>
 
       <div
-        className="relative mx-auto overflow-hidden"
+        className="relative mx-auto"
         style={{
           perspective: "1200px",
           maxWidth: "960px",
-          height: "260px",
+          height: "300px",
         }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
       >
 
         {/* ARROW */}
         <button
           onClick={prev}
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-9 h-9 rounded-full flex items-center justify-center"
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition"
         >
           ←
         </button>
 
         <button
           onClick={next}
-          className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-9 h-9 rounded-full flex items-center justify-center"
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition"
         >
           →
         </button>
@@ -86,10 +90,12 @@ const Features = () => {
             return (
               <motion.div
                 key={i}
-                className="absolute bg-white rounded-2xl p-5 flex flex-col"
+                onClick={() => pos !== 0 && setCurrent(i)}
+                className="absolute bg-white rounded-2xl p-6 flex flex-col"
                 style={{
-                  width: isMobile ? "200px" : "280px",
-                  height: isMobile ? "200px" : "240px",
+                  width: isMobile ? "220px" : "280px",
+                  height: isMobile ? "220px" : "240px",
+                  cursor: pos !== 0 ? "pointer" : "default",
                 }}
 
                 animate={{
@@ -97,32 +103,21 @@ const Features = () => {
                     pos === 0
                       ? 0
                       : pos === 1
-                      ? (isMobile ? 140 : 220)
+                      ? (isMobile ? 130 : 220)
                       : pos === -1
-                      ? (isMobile ? -140 : -220)
+                      ? (isMobile ? -130 : -220)
                       : pos === 2
-                      ? (isMobile ? 280 : 400)
+                      ? (isMobile ? 260 : 400)
                       : pos === -2
-                      ? (isMobile ? -280 : -400)
-                      : (isMobile ? 420 : 550),
+                      ? (isMobile ? -260 : -400)
+                      : (isMobile ? 400 : 500),
 
                   scale:
                     pos === 0
-                      ? 1
+                      ? 1.1
                       : pos === 1 || pos === -1
-                      ? 0.9
-                      : pos === 2 || pos === -2
-                      ? 0.75
+                      ? 0.8
                       : 0.6,
-
-                  opacity:
-                    pos === 0
-                      ? 1
-                      : pos === 1 || pos === -1
-                      ? 0.7
-                      : pos === 2 || pos === -2
-                      ? 0.4
-                      : 0.2,
 
                   rotateY:
                     isMobile
@@ -136,21 +131,41 @@ const Features = () => {
                       : pos > 0
                       ? -50
                       : 50,
+
+                  opacity:
+                    pos === 0
+                      ? 1
+                      : pos === 1 || pos === -1
+                      ? 0.6
+                      : 0,
+
+                  filter:
+                    pos === 0
+                      ? "blur(0px)"
+                      : pos === 1 || pos === -1
+                      ? "blur(1px)"
+                      : "blur(3px)",
+
+                  boxShadow:
+                    pos === 0
+                      ? "0px 20px 50px rgba(0,0,0,0.15)"
+                      : "0px 5px 15px rgba(0,0,0,0.05)",
                 }}
 
                 transition={{
                   type: "spring",
                   stiffness: 180,
                   damping: 18,
+                  mass: 0.8,
                 }}
               >
-                <div className="text-3xl md:text-4xl mb-3">{item.icon}</div>
+                <div className="text-4xl mb-4">{item.icon}</div>
 
-                <h3 className="text-sm md:text-lg font-semibold mb-2 text-gray-800">
+                <h3 className="text-lg font-semibold mb-2 text-gray-800">
                   {item.title}
                 </h3>
 
-                <p className="text-gray-600 text-xs md:text-sm">
+                <p className="text-gray-600 text-sm flex-grow leading-relaxed">
                   {item.desc}
                 </p>
               </motion.div>
@@ -161,13 +176,13 @@ const Features = () => {
       </div>
 
       {/* DOT */}
-      <div className="flex justify-center gap-2 mt-6">
+      <div className="flex justify-center gap-3 mt-8">
         {features.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
-            className={`h-2 rounded-full transition-all ${
-              i === current ? "w-6 bg-[#DC1416]" : "w-2 bg-gray-300"
+            className={`h-2 rounded-full transition-all duration-300 ${
+              i === current ? "w-8 bg-[#DC1416]" : "w-2 bg-gray-300"
             }`}
           />
         ))}
