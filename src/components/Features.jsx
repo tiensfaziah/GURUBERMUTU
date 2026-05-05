@@ -53,29 +53,46 @@ const Features = () => {
         </h2>
       </ScrollAnimation>
 
+      {/* 🔥 MOBILE VERSION (SCROLL) */}
+      <div className="flex md:hidden overflow-x-auto gap-4 px-2 pb-4">
+        {features.map((item, i) => (
+          <div
+            key={i}
+            className="min-w-[240px] bg-white rounded-2xl p-5 shadow-md flex-shrink-0"
+          >
+            <div className="text-3xl mb-3">{item.icon}</div>
+            <h3 className="text-base font-semibold mb-2 text-gray-800">
+              {item.title}
+            </h3>
+            <p className="text-gray-600 text-xs leading-relaxed">
+              {item.desc}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* 🔥 DESKTOP VERSION (CAROUSEL) */}
       <div
-        className="relative mx-auto overflow-hidden"
+        className="hidden md:block relative mx-auto"
         style={{
           perspective: "1200px",
-          maxWidth: "100%",
-          height: "260px",
+          maxWidth: "960px",
+          height: "300px",
         }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
 
-        {/* ARROW LEFT */}
         <button
           onClick={prev}
-          className="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-9 h-9 rounded-full items-center justify-center"
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center"
         >
           ←
         </button>
 
-        {/* ARROW RIGHT */}
         <button
           onClick={next}
-          className="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-9 h-9 rounded-full items-center justify-center"
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center"
         >
           →
         </button>
@@ -90,23 +107,15 @@ const Features = () => {
               <motion.div
                 key={i}
                 onClick={() => pos !== 0 && setCurrent(i)}
-                className="absolute bg-white rounded-2xl p-5 flex flex-col"
+                className="absolute bg-white rounded-2xl p-6 flex flex-col"
                 style={{
-                  width: window.innerWidth < 768 ? "220px" : "280px",
-                  height: "220px",
+                  width: "280px",
+                  height: "240px",
                 }}
 
                 animate={{
                   x:
-                    window.innerWidth < 768
-                      ? pos === 0
-                        ? 0
-                        : pos === 1
-                        ? 120
-                        : pos === -1
-                        ? -120
-                        : 0
-                      : pos === 0
+                    pos === 0
                       ? 0
                       : pos === 1
                       ? 220
@@ -116,18 +125,13 @@ const Features = () => {
 
                   scale:
                     pos === 0
-                      ? 1
-                      : 0.85,
+                      ? 1.1
+                      : 0.8,
 
                   opacity:
                     pos === 0
                       ? 1
-                      : 0.4,
-
-                  boxShadow:
-                    pos === 0
-                      ? "0px 15px 40px rgba(0,0,0,0.12)"
-                      : "0px 5px 15px rgba(0,0,0,0.05)",
+                      : 0.5,
                 }}
 
                 transition={{
@@ -136,13 +140,13 @@ const Features = () => {
                   damping: 18,
                 }}
               >
-                <div className="text-3xl mb-3">{item.icon}</div>
+                <div className="text-4xl mb-4">{item.icon}</div>
 
-                <h3 className="text-base font-semibold mb-2 text-gray-800">
+                <h3 className="text-lg font-semibold mb-2 text-gray-800">
                   {item.title}
                 </h3>
 
-                <p className="text-gray-600 text-xs leading-relaxed">
+                <p className="text-gray-600 text-sm flex-grow">
                   {item.desc}
                 </p>
               </motion.div>
@@ -158,10 +162,8 @@ const Features = () => {
           <button
             key={i}
             onClick={() => setCurrent(i)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              i === current
-                ? "w-6 bg-[#DC1416]"
-                : "w-2 bg-gray-300"
+            className={`h-2 rounded-full transition-all ${
+              i === current ? "w-6 bg-[#DC1416]" : "w-2 bg-gray-300"
             }`}
           />
         ))}
