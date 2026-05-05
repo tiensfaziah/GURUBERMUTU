@@ -1,17 +1,10 @@
 import guru from "../assets/guru2.png";
 import question from "../assets/tandatanya.png";
-import bg from "../assets/background.png";
 import ScrollAnimation from "../components/ScrollAnimation";
 
 function ProblemSection() {
   return (
-    <section className="relative">
-
-      {/* BACKGROUND */}
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-90"
-        style={{ backgroundImage: `url(${bg})` }}
-      />
+    <section className="relative bg-white">
 
       {/* CONTENT */}
       <div className="relative max-w-7xl mx-auto px-6 md:px-16 py-16 
@@ -23,7 +16,7 @@ function ProblemSection() {
 
           <ScrollAnimation>
             <h2 className="text-2xl md:text-4xl font-bold mb-6 text-gray-800 leading-snug">
-              <span className="text-[#DC1416]">Guru-guru</span>{" "}
+              <span className="text-[#5B21B6]">Guru-guru</span>{" "}
               Pernah Ngalamin Ini? 🤔
             </h2>
           </ScrollAnimation>
@@ -31,7 +24,7 @@ function ProblemSection() {
           <div className="space-y-4">
 
             <ScrollAnimation delay={0}>
-              <div className="flex items-center gap-4 bg-white/90 backdrop-blur-sm rounded-xl px-5 py-3 shadow-md">
+              <div className="flex items-center gap-4 bg-white rounded-xl px-5 py-3 shadow-md">
                 <span className="text-[#DC1416] text-lg">✖</span>
                 <p className="text-gray-700 text-sm md:text-base">
                   Ngerasa stuck saat ngajar?
@@ -40,7 +33,7 @@ function ProblemSection() {
             </ScrollAnimation>
 
             <ScrollAnimation delay={0.2}>
-              <div className="flex items-center gap-4 bg-white/90 backdrop-blur-sm rounded-xl px-5 py-3 shadow-md">
+              <div className="flex items-center gap-4 bg-white rounded-xl px-5 py-3 shadow-md">
                 <span className="text-[#DC1416] text-lg">✖</span>
                 <p className="text-gray-700 text-sm md:text-base">
                   Materi itu-itu aja, tuntutan makin banyak?
@@ -49,7 +42,7 @@ function ProblemSection() {
             </ScrollAnimation>
 
             <ScrollAnimation delay={0.4}>
-              <div className="flex items-center gap-4 bg-white/90 backdrop-blur-sm rounded-xl px-5 py-3 shadow-md">
+              <div className="flex items-center gap-4 bg-white rounded-xl px-5 py-3 shadow-md">
                 <span className="text-[#DC1416] text-lg">✖</span>
                 <p className="text-gray-700 text-sm md:text-base">
                   Udah belajar tapi belum ada hasil nyata?
@@ -62,7 +55,7 @@ function ProblemSection() {
           <ScrollAnimation delay={0.6}>
             <p className="mt-6 text-sm md:text-lg text-gray-700">
               Tenang, ada{" "}
-              <span className="text-[#DC1416] font-semibold">
+              <span className="text-[#5B21B6] font-semibold">
                 solusi untuk mengatasinya!
               </span>{" "}
               🚀
@@ -71,36 +64,36 @@ function ProblemSection() {
 
         </div>
 
-       {/* IMAGE */}
-<ScrollAnimation delay={0.3}>
-  <div className="relative flex justify-center mt-10 md:mt-0">
+        {/* IMAGE */}
+        <ScrollAnimation delay={0.3}>
+          <div className="relative flex justify-center mt-10 md:mt-0">
 
-    {/* BLOB BACKGROUND */}
-    <div className="absolute w-50 h-50 md:w-70 md:h-80 bg-gradient-to-br from-[#FFD6D6] to-[#FEE2E2]
-      rounded-[60%_40%_70%_30%/50%_60%_40%_60%] -z-5 top-6">
-    </div>
+            {/* BLOB BACKGROUND */}
+            <div className="absolute w-50 h-50 md:w-70 md:h-80 bg-gradient-to-br from-[#FFD6D6] to-[#FEE2E2]
+              rounded-[60%_40%_70%_30%/50%_60%_40%_60%] -z-5 top-6">
+            </div>
 
-    {/* STICKER */}
-    <img
-      src={question}
-      alt="question"
-      className="absolute top-0 right-10 w-20 md:w-32 rotate-12 opacity-90 animate-bounce"
-    />
+            {/* STICKER */}
+            <img
+              src={question}
+              alt="question"
+              className="absolute top-0 right-10 w-20 md:w-32 rotate-12 opacity-90 animate-bounce"
+            />
 
-    {/* IMAGE WRAPPER (MASK SHAPE) */}
-    <div className="w-52 md:w-80 overflow-hidden 
-      rounded-[60%_40%_70%_30%/50%_60%_40%_60%] shadow-2xl rotate-2">
+            {/* IMAGE WRAPPER */}
+            <div className="w-52 md:w-80 overflow-hidden 
+              rounded-[60%_40%_70%_30%/50%_60%_40%_60%] shadow-2xl rotate-2">
 
-      <img
-        src={guru}
-        alt="guru gen z"
-        className="w-full h-full object-cover"
-      />
+              <img
+                src={guru}
+                alt="guru gen z"
+                className="w-full h-full object-cover"
+              />
 
-    </div>
+            </div>
 
-  </div>
-</ScrollAnimation>
+          </div>
+        </ScrollAnimation>
 
       </div>
 

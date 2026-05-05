@@ -47,7 +47,7 @@ const Features = () => {
   const prev = () => setCurrent((prev) => (prev - 1 + N) % N);
 
   return (
-    <section id="fitur" className="py-20 px-6 bg-gray-50 text-center">
+    <section id="fitur" className="py-20 px-6 bg-white text-center">
 
       <ScrollAnimation>
         <h2 className="text-4xl font-bold mb-12 text-gray-800">
@@ -70,7 +70,7 @@ const Features = () => {
         {/* ARROW LEFT */}
         <button
           onClick={prev}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition"
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-purple-500 shadow-md w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition"
         >
           ←
         </button>
@@ -78,7 +78,7 @@ const Features = () => {
         {/* ARROW RIGHT */}
         <button
           onClick={next}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition"
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-purple-500 shadow-md w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition"
         >
           →
         </button>
@@ -181,7 +181,7 @@ const Features = () => {
             onClick={() => setCurrent(i)}
             className={`h-2 rounded-full transition-all duration-300 ${
               i === current
-                ? "w-8 bg-[#DC1416]"   // 🔥 pill merah
+                ? "w-8 bg-[#5B21B6]"   // 🔥 pill merah
                 : "w-2 bg-gray-300"
             }`}
           />

@@ -7,7 +7,7 @@ const CTA = () => {
 
   return (
     <ScrollAnimation>
-      <section className="py-20 text-center bg-gradient-to-b from-white via-[#F8BFBF] to-[#D9A7C7]">
+      <section className="py-20 text-center bg-gradient-to-b from-white via-[#f1bff8] to-[#cca7d9]">
 
         {/* TITLE */}
         <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-800">
@@ -26,7 +26,7 @@ const CTA = () => {
             onClick={() => navigate("/login")}
             className="
               relative overflow-hidden
-              bg-[#A64D8B] text-white px-8 py-3 rounded-full
+              bg-[#5B21B6] text-white px-8 py-3 rounded-full
               shadow-lg
 
               transition-all duration-300
