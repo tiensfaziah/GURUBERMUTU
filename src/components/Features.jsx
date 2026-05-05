@@ -32,14 +32,14 @@ const Features = () => {
   const [hovered, setHovered] = useState(false);
   const intervalRef = useRef(null);
 
-  const isMobile = window.innerWidth <= 768;
-
+  // autoplay 3.5 detik + pause saat hover
   useEffect(() => {
     if (!hovered) {
       intervalRef.current = setInterval(() => {
         setCurrent((prev) => (prev + 1) % N);
       }, 2000);
     }
+
     return () => clearInterval(intervalRef.current);
   }, [hovered]);
 
@@ -47,7 +47,7 @@ const Features = () => {
   const prev = () => setCurrent((prev) => (prev - 1 + N) % N);
 
   return (
-    <section id="fitur" className="py-20 px-6 bg-gray-50 text-center overflow-hidden">
+    <section id="fitur" className="py-20 px-6 bg-gray-50 text-center">
 
       <ScrollAnimation>
         <h2 className="text-4xl font-bold mb-12 text-gray-800">
@@ -55,6 +55,7 @@ const Features = () => {
         </h2>
       </ScrollAnimation>
 
+      {/* CAROUSEL */}
       <div
         className="relative mx-auto"
         style={{
@@ -66,7 +67,7 @@ const Features = () => {
         onMouseLeave={() => setHovered(false)}
       >
 
-        {/* ARROW */}
+        {/* ARROW LEFT */}
         <button
           onClick={prev}
           className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition"
@@ -74,6 +75,7 @@ const Features = () => {
           ←
         </button>
 
+        {/* ARROW RIGHT */}
         <button
           onClick={next}
           className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition"
@@ -93,8 +95,8 @@ const Features = () => {
                 onClick={() => pos !== 0 && setCurrent(i)}
                 className="absolute bg-white rounded-2xl p-6 flex flex-col"
                 style={{
-                  width: isMobile ? "220px" : "280px",
-                  height: isMobile ? "220px" : "240px",
+                  width: "280px",
+                  height: "240px",
                   cursor: pos !== 0 ? "pointer" : "default",
                 }}
 
@@ -103,26 +105,22 @@ const Features = () => {
                     pos === 0
                       ? 0
                       : pos === 1
-                      ? (isMobile ? 130 : 220)
+                      ? 220
                       : pos === -1
-                      ? (isMobile ? -130 : -220)
-                      : pos === 2
-                      ? (isMobile ? 260 : 400)
-                      : pos === -2
-                      ? (isMobile ? -260 : -400)
-                      : (isMobile ? 400 : 500),
+                      ? -220
+                      : pos > 0
+                      ? 400
+                      : -400,
 
                   scale:
                     pos === 0
-                      ? 1.1
+                      ? 1.1   // 🔥 center lebih besar
                       : pos === 1 || pos === -1
                       ? 0.8
                       : 0.6,
 
                   rotateY:
-                    isMobile
-                      ? 0
-                      : pos === 0
+                    pos === 0
                       ? 0
                       : pos === 1
                       ? -35
@@ -148,7 +146,7 @@ const Features = () => {
 
                   boxShadow:
                     pos === 0
-                      ? "0px 20px 50px rgba(0,0,0,0.15)"
+                      ? "0px 20px 50px rgba(0,0,0,0.15)" // 🔥 shadow center
                       : "0px 5px 15px rgba(0,0,0,0.05)",
                 }}
 
@@ -175,14 +173,16 @@ const Features = () => {
         </div>
       </div>
 
-      {/* DOT */}
+      {/* DOT / PILL */}
       <div className="flex justify-center gap-3 mt-8">
         {features.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
             className={`h-2 rounded-full transition-all duration-300 ${
-              i === current ? "w-8 bg-[#DC1416]" : "w-2 bg-gray-300"
+              i === current
+                ? "w-8 bg-[#DC1416]"   // 🔥 pill merah
+                : "w-2 bg-gray-300"
             }`}
           />
         ))}
