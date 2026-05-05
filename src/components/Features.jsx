@@ -70,7 +70,7 @@ const Features = () => {
         {/* ARROW LEFT */}
         <button
           onClick={prev}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-purple-500 shadow-md w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition"
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition"
         >
           ←
         </button>
@@ -78,7 +78,7 @@ const Features = () => {
         {/* ARROW RIGHT */}
         <button
           onClick={next}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-purple-500 shadow-md w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition"
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition"
         >
           →
         </button>

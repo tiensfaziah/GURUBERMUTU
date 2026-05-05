@@ -1,4 +1,5 @@
 import React from "react";
+import logo from "../assets/Logo.png"; // 🔥 tambah logo
 
 function Footer() {
   return (
@@ -8,9 +9,15 @@ function Footer() {
 
         {/* LOGO & DESC */}
         <div className="md:col-span-2">
-          <h2 className="text-2xl font-bold text-[#DC1416] mb-3">
-            GuruBermutu
-          </h2>
+
+          {/* 🔥 LOGO + TEXT */}
+          <div className="flex items-center gap-2 mb-3">
+            <img src={logo} alt="logo gurubermutu" className="w-10 h-10 md:w-12 md:h-12" />
+
+            <h2 className="text-2xl font-bold text-[#5B21B6]">
+              Gurubermutu.id
+            </h2>
+          </div>
 
           <p className="text-gray-600 text-sm leading-relaxed mb-4">
             Platform pembelajaran modern untuk guru Gen Z.

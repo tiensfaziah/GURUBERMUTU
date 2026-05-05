@@ -25,7 +25,7 @@ function ProblemSection() {
 
             <ScrollAnimation delay={0}>
               <div className="flex items-center gap-4 bg-white rounded-xl px-5 py-3 shadow-md">
-                <span className="text-[#DC1416] text-lg">✖</span>
+                <span className="text-[#5B21B6] text-lg">✖</span>
                 <p className="text-gray-700 text-sm md:text-base">
                   Ngerasa stuck saat ngajar?
                 </p>
@@ -34,7 +34,7 @@ function ProblemSection() {
 
             <ScrollAnimation delay={0.2}>
               <div className="flex items-center gap-4 bg-white rounded-xl px-5 py-3 shadow-md">
-                <span className="text-[#DC1416] text-lg">✖</span>
+                <span className="text-[#5B21B6] text-lg">✖</span>
                 <p className="text-gray-700 text-sm md:text-base">
                   Materi itu-itu aja, tuntutan makin banyak?
                 </p>
@@ -43,7 +43,7 @@ function ProblemSection() {
 
             <ScrollAnimation delay={0.4}>
               <div className="flex items-center gap-4 bg-white rounded-xl px-5 py-3 shadow-md">
-                <span className="text-[#DC1416] text-lg">✖</span>
+                <span className="text-[#5B21B6] text-lg">✖</span>
                 <p className="text-gray-700 text-sm md:text-base">
                   Udah belajar tapi belum ada hasil nyata?
                 </p>
