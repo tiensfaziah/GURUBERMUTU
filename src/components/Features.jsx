@@ -32,6 +32,8 @@ const Features = () => {
   const [hovered, setHovered] = useState(false);
   const intervalRef = useRef(null);
 
+  const isMobile = window.innerWidth <= 768;
+
   useEffect(() => {
     if (!hovered) {
       intervalRef.current = setInterval(() => {
@@ -85,8 +87,6 @@ const Features = () => {
             const offset = ((i - current) % N + N) % N;
             const pos = offset <= N / 2 ? offset : offset - N;
 
-            const isMobile = window.innerWidth < 768;
-
             return (
               <motion.div
                 key={i}
@@ -102,17 +102,21 @@ const Features = () => {
                     pos === 0
                       ? 0
                       : pos === 1
-                      ? isMobile ? 120 : 220
+                      ? (isMobile ? 110 : 220)
                       : pos === -1
-                      ? isMobile ? -120 : -220
-                      : isMobile ? 0 : 400,
+                      ? (isMobile ? -110 : -220)
+                      : pos === 2
+                      ? (isMobile ? 220 : 400)
+                      : pos === -2
+                      ? (isMobile ? -220 : -400)
+                      : (isMobile ? 300 : 500),
 
                   scale:
                     pos === 0
                       ? 1
-                      : isMobile
+                      : pos === 1 || pos === -1
                       ? 0.85
-                      : 0.8,
+                      : 0.7,
 
                   rotateY:
                     isMobile
@@ -121,12 +125,18 @@ const Features = () => {
                       ? 0
                       : pos === 1
                       ? -35
-                      : 35,
+                      : pos === -1
+                      ? 35
+                      : pos > 0
+                      ? -50
+                      : 50,
 
                   opacity:
                     pos === 0
                       ? 1
-                      : 0.5,
+                      : pos === 1 || pos === -1
+                      ? 0.6
+                      : 0.3,
                 }}
 
                 transition={{
