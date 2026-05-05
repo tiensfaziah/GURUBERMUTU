@@ -29,22 +29,18 @@ const N = features.length;
 
 const Features = () => {
   const [current, setCurrent] = useState(0);
-  const [hovered, setHovered] = useState(false);
   const intervalRef = useRef(null);
 
   const isMobile = window.innerWidth <= 768;
 
+  // autoplay
   useEffect(() => {
-    if (!hovered) {
-      intervalRef.current = setInterval(() => {
-        setCurrent((prev) => (prev + 1) % N);
-      }, 2000);
-    }
-    return () => clearInterval(intervalRef.current);
-  }, [hovered]);
+    intervalRef.current = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % N);
+    }, 2000);
 
-  const next = () => setCurrent((prev) => (prev + 1) % N);
-  const prev = () => setCurrent((prev) => (prev - 1 + N) % N);
+    return () => clearInterval(intervalRef.current);
+  }, []);
 
   return (
     <section
@@ -64,24 +60,7 @@ const Features = () => {
           maxWidth: "960px",
           height: "260px",
         }}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
       >
-        {/* ARROW */}
-        <button
-          onClick={prev}
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-9 h-9 rounded-full hidden md:flex items-center justify-center"
-        >
-          ←
-        </button>
-
-        <button
-          onClick={next}
-          className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-9 h-9 rounded-full hidden md:flex items-center justify-center"
-        >
-          →
-        </button>
-
         {/* CARDS */}
         <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
           {features.map((item, i) => {
@@ -91,10 +70,9 @@ const Features = () => {
             return (
               <motion.div
                 key={i}
-                onClick={() => pos !== 0 && setCurrent(i)}
                 className="absolute bg-white rounded-2xl p-5 flex flex-col"
                 style={{
-                  width: isMobile ? "200px" : "280px",
+                  width: isMobile ? "220px" : "280px",
                   height: isMobile ? "200px" : "240px",
                 }}
                 animate={{
@@ -103,29 +81,27 @@ const Features = () => {
                       ? 0
                       : pos === 1
                       ? isMobile
-                        ? 100
+                        ? 120
                         : 220
                       : pos === -1
                       ? isMobile
-                        ? -100
+                        ? -120
                         : -220
                       : pos > 1
-                      ? isMobile
-                        ? 300
-                        : 500
-                      : isMobile
-                      ? -300
+                      ? 500
                       : -500,
 
                   scale:
                     pos === 0
                       ? 1
-                      : pos === 1 || pos === -1
-                      ? 0.85
-                      : 0.6,
+                      : 0.85,
 
                   opacity:
-                    pos === 0
+                    isMobile
+                      ? pos === 0
+                        ? 1
+                        : 0
+                      : pos === 0
                       ? 1
                       : pos === 1 || pos === -1
                       ? 0.5
