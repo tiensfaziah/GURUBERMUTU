@@ -28,7 +28,6 @@ function Layout() {
       {!hideNavbar && <Navbar />}
 
       <Routes>
-        {/* LANDING */}
         <Route
           path="/"
           element={
@@ -43,11 +42,9 @@ function Layout() {
           }
         />
 
-        {/* AUTH */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* DASHBOARD */}
         <Route
           path="/dashboard"
           element={
@@ -57,7 +54,6 @@ function Layout() {
           }
         />
 
-        {/* SKILL TREE */}
         <Route
           path="/skill-tree"
           element={
@@ -67,7 +63,6 @@ function Layout() {
           }
         />
 
-        {/* 🔥 WORKSHOP LIST */}
         <Route
           path="/workshop"
           element={
@@ -77,7 +72,6 @@ function Layout() {
           }
         />
 
-        {/* 🔥 WORKSHOP DETAIL */}
         <Route
           path="/workshop/:id"
           element={
@@ -93,9 +87,11 @@ function Layout() {
 
 function App() {
   return (
-    <Router>
-      <Layout />
-    </Router>
+    <div className="overflow-x-hidden"> {/* 🔥 FIX UTAMA */}
+      <Router>
+        <Layout />
+      </Router>
+    </div>
   );
 }
 

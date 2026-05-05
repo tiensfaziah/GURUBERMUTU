@@ -32,14 +32,12 @@ const Features = () => {
   const [hovered, setHovered] = useState(false);
   const intervalRef = useRef(null);
 
-  // autoplay 3.5 detik + pause saat hover
   useEffect(() => {
     if (!hovered) {
       intervalRef.current = setInterval(() => {
         setCurrent((prev) => (prev + 1) % N);
       }, 2000);
     }
-
     return () => clearInterval(intervalRef.current);
   }, [hovered]);
 
@@ -47,21 +45,20 @@ const Features = () => {
   const prev = () => setCurrent((prev) => (prev - 1 + N) % N);
 
   return (
-    <section id="fitur" className="py-20 px-6 bg-gray-50 text-center">
+    <section id="fitur" className="py-20 px-4 md:px-6 bg-gray-50 text-center overflow-hidden">
 
       <ScrollAnimation>
-        <h2 className="text-4xl font-bold mb-12 text-gray-800">
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-gray-800">
           Fitur Utama Platform
         </h2>
       </ScrollAnimation>
 
-      {/* CAROUSEL */}
       <div
-        className="relative mx-auto"
+        className="relative mx-auto overflow-hidden"
         style={{
           perspective: "1200px",
-          maxWidth: "960px",
-          height: "300px",
+          maxWidth: "100%",
+          height: "260px",
         }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -70,7 +67,7 @@ const Features = () => {
         {/* ARROW LEFT */}
         <button
           onClick={prev}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition"
+          className="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-9 h-9 rounded-full items-center justify-center"
         >
           ←
         </button>
@@ -78,7 +75,7 @@ const Features = () => {
         {/* ARROW RIGHT */}
         <button
           onClick={next}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition"
+          className="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-9 h-9 rounded-full items-center justify-center"
         >
           →
         </button>
@@ -93,60 +90,43 @@ const Features = () => {
               <motion.div
                 key={i}
                 onClick={() => pos !== 0 && setCurrent(i)}
-                className="absolute bg-white rounded-2xl p-6 flex flex-col"
+                className="absolute bg-white rounded-2xl p-5 flex flex-col"
                 style={{
-                  width: "280px",
-                  height: "240px",
-                  cursor: pos !== 0 ? "pointer" : "default",
+                  width: window.innerWidth < 768 ? "220px" : "280px",
+                  height: "220px",
                 }}
 
                 animate={{
                   x:
-                    pos === 0
+                    window.innerWidth < 768
+                      ? pos === 0
+                        ? 0
+                        : pos === 1
+                        ? 120
+                        : pos === -1
+                        ? -120
+                        : 0
+                      : pos === 0
                       ? 0
                       : pos === 1
                       ? 220
                       : pos === -1
                       ? -220
-                      : pos > 0
-                      ? 400
-                      : -400,
+                      : 400,
 
                   scale:
                     pos === 0
-                      ? 1.1   // 🔥 center lebih besar
-                      : pos === 1 || pos === -1
-                      ? 0.8
-                      : 0.6,
-
-                  rotateY:
-                    pos === 0
-                      ? 0
-                      : pos === 1
-                      ? -35
-                      : pos === -1
-                      ? 35
-                      : pos > 0
-                      ? -50
-                      : 50,
+                      ? 1
+                      : 0.85,
 
                   opacity:
                     pos === 0
                       ? 1
-                      : pos === 1 || pos === -1
-                      ? 0.6
-                      : 0,
-
-                  filter:
-                    pos === 0
-                      ? "blur(0px)"
-                      : pos === 1 || pos === -1
-                      ? "blur(1px)"
-                      : "blur(3px)",
+                      : 0.4,
 
                   boxShadow:
                     pos === 0
-                      ? "0px 20px 50px rgba(0,0,0,0.15)" // 🔥 shadow center
+                      ? "0px 15px 40px rgba(0,0,0,0.12)"
                       : "0px 5px 15px rgba(0,0,0,0.05)",
                 }}
 
@@ -154,16 +134,15 @@ const Features = () => {
                   type: "spring",
                   stiffness: 180,
                   damping: 18,
-                  mass: 0.8,
                 }}
               >
-                <div className="text-4xl mb-4">{item.icon}</div>
+                <div className="text-3xl mb-3">{item.icon}</div>
 
-                <h3 className="text-lg font-semibold mb-2 text-gray-800">
+                <h3 className="text-base font-semibold mb-2 text-gray-800">
                   {item.title}
                 </h3>
 
-                <p className="text-gray-600 text-sm flex-grow leading-relaxed">
+                <p className="text-gray-600 text-xs leading-relaxed">
                   {item.desc}
                 </p>
               </motion.div>
@@ -173,15 +152,15 @@ const Features = () => {
         </div>
       </div>
 
-      {/* DOT / PILL */}
-      <div className="flex justify-center gap-3 mt-8">
+      {/* DOT */}
+      <div className="flex justify-center gap-2 mt-6">
         {features.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
             className={`h-2 rounded-full transition-all duration-300 ${
               i === current
-                ? "w-8 bg-[#DC1416]"   // 🔥 pill merah
+                ? "w-6 bg-[#DC1416]"
                 : "w-2 bg-gray-300"
             }`}
           />
