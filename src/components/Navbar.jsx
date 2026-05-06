@@ -1,19 +1,22 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/Logo.png"; // 🔥 tambah logo
+import logo from "../assets/Logo.png";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  // 🔥 SCROLL HOME
+  // SCROLL HOME
   const scrollToHome = () => {
+    setOpen(false);
+
     const element = document.getElementById("home");
 
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     } else {
       navigate("/");
+
       setTimeout(() => {
         const el = document.getElementById("home");
         el?.scrollIntoView({ behavior: "smooth" });
@@ -21,14 +24,17 @@ function Navbar() {
     }
   };
 
-  // 🔥 SCROLL FITUR
+  // SCROLL FITUR
   const scrollToFitur = () => {
+    setOpen(false);
+
     const element = document.getElementById("fitur");
 
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     } else {
       navigate("/");
+
       setTimeout(() => {
         const el = document.getElementById("fitur");
         el?.scrollIntoView({ behavior: "smooth" });
@@ -37,60 +43,176 @@ function Navbar() {
   };
 
   return (
-    <nav className="w-full bg-white shadow-sm fixed top-0 left-0 z-50">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center">
+    <nav className="w-full bg-white/95 backdrop-blur-md shadow-sm fixed top-0 left-0 z-50">
 
-        {/* 🔥 LOGO + TEXT */}
+      {/* CONTAINER */}
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+        {/* LOGO */}
         <div
           onClick={scrollToHome}
           className="flex items-center gap-2 cursor-pointer"
         >
-          <img src={logo} alt="logo gurubermutu" className="w-8 h-8" />
+          <img
+            src={logo}
+            alt="logo gurubermutu"
+            className="w-8 h-8 object-contain"
+          />
 
           <h1 className="font-bold text-xl text-[#5B21B6]">
             Gurubermutu.id
           </h1>
         </div>
 
-        {/* DESKTOP */}
-        <div className="ml-auto hidden md:flex items-center gap-8 text-gray-700">
+        {/* DESKTOP MENU */}
+        <div className="hidden md:flex items-center gap-8 text-gray-700 font-medium">
 
-          <button onClick={scrollToHome}>Home</button>
+          <button
+            onClick={scrollToHome}
+            className="hover:text-[#5B21B6] transition"
+          >
+            Home
+          </button>
 
-          <button onClick={scrollToFitur}>Fitur</button>
+          <button
+            onClick={scrollToFitur}
+            className="hover:text-[#5B21B6] transition"
+          >
+            Fitur
+          </button>
 
           <button
             onClick={() => navigate("/login")}
-            className="bg-[#5B21B6] text-white px-4 py-2 rounded-lg"
+            className="
+              bg-[#5B21B6]
+              text-white
+              px-5
+              py-2.5
+              rounded-xl
+              hover:scale-105
+              transition
+              shadow-md
+            "
           >
             Sign in
           </button>
         </div>
 
-        {/* MOBILE */}
+        {/* HAMBURGER */}
         <button
           onClick={() => setOpen(!open)}
-          className="ml-auto md:hidden text-2xl"
+          className="
+            md:hidden
+            text-3xl
+            text-gray-800
+            transition
+          "
         >
-          ☰
+          {open ? "✕" : "☰"}
         </button>
+
       </div>
 
-      {open && (
-        <div className="md:hidden bg-white px-6 pb-4 space-y-4 shadow-md">
+      {/* MOBILE MENU */}
+      <div
+        className={`
+          md:hidden
+          overflow-hidden
+          transition-all
+          duration-300
+          ease-in-out
 
-          <button onClick={scrollToHome}>Home</button>
+          ${
+            open
+              ? "max-h-96 opacity-100"
+              : "max-h-0 opacity-0"
+          }
+        `}
+      >
+        <div
+          className="
+            px-6
+            pb-6
+            pt-2
 
-          <button onClick={scrollToFitur}>Fitur</button>
+            bg-white/95
+            backdrop-blur-md
+
+            shadow-lg
+            border-t
+
+            flex
+            flex-col
+            gap-4
+          "
+        >
 
           <button
-            onClick={() => navigate("/login")}
-            className="w-full bg-[#5B21B6] text-white px-4 py-2 rounded-lg"
+            onClick={scrollToHome}
+            className="
+              w-full
+              text-left
+              text-lg
+              font-medium
+              text-gray-700
+
+              py-2
+
+              hover:text-[#5B21B6]
+              transition
+            "
+          >
+            Home
+          </button>
+
+          <button
+            onClick={scrollToFitur}
+            className="
+              w-full
+              text-left
+              text-lg
+              font-medium
+              text-gray-700
+
+              py-2
+
+              hover:text-[#5B21B6]
+              transition
+            "
+          >
+            Fitur
+          </button>
+
+          <button
+            onClick={() => {
+              setOpen(false);
+              navigate("/login");
+            }}
+            className="
+              w-full
+              mt-2
+
+              bg-[#5B21B6]
+              text-white
+
+              px-4
+              py-3
+
+              rounded-xl
+              font-medium
+
+              shadow-md
+              hover:scale-[1.02]
+
+              transition
+            "
           >
             Sign in
           </button>
+
         </div>
-      )}
+      </div>
+
     </nav>
   );
 }
