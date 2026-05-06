@@ -149,7 +149,7 @@ function Hero() {
               Bukan
               <br />
 
-              Sekadar Rutinitas
+              Sekadar Rutinitas,
 
               <br />
 
