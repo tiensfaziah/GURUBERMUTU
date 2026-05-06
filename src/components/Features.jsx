@@ -41,7 +41,7 @@ const Features = () => {
     if (!hovered) {
       intervalRef.current = setInterval(() => {
         setCurrent((prev) => (prev + 1) % N);
-      }, 2500);
+      }, 1800);
     }
 
     return () => clearInterval(intervalRef.current);
