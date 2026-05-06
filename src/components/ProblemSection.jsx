@@ -3,7 +3,7 @@ import ScrollAnimation from "../components/ScrollAnimation";
 function ProblemSection() {
   return (
     <section
-      id="fitur"
+      id="problem"
       className="relative overflow-hidden bg-[#FCFCFD]"
     >
 
