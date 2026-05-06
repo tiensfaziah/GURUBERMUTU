@@ -27,7 +27,7 @@ function Login() {
 
       <div className="bg-white/90 rounded-2xl shadow-xl p-8 w-full max-w-md">
 
-        <h1 className="text-2xl font-bold text-center text-[#DC1416] mb-2">
+        <h1 className="text-2xl font-bold text-center text-[#5B21B6] mb-2">
           Gurubermutu
         </h1>
 
@@ -47,7 +47,7 @@ function Login() {
             />
           </div>
 
-          {/* 🔥 PASSWORD FIX */}
+          {/* PASSWORD */}
           <div className="relative">
             <label>Password</label>
 
@@ -68,7 +68,7 @@ function Login() {
 
           <button
             type="submit"
-            className="w-full bg-[#DC1416] text-white py-2 rounded-lg"
+            className="w-full bg-[#5B21B6] text-white py-2 rounded-lg"
           >
             Sign In
           </button>
@@ -77,7 +77,7 @@ function Login() {
 
         <p className="text-sm text-center mt-6">
           Belum punya akun?{" "}
-          <span onClick={() => navigate("/register")} className="text-[#DC1416] cursor-pointer">
+          <span onClick={() => navigate("/register")} className="text-[#5B21B6] cursor-pointer">
             Daftar di sini
           </span>
         </p>

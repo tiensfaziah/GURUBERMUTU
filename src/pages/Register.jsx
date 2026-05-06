@@ -36,7 +36,7 @@ function Register() {
 
       <div className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl p-6 sm:p-8 w-full max-w-md mt-10 mb-10">
 
-        <h1 className="text-2xl sm:text-3xl font-bold text-center text-[#DC1416] mb-2">
+        <h1 className="text-2xl sm:text-3xl font-bold text-center text-[#5B21B6] mb-2">
           Gurubermutu
         </h1>
 
@@ -108,7 +108,7 @@ function Register() {
           {/* BUTTON */}
           <button
             type="submit"
-            className="w-full bg-[#DC1416] text-white py-2.5 rounded-lg hover:scale-105 transition"
+            className="w-full bg-[#5B21B6] text-white py-2.5 rounded-lg hover:scale-105 transition"
           >
             Daftar
           </button>
@@ -120,7 +120,7 @@ function Register() {
           Sudah punya akun?{" "}
           <span
             onClick={() => navigate("/login")}
-            className="text-[#DC1416] cursor-pointer hover:underline"
+            className="text-[#5B21B6] cursor-pointer hover:underline"
           >
             Sign In
           </span>
