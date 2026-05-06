@@ -48,12 +48,12 @@ function Hero() {
         />
       </div>
 
-      {/* OVERLAY MOBILE + DESKTOP */}
+      {/* OVERLAY */}
       <div
         className="
           absolute inset-0
 
-          bg-black/45
+          bg-black/55
 
           md:bg-gradient-to-r
           md:from-white
@@ -78,15 +78,36 @@ function Hero() {
 
                 text-white
                 md:text-gray-800
+
+                drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]
+                md:drop-shadow-none
               "
             >
-              <span className="text-[#8B5CF6] md:text-[#5B21B6]">
+              <span
+                className="
+                  text-[#C084FC]
+                  md:text-[#5B21B6]
+
+                  drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]
+                  md:drop-shadow-none
+                "
+              >
                 Mengajar
               </span>{" "}
               Bukan Sekadar Rutinitas,
               <br />
               Jadi Guru Gen Z yang{" "}
-              <span className="text-[#F472B6] md:text-[#EC4899] transition-all duration-500">
+              <span
+                className="
+                  text-[#F9A8D4]
+                  md:text-[#EC4899]
+                  transition-all
+                  duration-500
+
+                  drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]
+                  md:drop-shadow-none
+                "
+              >
                 {words[index]}
               </span>{" "}
               di Era Digital
@@ -100,6 +121,9 @@ function Hero() {
                 text-base
                 md:text-lg
                 leading-relaxed
+
+                drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]
+                md:drop-shadow-none
               "
             >
               Tingkatkan cara mengajar dengan pendekatan modern,
