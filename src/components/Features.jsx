@@ -7,21 +7,25 @@ const features = [
     title: "Gamified Skill Tree",
     desc: "Lihat perkembangan skill kamu dengan sistem level dan XP.",
     icon: "🎮",
+    badge: "Gamifikasi",
   },
   {
     title: "Tech Stack",
     desc: "Temukan tools digital terbaik untuk meningkatkan kualitas mengajar.",
     icon: "🧠",
+    badge: "Teknologi",
   },
   {
     title: "Marketplace",
     desc: "Jual dan beli materi ajar seperti PPT, modul, dan soal latihan.",
     icon: "🛒",
+    badge: "Marketplace",
   },
   {
     title: "Workshop & Seminar",
     desc: "Ikuti pelatihan dan seminar untuk meningkatkan kompetensi.",
     icon: "📚",
+    badge: "Pelatihan",
   },
 ];
 
@@ -32,12 +36,12 @@ const Features = () => {
   const [hovered, setHovered] = useState(false);
   const intervalRef = useRef(null);
 
-  // autoplay 3.5 detik + pause saat hover
+  // AUTOPLAY
   useEffect(() => {
     if (!hovered) {
       intervalRef.current = setInterval(() => {
         setCurrent((prev) => (prev + 1) % N);
-      }, 2000);
+      }, 2500);
     }
 
     return () => clearInterval(intervalRef.current);
@@ -47,21 +51,132 @@ const Features = () => {
   const prev = () => setCurrent((prev) => (prev - 1 + N) % N);
 
   return (
-    <section id="fitur" className="py-20 px-6 bg-white text-center">
+    <section
+      id="fitur"
+      className="
+        relative
+        overflow-hidden
 
-      <ScrollAnimation>
-        <h2 className="text-4xl font-bold mb-12 text-gray-800">
-          Fitur Utama Platform
-        </h2>
-      </ScrollAnimation>
+        py-20
+        md:py-28
+
+        px-6
+
+        bg-white
+        text-center
+      "
+    >
+
+      {/* BACKGROUND CIRCLE */}
+      <div
+        className="
+          absolute
+          -top-32
+          -left-32
+
+          w-[320px]
+          h-[320px]
+
+          md:w-[500px]
+          md:h-[500px]
+
+          rounded-full
+
+          bg-[#F3F0FF]
+
+          opacity-90
+        "
+      ></div>
+
+      {/* HEADER */}
+      <div className="relative z-10">
+
+        {/* BADGE */}
+        <ScrollAnimation>
+          <div
+            className="
+              inline-flex
+              items-center
+              gap-2
+
+              px-5
+              py-2.5
+
+              rounded-full
+
+              bg-[#EEE8FF]
+
+              text-[#6D28D9]
+
+              text-xs
+              md:text-sm
+
+              font-semibold
+              tracking-wide
+              uppercase
+            "
+          >
+            <span className="w-2 h-2 rounded-full bg-[#A78BFA]"></span>
+            Yang Kamu Dapatkan
+          </div>
+        </ScrollAnimation>
+
+        {/* TITLE */}
+        <ScrollAnimation delay={0.1}>
+          <h2
+            className="
+              mt-8
+
+              text-3xl
+              md:text-4xl
+
+              font-bold
+              leading-tight
+
+              text-gray-900
+            "
+          >
+            Fitur{" "}
+
+            <span className="text-[#7C3AED]">
+              Utama
+            </span>{" "}
+
+            Platform
+          </h2>
+        </ScrollAnimation>
+
+        {/* DESC */}
+        <ScrollAnimation delay={0.2}>
+          <p
+            className="
+              mt-6
+
+              max-w-3xl
+              mx-auto
+
+              text-gray-600
+
+              text-sm
+              md:text-lg
+
+              leading-relaxed
+            "
+          >
+            Semua yang kamu butuhkan untuk berkembang
+            sebagai guru profesional — dalam satu platform.
+          </p>
+        </ScrollAnimation>
+
+      </div>
 
       {/* CAROUSEL */}
       <div
-        className="relative mx-auto"
+        className="relative mx-auto mt-20"
         style={{
           perspective: "1200px",
-          maxWidth: "960px",
-          height: "300px",
+          maxWidth: "1000px",
+          height: "340px",
         }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -70,7 +185,31 @@ const Features = () => {
         {/* ARROW LEFT */}
         <button
           onClick={prev}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition"
+          className="
+            absolute
+            left-0
+            top-1/2
+            -translate-y-1/2
+
+            z-20
+
+            bg-white
+
+            shadow-lg
+
+            w-10
+            h-10
+
+            rounded-full
+
+            flex
+            items-center
+            justify-center
+
+            hover:scale-110
+
+            transition
+          "
         >
           ←
         </button>
@@ -78,7 +217,31 @@ const Features = () => {
         {/* ARROW RIGHT */}
         <button
           onClick={next}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-md w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition"
+          className="
+            absolute
+            right-0
+            top-1/2
+            -translate-y-1/2
+
+            z-20
+
+            bg-white
+
+            shadow-lg
+
+            w-10
+            h-10
+
+            rounded-full
+
+            flex
+            items-center
+            justify-center
+
+            hover:scale-110
+
+            transition
+          "
         >
           →
         </button>
@@ -93,10 +256,26 @@ const Features = () => {
               <motion.div
                 key={i}
                 onClick={() => pos !== 0 && setCurrent(i)}
-                className="absolute bg-white rounded-2xl p-6 flex flex-col"
+                className="
+                  absolute
+
+                  bg-white
+
+                  rounded-[28px]
+
+                  border
+                  border-[#E9D5FF]
+
+                  flex
+                  flex-col
+
+                  text-left
+
+                  overflow-hidden
+                "
                 style={{
-                  width: "280px",
-                  height: "240px",
+                  width: "260px",
+                  height: "300px",
                   cursor: pos !== 0 ? "pointer" : "default",
                 }}
 
@@ -105,36 +284,36 @@ const Features = () => {
                     pos === 0
                       ? 0
                       : pos === 1
-                      ? 220
+                      ? 240
                       : pos === -1
-                      ? -220
+                      ? -240
                       : pos > 0
-                      ? 400
-                      : -400,
+                      ? 420
+                      : -420,
 
                   scale:
                     pos === 0
-                      ? 1.1   // 🔥 center lebih besar
+                      ? 1
                       : pos === 1 || pos === -1
-                      ? 0.8
+                      ? 0.82
                       : 0.6,
 
                   rotateY:
                     pos === 0
                       ? 0
                       : pos === 1
-                      ? -35
+                      ? -20
                       : pos === -1
-                      ? 35
+                      ? 20
                       : pos > 0
-                      ? -50
-                      : 50,
+                      ? -35
+                      : 35,
 
                   opacity:
                     pos === 0
                       ? 1
                       : pos === 1 || pos === -1
-                      ? 0.6
+                      ? 0.55
                       : 0,
 
                   filter:
@@ -146,7 +325,7 @@ const Features = () => {
 
                   boxShadow:
                     pos === 0
-                      ? "0px 20px 50px rgba(0,0,0,0.15)" // 🔥 shadow center
+                      ? "0px 20px 50px rgba(124,58,237,0.12)"
                       : "0px 5px 15px rgba(0,0,0,0.05)",
                 }}
 
@@ -157,15 +336,96 @@ const Features = () => {
                   mass: 0.8,
                 }}
               >
-                <div className="text-4xl mb-4">{item.icon}</div>
 
-                <h3 className="text-lg font-semibold mb-2 text-gray-800">
-                  {item.title}
-                </h3>
+                {/* TOP LINE */}
+                <div className="w-full h-1 bg-[#7C3AED]"></div>
 
-                <p className="text-gray-600 text-sm flex-grow leading-relaxed">
-                  {item.desc}
-                </p>
+                {/* CONTENT */}
+                <div className="p-7 flex flex-col h-full">
+
+                  {/* ICON BOX */}
+                  <div
+                    className="
+                      w-14
+                      h-14
+
+                      rounded-2xl
+
+                      bg-[#F3F0FF]
+
+                      flex
+                      items-center
+                      justify-center
+
+                      text-2xl
+                    "
+                  >
+                    {item.icon}
+                  </div>
+
+                  {/* BADGE */}
+                  <div
+                    className="
+                      mt-5
+
+                      inline-flex
+                      items-center
+                      gap-2
+
+                      w-fit
+
+                      px-3
+                      py-1.5
+
+                      rounded-full
+
+                      bg-[#F3F0FF]
+
+                      text-[#6D28D9]
+
+                      text-xs
+                      font-bold
+                      uppercase
+                    "
+                  >
+                    ✨ {item.badge}
+                  </div>
+
+                  {/* TITLE */}
+                  <h3
+                    className="
+                      mt-5
+
+                      text-xl
+
+                      font-bold
+
+                      leading-snug
+
+                      text-gray-900
+                    "
+                  >
+                    {item.title}
+                  </h3>
+
+                  {/* DESC */}
+                  <p
+                    className="
+                      mt-4
+
+                      text-gray-600
+
+                      text-sm
+                      md:text-base
+
+                      leading-relaxed
+                    "
+                  >
+                    {item.desc}
+                  </p>
+
+                </div>
+
               </motion.div>
             );
           })}
@@ -174,14 +434,14 @@ const Features = () => {
       </div>
 
       {/* DOT / PILL */}
-      <div className="flex justify-center gap-3 mt-8">
+      <div className="flex justify-center gap-3 mt-10">
         {features.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
             className={`h-2 rounded-full transition-all duration-300 ${
               i === current
-                ? "w-8 bg-[#5B21B6]"   // 🔥 pill merah
+                ? "w-8 bg-[#7C3AED]"
                 : "w-2 bg-gray-300"
             }`}
           />
