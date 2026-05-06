@@ -23,7 +23,7 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#F8BFBF] via-[#F8FBFB] to-[#E0C3FC] px-6">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f1bff8] via-[#e8dfea] to-[#a985cb] px-6">
 
       <div className="bg-white/90 rounded-2xl shadow-xl p-8 w-full max-w-md">
 
