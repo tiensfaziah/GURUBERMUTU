@@ -109,28 +109,19 @@ function Dashboard() {
 
           ${
             menuOpen
-              ? "max-h-96 opacity-100"
+              ? "max-h-[500px] opacity-100"
               : "max-h-0 opacity-0"
           }
         `}
       >
-        <div className="bg-white px-4 pb-5 pt-2 space-y-4 shadow-md border-b border-[#EEE8FF]">
+        <div className="bg-white px-4 pb-5 pt-2 space-y-2 shadow-md border-b border-[#EEE8FF]">
 
           <button
             onClick={() => {
               navigate("/dashboard");
               setMenuOpen(false);
             }}
-            className="
-              block
-              w-full
-              text-left
-
-              text-gray-700
-              font-medium
-
-              py-2
-            "
+            className="block w-full text-left text-gray-700 font-medium py-3"
           >
             🏠 Dashboard
           </button>
@@ -140,18 +131,21 @@ function Dashboard() {
               navigate("/skill-tree");
               setMenuOpen(false);
             }}
-            className="
-              block
-              w-full
-              text-left
-
-              text-gray-700
-              font-medium
-
-              py-2
-            "
+            className="block w-full text-left text-gray-700 font-medium py-3"
           >
             🌳 Skill Tree
+          </button>
+
+          <button
+            className="block w-full text-left text-gray-700 font-medium py-3"
+          >
+            🛠 Tech Stack
+          </button>
+
+          <button
+            className="block w-full text-left text-gray-700 font-medium py-3"
+          >
+            🛒 Marketplace
           </button>
 
           <button
@@ -159,37 +153,32 @@ function Dashboard() {
               navigate("/workshop");
               setMenuOpen(false);
             }}
-            className="
-              block
-              w-full
-              text-left
-
-              text-gray-700
-              font-medium
-
-              py-2
-            "
+            className="block w-full text-left text-gray-700 font-medium py-3"
           >
             🎓 Workshop
           </button>
 
           <button
+            className="block w-full text-left text-gray-700 font-medium py-3"
+          >
+            👤 Edit Profil
+          </button>
+
+          <hr className="my-2 border-[#EEE8FF]" />
+
+          <button
             onClick={handleLogout}
             className="
               w-full
-
               bg-gradient-to-r
               from-[#5B21B6]
               to-[#7C3AED]
-
               text-white
-
               py-3
-
               rounded-xl
-
               text-sm
               font-medium
+              mt-2
             "
           >
             Logout
@@ -241,6 +230,14 @@ function Dashboard() {
               🌳 Skill Tree
             </p>
 
+            <p className="cursor-pointer hover:text-[#7C3AED] transition">
+              🛠 Tech Stack
+            </p>
+
+            <p className="cursor-pointer hover:text-[#7C3AED] transition">
+              🛒 Marketplace
+            </p>
+
             <p
               onClick={() => navigate("/workshop")}
               className="cursor-pointer hover:text-[#7C3AED] transition"
@@ -277,22 +274,15 @@ function Dashboard() {
                 placeholder="Cari modul..."
                 className="
                   bg-white
-
                   px-4
                   py-3
-
                   rounded-xl
-
                   shadow-sm
-
                   text-sm
-
                   w-full
                   md:w-64
-
                   border
                   border-[#EEE8FF]
-
                   focus:outline-none
                 "
               />
@@ -344,19 +334,13 @@ function Dashboard() {
                 <button
                   className="
                     mt-4
-
                     bg-white
-
                     text-[#7C3AED]
-
                     px-5
                     py-2.5
-
                     rounded-xl
-
                     text-sm
                     font-semibold
-
                     transition
                   "
                 >
@@ -371,13 +355,9 @@ function Dashboard() {
                 <div
                   className="
                     bg-white/15
-
                     backdrop-blur-md
-
                     p-3
-
                     rounded-xl
-
                     text-center
                   "
                 >
@@ -393,13 +373,9 @@ function Dashboard() {
                 <div
                   className="
                     bg-white/15
-
                     backdrop-blur-md
-
                     p-3
-
                     rounded-xl
-
                     text-center
                   "
                 >
@@ -419,24 +395,7 @@ function Dashboard() {
             {/* STATS */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-              {/* XP */}
-              <div
-                className="
-                  bg-white
-
-                  p-5
-
-                  rounded-2xl
-
-                  shadow-sm
-
-                  border
-                  border-[#EEE8FF]
-
-                  border-t-4
-                  border-t-[#EC4899]
-                "
-              >
+              <div className="bg-white p-5 rounded-2xl shadow-sm border border-[#EEE8FF] border-t-4 border-t-[#EC4899]">
                 <p className="text-gray-500 text-sm">
                   TOTAL XP
                 </p>
@@ -446,24 +405,7 @@ function Dashboard() {
                 </h3>
               </div>
 
-              {/* LEVEL */}
-              <div
-                className="
-                  bg-white
-
-                  p-5
-
-                  rounded-2xl
-
-                  shadow-sm
-
-                  border
-                  border-[#EEE8FF]
-
-                  border-t-4
-                  border-t-[#7C3AED]
-                "
-              >
+              <div className="bg-white p-5 rounded-2xl shadow-sm border border-[#EEE8FF] border-t-4 border-t-[#7C3AED]">
                 <p className="text-gray-500 text-sm">
                   LEVEL
                 </p>
@@ -473,24 +415,7 @@ function Dashboard() {
                 </h3>
               </div>
 
-              {/* BADGE */}
-              <div
-                className="
-                  bg-white
-
-                  p-5
-
-                  rounded-2xl
-
-                  shadow-sm
-
-                  border
-                  border-[#EEE8FF]
-
-                  border-t-4
-                  border-t-[#5B21B6]
-                "
-              >
+              <div className="bg-white p-5 rounded-2xl shadow-sm border border-[#EEE8FF] border-t-4 border-t-[#5B21B6]">
                 <p className="text-gray-500 text-sm">
                   BADGE
                 </p>
@@ -509,20 +434,7 @@ function Dashboard() {
             </div>
 
             {/* PROGRESS */}
-            <div
-              className="
-                bg-white
-
-                p-5
-
-                rounded-2xl
-
-                shadow-sm
-
-                border
-                border-[#EEE8FF]
-              "
-            >
+            <div className="bg-white p-5 rounded-2xl shadow-sm border border-[#EEE8FF]">
 
               <div className="flex justify-between items-center">
 
@@ -543,9 +455,7 @@ function Dashboard() {
                     bg-gradient-to-r
                     from-[#7C3AED]
                     to-[#EC4899]
-
                     h-2
-
                     rounded
                   "
                   style={{ width: `${progress}%` }}
@@ -560,22 +470,7 @@ function Dashboard() {
             </div>
 
             {/* MOBILE AKTIVITAS */}
-            <div
-              className="
-                md:hidden
-
-                bg-white
-
-                p-5
-
-                rounded-2xl
-
-                shadow-sm
-
-                border
-                border-[#EEE8FF]
-              "
-            >
+            <div className="md:hidden bg-white p-5 rounded-2xl shadow-sm border border-[#EEE8FF]">
 
               <h3 className="font-semibold mb-3">
                 Aktivitas Terkini
@@ -599,22 +494,7 @@ function Dashboard() {
             </div>
 
             {/* MOBILE PROFILE */}
-            <div
-              className="
-                md:hidden
-
-                bg-white
-
-                p-5
-
-                rounded-2xl
-
-                shadow-sm
-
-                border
-                border-[#EEE8FF]
-              "
-            >
+            <div className="md:hidden bg-white p-5 rounded-2xl shadow-sm border border-[#EEE8FF]">
 
               <div className="flex items-center gap-4">
 
@@ -622,19 +502,14 @@ function Dashboard() {
                   className="
                     w-14
                     h-14
-
                     bg-gradient-to-br
                     from-[#5B21B6]
                     to-[#EC4899]
-
                     text-white
-
                     rounded-full
-
                     flex
                     items-center
                     justify-center
-
                     text-lg
                     font-bold
                   "
@@ -661,16 +536,11 @@ function Dashboard() {
                 <button
                   className="
                     w-full
-
                     border
                     border-[#7C3AED]
-
                     text-[#7C3AED]
-
                     py-2.5
-
                     rounded-xl
-
                     text-sm
                   "
                 >
@@ -681,17 +551,12 @@ function Dashboard() {
                   onClick={handleLogout}
                   className="
                     w-full
-
                     bg-gradient-to-r
                     from-[#5B21B6]
                     to-[#7C3AED]
-
                     text-white
-
                     py-2.5
-
                     rounded-xl
-
                     text-sm
                   "
                 >
@@ -724,6 +589,14 @@ function Dashboard() {
 
               border-l
               border-[#F1EAFE]
+
+              rounded-2xl
+
+              self-start
+
+              mt-6
+
+              h-[calc(100vh-48px)]
             "
           >
 
@@ -763,25 +636,7 @@ function Dashboard() {
                 {user?.email}
               </p>
 
-              <div
-                className="
-                  mt-3
-
-                  inline-block
-
-                  px-3
-                  py-1
-
-                  rounded-full
-
-                  bg-[#F3E8FF]
-
-                  text-[#7C3AED]
-
-                  text-xs
-                  font-semibold
-                "
-              >
+              <div className="mt-3 inline-block px-3 py-1 rounded-full bg-[#F3E8FF] text-[#7C3AED] text-xs font-semibold">
                 {getLevelName(xp)}
               </div>
 
@@ -819,21 +674,14 @@ function Dashboard() {
               <button
                 className="
                   w-full
-
                   border
                   border-[#7C3AED]
-
                   text-[#7C3AED]
-
                   py-2.5
-
                   rounded-xl
-
                   text-sm
-
                   hover:bg-[#7C3AED]
                   hover:text-white
-
                   transition
                 "
               >
@@ -844,21 +692,14 @@ function Dashboard() {
                 onClick={handleLogout}
                 className="
                   w-full
-
                   bg-gradient-to-r
                   from-[#5B21B6]
                   to-[#7C3AED]
-
                   text-white
-
                   py-2.5
-
                   rounded-xl
-
                   text-sm
-
                   hover:opacity-90
-
                   transition
                 "
               >
