@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 function Hero() {
   const navigate = useNavigate();
 
-  const words = ["Relevan", "Kreatif", "Interaktif", "Inovatif"];
+  const words = ["Relevan", "Kreatif", "Inovatif"];
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
