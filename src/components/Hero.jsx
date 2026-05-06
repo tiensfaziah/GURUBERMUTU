@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 function Hero() {
   const navigate = useNavigate();
 
-  const words = ["Relevan", "Kreatif", "Inovatif"];
+  const words = ["Relevan", "Kreatif", "Interaktif", "Inovatif"];
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -22,18 +22,15 @@ function Hero() {
       id="home"
       className="
         relative
-        scroll-mt-24
-        w-full
-        pt-20 md:pt-28
-        pb-20 md:pb-32
+        min-h-screen
+        flex
+        items-center
         overflow-hidden
-        min-h-[85vh] md:min-h-screen
-        flex items-center
       "
     >
 
       {/* BACKGROUND IMAGE */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0">
         <img
           src={heroImg}
           alt="guru gen z mengajar digital"
@@ -41,120 +38,193 @@ function Hero() {
             w-full
             h-full
             object-cover
-            object-center
-            md:object-[70%_30%]
+
+            object-[65%_20%]
+            md:object-[center_10%]
+
             scale-105
           "
         />
       </div>
 
-      {/* OVERLAY */}
+      {/* DARK OVERLAY */}
       <div
         className="
-          absolute inset-0
+          absolute
+          inset-0
+          bg-black/60
+        "
+      ></div>
 
-          bg-black/55
+      {/* GRADIENT GLOW */}
+      <div
+        className="
+          absolute
+          bottom-0
+          left-0
 
-          md:bg-gradient-to-r
-          md:from-white
-          md:via-white/80
-          md:to-transparent
+          w-[400px]
+          h-[400px]
+
+          bg-[#7C3AED]/20
+
+          rounded-full
+          blur-3xl
         "
       ></div>
 
       {/* CONTENT */}
-      <div className="relative max-w-7xl mx-auto px-6 md:px-16 w-full">
+      <div
+        className="
+          relative
+          z-10
+
+          max-w-7xl
+          mx-auto
+
+          w-full
+
+          px-6
+          md:px-16
+
+          pt-28
+          pb-20
+        "
+      >
 
         <ScrollAnimation>
-          <div className="max-w-xl text-center md:text-left">
 
+          <div className="max-w-3xl">
+
+            {/* BADGE */}
+            <div
+              className="
+                inline-flex
+                items-center
+                gap-2
+
+                px-4
+                py-2
+
+                rounded-full
+
+                bg-white/10
+                border
+                border-white/20
+
+                backdrop-blur-md
+
+                text-white/90
+                text-sm
+                font-medium
+              "
+            >
+              ✨ Platform Belajar Guru Masa Kini
+            </div>
+
+            {/* TITLE */}
             <h1
               className="
+                mt-8
+
                 text-4xl
                 md:text-5xl
+                lg:text-6xl
+
                 font-bold
-                mb-5 md:mb-6
                 leading-tight
 
                 text-white
-                md:text-gray-800
 
-                drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]
-                md:drop-shadow-none
+                text-left
+
+                drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]
               "
             >
-              <span
-                className="
-                  text-[#C084FC]
-                  md:text-[#5B21B6]
 
-                  drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]
-                  md:drop-shadow-none
-                "
-              >
+              <span className="text-[#C084FC]">
                 Mengajar
               </span>{" "}
-              Bukan Sekadar Rutinitas,
+
+              Bukan
               <br />
+
+              Sekadar Rutinitas
+
+              <br />
+
               Jadi Guru Gen Z yang{" "}
+
               <span
                 className="
                   text-[#F9A8D4]
-                  md:text-[#EC4899]
                   transition-all
                   duration-500
-
-                  drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]
-                  md:drop-shadow-none
                 "
               >
                 {words[index]}
-              </span>{" "}
-              di Era Digital
+              </span>
+
             </h1>
 
+            {/* DESCRIPTION */}
             <p
               className="
-                text-white/90
-                md:text-gray-600
-                mb-6
+                mt-7
+
+                max-w-2xl
+
+                text-white/85
+
                 text-base
                 md:text-lg
+
                 leading-relaxed
 
-                drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]
-                md:drop-shadow-none
+                text-left
               "
             >
               Tingkatkan cara mengajar dengan pendekatan modern,
-              interaktif, dan berbasis teknologi dalam satu platform
-              yang dirancang khusus untuk guru masa kini.
+              interaktif, dan berbasis teknologi dalam satu
+              platform yang dirancang khusus untuk guru masa kini.
             </p>
 
+            {/* BUTTON */}
             <div
               className="
+                mt-10
+
                 flex
                 flex-col
                 sm:flex-row
-                gap-3 md:gap-4
-                mt-6
-                justify-center
-                md:justify-start
+
+                items-start
+
+                gap-4
               "
             >
 
               <button
                 onClick={() => navigate("/login")}
                 className="
-                  bg-[#5B21B6]
+                  w-full
+                  sm:w-auto
+
+                  bg-[#7C3AED]
+                  hover:bg-[#6D28D9]
+
                   text-white
-                  px-6
-                  py-3.5
-                  rounded-xl
-                  shadow-lg
+                  font-semibold
+
+                  px-7
+                  py-4
+
+                  rounded-2xl
+
+                  shadow-xl
                   hover:scale-105
+
                   transition
-                  font-medium
                 "
               >
                 Mulai Sekarang 🚀
@@ -162,24 +232,25 @@ function Hero() {
 
               <button
                 className="
-                  border
-                  border-white/40
-                  md:border-gray-300
+                  w-full
+                  sm:w-auto
 
-                  bg-white/20
-                  md:bg-white/80
+                  bg-white/10
+                  border
+                  border-white/20
 
                   backdrop-blur-md
 
                   text-white
-                  md:text-gray-800
+                  font-semibold
 
-                  px-6
-                  py-3.5
-                  rounded-xl
-                  hover:scale-105
+                  px-7
+                  py-4
+
+                  rounded-2xl
+
+                  hover:bg-white/20
                   transition
-                  font-medium
                 "
               >
                 Lihat Demo
@@ -188,6 +259,7 @@ function Hero() {
             </div>
 
           </div>
+
         </ScrollAnimation>
 
       </div>
