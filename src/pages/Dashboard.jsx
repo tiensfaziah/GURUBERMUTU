@@ -99,43 +99,106 @@ function Dashboard() {
       </div>
 
       {/* MOBILE MENU */}
-      {menuOpen && (
-        <div className="md:hidden bg-white px-4 pb-5 space-y-4 shadow-md border-b border-[#EEE8FF]">
+      <div
+        className={`
+          md:hidden
+          overflow-hidden
+          transition-all
+          duration-300
+          ease-in-out
 
-          <p
+          ${
+            menuOpen
+              ? "max-h-96 opacity-100"
+              : "max-h-0 opacity-0"
+          }
+        `}
+      >
+        <div className="bg-white px-4 pb-5 pt-2 space-y-4 shadow-md border-b border-[#EEE8FF]">
+
+          <button
             onClick={() => {
               navigate("/dashboard");
               setMenuOpen(false);
             }}
-            className="text-gray-700"
+            className="
+              block
+              w-full
+              text-left
+
+              text-gray-700
+              font-medium
+
+              py-2
+            "
           >
             🏠 Dashboard
-          </p>
+          </button>
 
-          <p
+          <button
             onClick={() => {
               navigate("/skill-tree");
               setMenuOpen(false);
             }}
-            className="text-gray-700"
+            className="
+              block
+              w-full
+              text-left
+
+              text-gray-700
+              font-medium
+
+              py-2
+            "
           >
             🌳 Skill Tree
-          </p>
+          </button>
 
-          <p
+          <button
             onClick={() => {
               navigate("/workshop");
               setMenuOpen(false);
             }}
-            className="text-gray-700"
+            className="
+              block
+              w-full
+              text-left
+
+              text-gray-700
+              font-medium
+
+              py-2
+            "
           >
             🎓 Workshop
-          </p>
+          </button>
+
+          <button
+            onClick={handleLogout}
+            className="
+              w-full
+
+              bg-gradient-to-r
+              from-[#5B21B6]
+              to-[#7C3AED]
+
+              text-white
+
+              py-3
+
+              rounded-xl
+
+              text-sm
+              font-medium
+            "
+          >
+            Logout
+          </button>
 
         </div>
-      )}
+      </div>
 
-      <div className="flex">
+      <div className="flex gap-6">
 
         {/* DESKTOP SIDEBAR */}
         <div
@@ -144,7 +207,6 @@ function Dashboard() {
             md:flex
 
             w-64
-            min-h-screen
 
             bg-white
 
@@ -191,10 +253,21 @@ function Dashboard() {
         </div>
 
         {/* MAIN */}
-        <div className="flex-1 flex justify-center gap-6 px-3 md:px-6 py-4 md:py-6">
+        <div className="flex flex-1 justify-center gap-6 px-3 md:px-0 py-4 md:py-0">
 
           {/* CENTER */}
-          <div className="w-full max-w-[900px] space-y-5">
+          <div
+            className="
+              w-full
+              max-w-[900px]
+
+              p-0
+              md:p-6
+
+              space-y-5
+              md:space-y-6
+            "
+          >
 
             {/* HEADER */}
             <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3">
@@ -292,7 +365,7 @@ function Dashboard() {
 
               </div>
 
-              {/* MOBILE XP */}
+              {/* XP */}
               <div className="grid grid-cols-2 gap-3 md:flex md:flex-col">
 
                 <div
@@ -486,6 +559,45 @@ function Dashboard() {
 
             </div>
 
+            {/* MOBILE AKTIVITAS */}
+            <div
+              className="
+                md:hidden
+
+                bg-white
+
+                p-5
+
+                rounded-2xl
+
+                shadow-sm
+
+                border
+                border-[#EEE8FF]
+              "
+            >
+
+              <h3 className="font-semibold mb-3">
+                Aktivitas Terkini
+              </h3>
+
+              <div className="space-y-3 text-sm">
+
+                {userData?.aktivitas
+                  ?.slice(0, 3)
+                  .map((item, index) => (
+                    <p
+                      key={index}
+                      className="leading-relaxed text-gray-700"
+                    >
+                      {item}
+                    </p>
+                  ))}
+
+              </div>
+
+            </div>
+
             {/* MOBILE PROFILE */}
             <div
               className="
@@ -596,7 +708,7 @@ function Dashboard() {
           <div
             className="
               hidden
-              lg:flex
+              md:flex
 
               w-[260px]
               shrink-0
@@ -610,11 +722,7 @@ function Dashboard() {
 
               flex-col
 
-              rounded-2xl
-
-              h-fit
-
-              border
+              border-l
               border-[#F1EAFE]
             "
           >
