@@ -14,7 +14,7 @@ function Footer() {
           <div className="flex items-center gap-2 mb-3">
             <img src={logo} alt="logo gurubermutu" className="w-10 h-10 md:w-12 md:h-12" />
 
-            <h2 className="text-2xl font-bold text-[#5B21B6]">
+            <h2 className="text-2xl font-bold text-[#700087]">
               Gurubermutu.id
             </h2>
           </div>
@@ -24,14 +24,6 @@ function Footer() {
             Tingkatkan skill mengajar, eksplor teknologi, dan
             berkembang dengan cara yang lebih relevan.
           </p>
-
-          {/* SOCIAL */}
-          <div className="flex gap-4 mt-4 text-xl">
-            <span>📷</span>
-            <span>▶️</span>
-            <span>💼</span>
-            <span>📘</span>
-          </div>
         </div>
 
         {/* TENTANG */}

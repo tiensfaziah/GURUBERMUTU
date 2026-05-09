@@ -48,15 +48,15 @@ const SocialProof = () => {
       <ScrollAnimation>
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-8 mb-12">
           <div>
-            <h3 className="text-3xl font-bold text-[#5B21B6]">1,200+</h3>
+            <h3 className="text-3xl font-bold text-[#700087]">1,200+</h3>
             <p className="text-gray-600">Guru Bergabung</p>
           </div>
           <div>
-            <h3 className="text-3xl font-bold text-[#5B21B6]">350+</h3>
+            <h3 className="text-3xl font-bold text-[#700087]">350+</h3>
             <p className="text-gray-600">Materi Dibagikan</p>
           </div>
           <div>
-            <h3 className="text-3xl font-bold text-[#5B21B6]">50+</h3>
+            <h3 className="text-3xl font-bold text-[#700087]">50+</h3>
             <p className="text-gray-600">Pelatihan Aktif</p>
           </div>
         </div>
@@ -64,9 +64,9 @@ const SocialProof = () => {
 
       {/* TITLE */}
       <ScrollAnimation delay={0.2}>
-        <h2 className="text-3xl font-bold mb-8 text-[#EC4899]">
+        <h2 className="text-3xl font-bold mb-8 text-[#700087]">
           Cerita Guru yang
-<span className="text-[#7C3AED]"> Bertumbuh Bersama </span>
+<span className="text-[#700087]"> Bertumbuh Bersama </span>
 Gurubermutu
         </h2>
       </ScrollAnimation>

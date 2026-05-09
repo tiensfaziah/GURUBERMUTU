@@ -136,7 +136,7 @@ const Features = () => {
               text-gray-900
             "
           >
-           Pusat <span className="text-[#7C3AED]">Pemberdayaan</span> Guru Gen Z          </h2>
+           Pusat <span className="text-[#700087]">Pemberdayaan</span> Guru Gen Z          </h2>
         </ScrollAnimation>
 
         {/* DESC */}

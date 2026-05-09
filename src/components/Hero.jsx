@@ -210,8 +210,8 @@ function Hero() {
     w-full
     sm:w-auto
 
-    bg-[#7C3AED]
-    hover:bg-[#6D28D9]
+    bg-[#700087]
+    hover:bg-[#700087]
 
     text-white
     font-semibold

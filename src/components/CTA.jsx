@@ -93,7 +93,7 @@ const CTA = () => {
             <br />
 
             Masa Depan yang
-            <span className="text-[#7C3AED]">
+            <span className="text-[#700087]">
               {" "}Future-Ready?
             </span>
           </h2>
@@ -135,7 +135,7 @@ const CTA = () => {
 
                 rounded-2xl
 
-                bg-[#7C3AED]
+                bg-[#700087]
                 text-white
 
                 font-semibold
@@ -147,7 +147,7 @@ const CTA = () => {
                 duration-300
 
                 hover:scale-105
-                hover:bg-[#6D28D9]
+                hover:bg-[#700087]
                 hover:shadow-2xl
 
                 active:scale-95

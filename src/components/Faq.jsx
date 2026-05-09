@@ -125,7 +125,7 @@ function FAQ() {
 
                 bg-[#EEE8FF]
 
-                text-[#7C3AED]
+                text-[#700087]
 
                 text-xs
                 md:text-sm
@@ -156,7 +156,7 @@ function FAQ() {
               "
             >
               Pertanyaan yang
-              <span className="text-[#7C3AED]">
+              <span className="text-[#700087]">
                 {" "}Sering Ditanyakan
               </span>
             </h2>

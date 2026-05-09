@@ -59,7 +59,7 @@ function Navbar() {
             className="w-8 h-8 object-contain"
           />
 
-          <h1 className="font-bold text-xl text-[#5B21B6]">
+          <h1 className="font-bold text-xl text-[#700087]">
             Gurubermutu.id
           </h1>
         </div>
@@ -84,7 +84,7 @@ function Navbar() {
           <button
             onClick={() => navigate("/login")}
             className="
-              bg-[#5B21B6]
+              bg-[#700087]
               text-white
               px-5
               py-2.5
@@ -192,7 +192,7 @@ function Navbar() {
               w-full
               mt-2
 
-              bg-[#5B21B6]
+              bg-[#700087]
               text-white
 
               px-4

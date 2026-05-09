@@ -130,7 +130,7 @@ function HowItWorks() {
 
                 bg-[#F3F0FF]
 
-                text-[#7C3AED]
+                text-[#700087]
 
                 text-xs
                 md:text-sm
@@ -164,7 +164,7 @@ function HowItWorks() {
               <br />
 
               Bersama
-              <span className="text-[#7C3AED]">
+              <span className="text-[#700087]">
                 {" "}Gurubermutu
               </span>
             </h2>

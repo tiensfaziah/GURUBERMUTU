@@ -88,7 +88,7 @@ function ProblemSection() {
               Masih Merasa
 <br />
 
-<span className="text-[#7C3AED]">
+<span className="text-[#700087]">
   Tertinggal
 </span>
 
@@ -407,7 +407,7 @@ terasa stagnan.
                   text-4xl
                   md:text-5xl
                   font-bold
-                  text-[#7C3AED]
+                  text-[#700087]
                   mt-3
                 "
               >
@@ -441,7 +441,7 @@ terasa stagnan.
                   text-4xl
                   md:text-5xl
                   font-bold
-                  text-[#7C3AED]
+                  text-[#700087]
                   mt-3
                 "
               >
