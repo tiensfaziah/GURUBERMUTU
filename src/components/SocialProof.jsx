@@ -120,7 +120,7 @@ Gurubermutu
                       {getInitial(item.name)}
                     </div>
 
-                    <h4 className="font-semibold text-[#7C3AED] text-sm">
+                    <h4 className="font-semibold text-[#700087] text-sm">
                       {item.name}
                     </h4>
 

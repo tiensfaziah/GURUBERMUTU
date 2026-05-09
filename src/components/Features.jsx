@@ -106,7 +106,7 @@ const Features = () => {
 
               bg-[#EEE8FF]
 
-              text-[#6D28D9]
+              text-[#700087]
 
               text-xs
               md:text-sm
@@ -343,8 +343,8 @@ dan menciptakan pembelajaran yang lebih relevan.
     h-[4px]
 
     bg-gradient-to-r
-    from-[#8B5CF6]
-    to-[#7C3AED]
+    from-[#700087]
+    to-[#700087]
 
     z-20
   "
@@ -391,7 +391,7 @@ dan menciptakan pembelajaran yang lebih relevan.
 
                       bg-[#F3F0FF]
 
-                      text-[#6D28D9]
+                      text-[#700087]
 
                       text-xs
                       font-bold
@@ -451,7 +451,7 @@ dan menciptakan pembelajaran yang lebih relevan.
             onClick={() => setCurrent(i)}
             className={`h-2 rounded-full transition-all duration-300 ${
               i === current
-                ? "w-8 bg-[#7C3AED]"
+                ? "w-8 bg-[#700087]"
                 : "w-2 bg-gray-300"
             }`}
           />
