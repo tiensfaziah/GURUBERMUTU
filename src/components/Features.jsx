@@ -332,7 +332,23 @@ dan menciptakan pembelajaran yang lebih relevan.
               >
 
                 {/* TOP LINE */}
-                <div className="w-full h-1 bg-[#7C3AED]"></div>
+                {/* TOP LINE */}
+<div
+  className="
+    absolute
+    top-0
+    left-0
+
+    w-full
+    h-[4px]
+
+    bg-gradient-to-r
+    from-[#8B5CF6]
+    to-[#7C3AED]
+
+    z-20
+  "
+></div>
 
                 {/* CONTENT */}
                 <div className="p-7 flex flex-col h-full">
