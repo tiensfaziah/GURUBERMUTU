@@ -1,4 +1,9 @@
 import ScrollAnimation from "../components/ScrollAnimation";
+import {
+  BookOpen,
+  MonitorSmartphone,
+  TrendingUp
+} from "lucide-react";
 
 function ProblemSection() {
   return (
@@ -162,14 +167,14 @@ dan pengalaman belajar yang relevan.
                     items-center
                     justify-center
 
-                    text-[#7C3AED]
+                    text-[#700087]
                     font-bold
                     text-lg
 
                     flex-shrink-0
                   "
                 >
-                  ✖
+                  <BookOpen size={22} strokeWidth={2.5} />
                 </div>
 
                 {/* TEXT */}
@@ -247,7 +252,7 @@ monoton dan kurang interaktif.
                     flex-shrink-0
                   "
                 >
-                  ✖
+                  <MonitorSmartphone size={22} strokeWidth={2.5} />
                 </div>
 
                 {/* TEXT */}
@@ -325,7 +330,7 @@ tantangan tersendiri.
                     flex-shrink-0
                   "
                 >
-                  ✖
+                  <TrendingUp size={22} strokeWidth={2.5} />
                 </div>
 
                 {/* TEXT */}
