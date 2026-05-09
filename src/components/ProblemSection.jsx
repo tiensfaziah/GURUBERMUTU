@@ -67,8 +67,7 @@ function ProblemSection() {
                 uppercase
               "
             >
-              <span className="w-2 h-2 rounded-full bg-[#8B5CF6]"></span>
-              Realita di Lapangan
+             
             </div>
           </ScrollAnimation>
 
