@@ -7,45 +7,184 @@ const CTA = () => {
 
   return (
     <ScrollAnimation>
-      <section className="py-20 text-center bg-gradient-to-b from-white via-[#f1bff8] to-[#cca7d9]">
+      <section
+        className="
+          relative
+          overflow-hidden
 
-        {/* TITLE */}
-        <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-800">
-          Siap Naik Level Jadi Guru Keren? 🚀
-        </h2>
+          py-20
+          md:py-24
 
-        {/* DESC */}
-        <p className="mb-6 md:mb-8 text-base md:text-lg text-gray-700">
-          Belajar, berkarya, dan hasilkan cuan dalam satu platform.
-          Mulai perjalananmu sekarang dan jadi versi terbaikmu!
-        </p>
+          px-6
 
-        {/* BUTTON */}
-        <div className="flex justify-center">
-          <button
-            onClick={() => navigate("/login")}
+          bg-gradient-to-b
+          from-white
+          via-[#F7F2FF]
+          to-[#EEE7FF]
+        "
+      >
+
+        {/* BACKGROUND BLUR */}
+        <div
+          className="
+            absolute
+            top-0
+            left-1/2
+            -translate-x-1/2
+
+            w-[450px]
+            h-[450px]
+
+            bg-[#E9D5FF]
+
+            rounded-full
+
+            blur-3xl
+            opacity-40
+          "
+        ></div>
+
+        {/* CONTENT */}
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
+
+          {/* BADGE */}
+          <div
             className="
-              relative overflow-hidden
-              bg-[#5B21B6] text-white px-8 py-3 rounded-full
-              shadow-lg
+              inline-flex
+              items-center
+              gap-2
 
-              transition-all duration-300
+              px-5
+              py-2
 
-              hover:scale-105
-              hover:shadow-[0_0_25px_rgba(166,77,139,0.6)]
-              hover:brightness-110
+              rounded-full
 
-              active:scale-95
-              active:shadow-md
+              bg-[#EEE8FF]
 
-              before:absolute before:inset-0
-              before:bg-white/20 before:opacity-0
-              before:transition before:duration-300
-              hover:before:opacity-100
+              text-[#7C3AED]
+
+              text-xs
+              md:text-sm
+
+              font-semibold
+              uppercase
+              tracking-wide
             "
           >
-            🚀 Mulai Sekarang
-          </button>
+            <span className="w-2 h-2 rounded-full bg-[#A78BFA]"></span>
+            Join Gurubermutu
+          </div>
+
+          {/* TITLE */}
+          <h2
+            className="
+              mt-6
+
+              text-3xl
+              md:text-5xl
+
+              font-bold
+              leading-tight
+
+              text-gray-900
+            "
+          >
+            Siap Menjadi Pendidik
+            <br />
+
+            Masa Depan yang
+            <span className="text-[#7C3AED]">
+              {" "}Future-Ready?
+            </span>
+          </h2>
+
+          {/* DESC */}
+          <p
+            className="
+              mt-6
+
+              text-sm
+              md:text-lg
+
+              text-gray-600
+
+              leading-relaxed
+
+              max-w-2xl
+              mx-auto
+            "
+          >
+            Tingkatkan kompetensi, eksplorasi teknologi,
+            dan berkembang bersama komunitas guru Gen Z
+            dalam satu platform terintegrasi.
+          </p>
+
+          {/* BUTTON */}
+          <div className="mt-10 flex justify-center">
+
+            <button
+              onClick={() => navigate("/login")}
+              className="
+                relative
+                overflow-hidden
+
+                px-8
+                md:px-10
+
+                py-4
+
+                rounded-2xl
+
+                bg-[#7C3AED]
+                text-white
+
+                font-semibold
+
+                shadow-lg
+                shadow-purple-200
+
+                transition-all
+                duration-300
+
+                hover:scale-105
+                hover:bg-[#6D28D9]
+                hover:shadow-2xl
+
+                active:scale-95
+              "
+            >
+
+              <span className="relative z-10">
+                Join Komunitas Guru Masa Depan
+              </span>
+
+              {/* SHINE */}
+              <div
+                className="
+                  absolute
+                  inset-0
+
+                  opacity-0
+                  hover:opacity-100
+
+                  transition
+
+                  bg-gradient-to-r
+                  from-transparent
+                  via-white/20
+                  to-transparent
+
+                  -translate-x-full
+                  hover:translate-x-full
+
+                  duration-1000
+                "
+              ></div>
+
+            </button>
+
+          </div>
+
         </div>
 
       </section>

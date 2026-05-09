@@ -5,25 +5,25 @@ import ScrollAnimation from "../components/ScrollAnimation";
 const features = [
   {
     title: "Gamified Skill Tree",
-    desc: "Lihat perkembangan skill kamu dengan sistem level dan XP.",
+    desc: "Peta kemajuan interaktif untuk memotivasi proses belajar tanpa terasa membosankan.",
     icon: "🎮",
     badge: "Gamifikasi",
   },
   {
-    title: "Tech Stack",
-    desc: "Temukan tools digital terbaik untuk meningkatkan kualitas mengajar.",
+    title: "Curated Tech Stack",
+    desc: "Kumpulan tools digital pilihan untuk membantu proses mengajar lebih efektif dan modern.",
     icon: "🧠",
     badge: "Teknologi",
   },
   {
-    title: "Marketplace",
-    desc: "Jual dan beli materi ajar seperti PPT, modul, dan soal latihan.",
+    title: "Resource Marketplace",
+    desc: "Bagikan dan akses aset digital seperti RPP, template, dan materi ajar dengan mudah.",
     icon: "🛒",
     badge: "Marketplace",
   },
   {
-    title: "Workshop & Seminar",
-    desc: "Ikuti pelatihan dan seminar untuk meningkatkan kompetensi.",
+    title: "Workshop Hub",
+    desc: "Pelatihan terintegrasi yang membantu meningkatkan kompetensi secara bertahap.",
     icon: "📚",
     badge: "Pelatihan",
   },
@@ -62,7 +62,7 @@ const Features = () => {
 
         px-6
 
-        bg-white
+       bg-white/95 backdrop-blur-sm
         text-center
       "
     >
@@ -82,7 +82,7 @@ const Features = () => {
 
           rounded-full
 
-          bg-[#F3F0FF]
+          bg-gradient-to-br from-[#F3F0FF] to-[#E9D5FF]
 
           opacity-90
         "
@@ -136,14 +136,7 @@ const Features = () => {
               text-gray-900
             "
           >
-            Fitur{" "}
-
-            <span className="text-[#7C3AED]">
-              Utama
-            </span>{" "}
-
-            Platform
-          </h2>
+           Pusat <span className="text-[#7C3AED]">Pemberdayaan</span> Guru Gen Z          </h2>
         </ScrollAnimation>
 
         {/* DESC */}
@@ -163,8 +156,9 @@ const Features = () => {
               leading-relaxed
             "
           >
-            Semua yang kamu butuhkan untuk berkembang
-            sebagai guru profesional — dalam satu platform.
+            Platform terpadu yang dirancang untuk membantu
+guru Gen Z berkembang, beradaptasi dengan teknologi,
+dan menciptakan pembelajaran yang lebih relevan.
           </p>
         </ScrollAnimation>
 

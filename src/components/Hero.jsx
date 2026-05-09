@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 function Hero() {
   const navigate = useNavigate();
 
-  const words = ["Relevan", "Kreatif", "Interaktif", "Inovatif"];
+  const words = ["inspiratif", "Interaktif", "Inovatif"];
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ function Hero() {
         className="
           absolute
           inset-0
-          bg-black/60
+          bg-black/50
         "
       ></div>
 
@@ -119,75 +119,75 @@ function Hero() {
                 font-medium
               "
             >
-              ✨ Platform Belajar Guru Masa Kini
+              ✨ Platform Pemberdayaan Guru Gen Z
             </div>
 
             {/* TITLE */}
-            <h1
-              className="
-                mt-8
+<h1
+  className="
+    mt-8
 
-                text-4xl
-                md:text-5xl
-                lg:text-6xl
+    text-4xl
+    md:text-5xl
+    lg:text-6xl
 
-                font-bold
-                leading-tight
+    font-bold
+    leading-tight
 
-                text-white
+    text-white
 
-                text-left
+    text-left
 
-                drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]
-              "
-            >
+    drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]
+  "
+>
 
-              <span className="text-[#C084FC]">
-                Mengajar
-              </span>{" "}
+  Jadilah{" "}
 
-              Bukan
-              <br />
+  <span className="text-[#C084FC]">
+    Guru Gen Z
+  </span>{" "}
 
-              Sekadar Rutinitas,
+  <span
+    className="
+      text-[#F9A8D4]
+      transition-all
+      duration-500
+    "
+  >
+    {words[index]}
+  </span>
 
-              <br />
+  <br />
 
-              Jadi Guru Gen Z yang{" "}
+  yang Relevan dan Berdampak
+  <br />
 
-              <span
-                className="
-                  text-[#F9A8D4]
-                  transition-all
-                  duration-500
-                "
-              >
-                {words[index]}
-              </span>
+  di Era Digital.
 
-            </h1>
+</h1>
 
             {/* DESCRIPTION */}
-            <p
-              className="
-                mt-7
+<p
+  className="
+    mt-7
 
-                max-w-2xl
+    max-w-2xl
 
-                text-white/85
+    text-white/85
 
-                text-base
-                md:text-lg
+    text-base
+    md:text-lg
 
-                leading-relaxed
+    leading-relaxed
 
-                text-left
-              "
-            >
-              Tingkatkan cara mengajar dengan pendekatan modern,
-              interaktif, dan berbasis teknologi dalam satu
-              platform yang dirancang khusus untuk guru masa kini.
-            </p>
+    text-left
+  "
+>
+  Tingkatkan kompetensi pedagogi kreatif dan
+  penguasaan teknologi mutakhir dalam satu
+  platform masa depan.
+</p>
 
             {/* BUTTON */}
             <div
@@ -204,57 +204,31 @@ function Hero() {
               "
             >
 
-              <button
-                onClick={() => navigate("/login")}
-                className="
-                  w-full
-                  sm:w-auto
+<button
+  onClick={() => navigate("/login")}
+  className="
+    w-full
+    sm:w-auto
 
-                  bg-[#7C3AED]
-                  hover:bg-[#6D28D9]
+    bg-[#7C3AED]
+    hover:bg-[#6D28D9]
 
-                  text-white
-                  font-semibold
+    text-white
+    font-semibold
 
-                  px-7
-                  py-4
+    px-7
+    py-4
 
-                  rounded-2xl
+    rounded-2xl
 
-                  shadow-xl
-                  hover:scale-105
+    shadow-xl
+    hover:scale-105
 
-                  transition
-                "
-              >
-                Mulai Sekarang 🚀
-              </button>
-
-              <button
-                className="
-                  w-full
-                  sm:w-auto
-
-                  bg-white/10
-                  border
-                  border-white/20
-
-                  backdrop-blur-md
-
-                  text-white
-                  font-semibold
-
-                  px-7
-                  py-4
-
-                  rounded-2xl
-
-                  hover:bg-white/20
-                  transition
-                "
-              >
-                Lihat Demo
-              </button>
+    transition
+  "
+>
+  Join Komunitas Guru Masa Depan
+</button>
 
             </div>
 

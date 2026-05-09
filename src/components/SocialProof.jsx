@@ -3,24 +3,24 @@ import ScrollAnimation from "../components/ScrollAnimation";
 
 const testimonials = [
   {
-    text: "Platform ini bantu banget buat upgrade skill ngajar aku!",
-    name: "Rina, Guru SMP",
+    text: "Berkat Gurubermutu.id, efektivitas mengajar saya naik pesat dan siswa jadi jauh lebih antusias!",
+    name: "Budi, Guru Muda Penggerak",
   },
   {
-    text: "Sekarang aku bisa jual materi sendiri dan dapet penghasilan tambahan.",
-    name: "Andi, Guru SMA",
+    text: "Berkat Gamified Skill Tree, saya jadi lebih semangat upgrade diri karena progresnya terlihat nyata!",
+    name: "Andi, Guru Muda & Content Creator Pendidikan",
   },
   {
-    text: "Gamification-nya bikin belajar jadi lebih seru dan ga boring.",
-    name: "Sari, Guru SD",
+    text: "Dulu saya sering bingung mencari alat bantu mengajar yang pas, tapi sejak ada Curated Tech Stack, persiapan kelas jadi jauh lebih efisien.",
+    name: "Rina, Guru Matematika SMP",
   },
   {
-    text: "Belajar jadi lebih terarah karena ada sistem level.",
-    name: "Dewi, Guru TK",
+    text: "Fitur Gamified Skill Tree bikin proses belajar jadi ketagihan; saya merasa sangat termotivasi untuk terus naik level.",
+    name: "Fajar, Mahasiswa Calon Guru",
   },
   {
-    text: "Materinya lengkap dan mudah dipahami.",
-    name: "Budi, Guru SMK",
+    text: "Resource Marketplace sangat membantu, saya bisa berbagi aset digital sekaligus belajar dari modul pedagogi kreatif.",
+    name: "Siska, Guru SD & Edu-Creator",
   },
 ];
 
@@ -39,7 +39,7 @@ const colors = [
 
 const SocialProof = () => {
   return (
-    <section className="relative z-10 py-16 pb-20 px-6 bg-white text-center overflow-hidden">
+    <section className="relative z-10 py-16 pb-20 px-6 bg-[#FCFCFD] text-center overflow-hidden">
       
       {/* FADE KE CTA */}
       <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-b from-white to-transparent pointer-events-none"></div>
@@ -65,7 +65,9 @@ const SocialProof = () => {
       {/* TITLE */}
       <ScrollAnimation delay={0.2}>
         <h2 className="text-3xl font-bold mb-8 text-[#EC4899]">
-          Apa Kata Mereka? 💬
+          Cerita Guru yang
+<span className="text-[#7C3AED]"> Bertumbuh Bersama </span>
+Gurubermutu
         </h2>
       </ScrollAnimation>
 
@@ -80,7 +82,7 @@ const SocialProof = () => {
               return (
                 <div
                   key={index}
-                  className="bg-gray-50 min-w-[280px] max-w-[280px] p-6 rounded-2xl shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+                  className="bg-white border border-[#E9D5FF] min-w-[280px] max-w-[280px] p-6 rounded-2xl shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
                 >
 
                   {/* ⭐ STARS */}
@@ -94,13 +96,31 @@ const SocialProof = () => {
                   </p>
 
                   {/* AVATAR + NAME */}
-                  <div className="flex items-center justify-center gap-3 mt-4">
+                  <div className="flex items-center gap-3 mt-auto pt-6">
 
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold ${color}`}>
+                    <div
+  className={`
+    w-10
+    h-10
+
+    min-w-[40px]
+
+    rounded-full
+
+    flex
+    items-center
+    justify-center
+
+    text-white
+    font-bold
+
+    ${color}
+  `}
+>
                       {getInitial(item.name)}
                     </div>
 
-                    <h4 className="font-semibold text-[#DC1416] text-sm">
+                    <h4 className="font-semibold text-[#7C3AED] text-sm">
                       {item.name}
                     </h4>
 

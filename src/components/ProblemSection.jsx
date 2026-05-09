@@ -86,15 +86,15 @@ function ProblemSection() {
                 text-gray-900
               "
             >
-              Guru-guru
-              <br />
+              Masih Merasa
+<br />
 
-              <span className="text-[#7C3AED]">
-                Pernah Ngalamin
-              </span>
+<span className="text-[#7C3AED]">
+  Tertinggal
+</span>
 
-              <br />
-              Ini? 🤔
+<br />
+di Era Digital?🤔
             </h2>
           </ScrollAnimation>
 
@@ -110,8 +110,16 @@ function ProblemSection() {
                 max-w-xl
               "
             >
-              Kamu bukan sendirian. Jutaan guru menghadapi
-              masalah yang sama setiap harinya.
+              Apakah Anda merasa metode mengajar mulai
+tertinggal zaman dan sulit mengikuti
+perkembangan teknologi yang begitu cepat?
+
+<br />
+<br />
+
+Menjadi guru Gen Z bukan hanya tentang
+mengajar, tetapi juga menciptakan dampak
+dan pengalaman belajar yang relevan.
             </p>
           </ScrollAnimation>
 
@@ -175,7 +183,7 @@ function ProblemSection() {
                       text-gray-900
                     "
                   >
-                    Ngerasa stuck saat ngajar?
+                    Metode belajar terasa kurang relevan?
                   </h3>
 
                   <p
@@ -187,8 +195,9 @@ function ProblemSection() {
                       leading-relaxed
                     "
                   >
-                    Ide habis, siswa kurang antusias,
-                    dan semangat mulai memudar.
+                    Siswa semakin cepat berubah,
+namun metode mengajar masih terasa
+monoton dan kurang interaktif.
                   </p>
                 </div>
 
@@ -252,7 +261,7 @@ function ProblemSection() {
                       text-gray-900
                     "
                   >
-                    Materi itu-itu aja, tuntutan makin banyak?
+                    Kesulitan mengikuti perkembangan teknologi?
                   </h3>
 
                   <p
@@ -264,8 +273,9 @@ function ProblemSection() {
                       leading-relaxed
                     "
                   >
-                    Kurikulum berubah cepat tapi waktu
-                    belajar mandiri terbatas.
+Perkembangan tools dan platform digital
+yang cepat membuat proses adaptasi menjadi
+tantangan tersendiri.
                   </p>
                 </div>
 
@@ -329,7 +339,7 @@ function ProblemSection() {
                       text-gray-900
                     "
                   >
-                    Udah belajar tapi belum ada hasil nyata?
+                    Sudah belajar, tapi belum terasa berkembang?
                   </h3>
 
                   <p
@@ -341,8 +351,9 @@ function ProblemSection() {
                       leading-relaxed
                     "
                   >
-                    Waktu dan energi terkuras,
-                    namun perkembangan terasa stagnan.
+Belajar banyak hal tanpa arah yang jelas
+sering membuat proses pengembangan diri
+terasa stagnan.
                   </p>
                 </div>
 
@@ -376,7 +387,7 @@ function ProblemSection() {
               "
             >
               <span className="text-lg">✨</span>
-              Tenang, ada solusinya!
+              Gurubermutu hadir untuk membantu guru berkembang di era digital.
             </div>
           </ScrollAnimation>
 
@@ -586,6 +597,92 @@ function ProblemSection() {
               </div>
 
             </div>
+            {/* MINI TESTIMONIALS */}
+<div className="mt-6 space-y-4">
+
+  {/* TESTI 2 */}
+  <div
+    className="
+      bg-white/80
+      border
+      border-[#E9D5FF]
+
+      rounded-2xl
+
+      p-4
+
+      backdrop-blur-sm
+    "
+  >
+    <p
+      className="
+        text-sm
+        md:text-base
+
+        text-gray-700
+        leading-relaxed
+      "
+    >
+      “Kadang bingung harus mulai belajar dari mana
+      karena materi yang tersedia terlalu banyak.”
+    </p>
+
+    <p
+      className="
+        mt-3
+
+        text-sm
+        font-semibold
+
+        text-[#7C3AED]
+      "
+    >
+      — Dinda, Guru SMP
+    </p>
+  </div>
+
+  {/* TESTI 3 */}
+  <div
+    className="
+      bg-white/80
+      border
+      border-[#E9D5FF]
+
+      rounded-2xl
+
+      p-4
+
+      backdrop-blur-sm
+    "
+  >
+    <p
+      className="
+        text-sm
+        md:text-base
+
+        text-gray-700
+        leading-relaxed
+      "
+    >
+      “Saya ingin mengajar lebih interaktif,
+      tapi masih kesulitan memahami tools digital.”
+    </p>
+
+    <p
+      className="
+        mt-3
+
+        text-sm
+        font-semibold
+
+        text-[#7C3AED]
+      "
+    >
+      — Riko, Guru SMA
+    </p>
+  </div>
+
+</div>
           </ScrollAnimation>
 
         </div>
