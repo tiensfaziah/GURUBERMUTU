@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
-import { Eye, EyeOff } from "lucide-react"; // 🔥 icon konsisten
+import { Eye, EyeOff } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 function Register() {
   const navigate = useNavigate();
@@ -23,12 +24,26 @@ function Register() {
     }
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      alert("Register berhasil!");
-      navigate("/login");
+     await createUserWithEmailAndPassword(auth, email, password);
+
+await emailjs.send(
+  "service_srxojgr",
+  "template_m1b4vrn",
+  {
+    user_email: email,
+  },
+  "XxKySkAy4sAVTwr1Y"
+);
+
+alert(
+  "Register berhasil! Silakan cek email untuk bergabung ke komunitas Guru Bermutu 🚀"
+);
+
+navigate("/login");
     } catch (error) {
-      alert(error.message);
-    }
+  console.log(error);
+  alert(JSON.stringify(error));
+}
   };
 
   return (

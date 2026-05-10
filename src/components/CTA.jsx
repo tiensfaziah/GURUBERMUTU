@@ -123,7 +123,7 @@ const CTA = () => {
           <div className="mt-10 flex justify-center">
 
             <button
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/register")}
               className="
                 relative
                 overflow-hidden

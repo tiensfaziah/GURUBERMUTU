@@ -205,7 +205,7 @@ function Hero() {
             >
 
 <button
-  onClick={() => navigate("/login")}
+  onClick={() => navigate("/register")}
   className="
     w-full
     sm:w-auto
