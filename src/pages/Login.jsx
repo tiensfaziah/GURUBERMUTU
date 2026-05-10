@@ -23,7 +23,7 @@ function Login() {
   };
 
   return (
-    <div className="h-screen flex items-center justify-center pt-20 overflow-hidden bg-gradient-to-br from-[#f1bff8] via-[#e8dfea] to-[#a985cb] px-4">
+    <div className="min-h-[100dvh] flex items-center justify-center pt-20 overflow-hidden bg-gradient-to-br from-[#f1bff8] via-[#e8dfea] to-[#a985cb] px-4">
 
       <div className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl p-5 sm:p-6 w-full max-w-sm">
 
