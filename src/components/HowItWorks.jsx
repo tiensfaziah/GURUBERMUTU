@@ -6,6 +6,10 @@ import {
   TrendingUp,
 } from "lucide-react";
 
+import gambarjoin from "../assets/gambarjoin.jpg";
+import workshop from "../assets/workshop.jpg";
+import levelup from "../assets/levelup.jpg";
+
 const steps = [
   {
     number: "01",
@@ -13,6 +17,7 @@ const steps = [
     title: "Join",
     desc: "Daftar dan bergabung dengan komunitas.",
     icon: Rocket,
+    image: gambarjoin,
     color: "from-[#8B5CF6] to-[#7C3AED]",
     bg: "bg-[#F6F0FF]",
     badgeBg: "bg-[#F1E8FF]",
@@ -29,6 +34,7 @@ const steps = [
     title: "Learn & Earn",
     desc: "Ikuti workshop dan kumpulkan aset di Marketplace.",
     icon: BookOpenText,
+    image: workshop,
     color: "from-[#D946EF] to-[#A855F7]",
     bg: "bg-[#FDF4FF]",
     badgeBg: "bg-[#FAE8FF]",
@@ -45,6 +51,7 @@ const steps = [
     title: "Level Up",
     desc: "Lihat progres kompetensi Anda.",
     icon: TrendingUp,
+    image: levelup,
     color: "from-[#0EA5E9] to-[#2563EB]",
     bg: "bg-[#F0F9FF]",
     badgeBg: "bg-[#E0F2FE]",
@@ -216,15 +223,12 @@ function HowItWorks() {
 
                   h-full
 
-                  bg-white
-
                   border
                   border-[#EFE7FF]
 
                   rounded-[32px]
 
-                  px-7
-                  py-8
+                  overflow-hidden
 
                   shadow-sm
 
@@ -236,141 +240,159 @@ function HowItWorks() {
                 "
               >
 
-                {/* TOP GRADIENT */}
+                {/* BACKGROUND IMAGE */}
                 <div
-                  className={`
-                    absolute
-                    top-0
-                    left-0
-
-                    w-full
-                    h-1.5
-
-                    rounded-t-[32px]
-
-                    bg-gradient-to-r
-                    ${item.color}
-                  `}
+                  className="absolute inset-0"
+                  style={{
+                    backgroundImage: `url(${item.image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
                 ></div>
 
-                {/* NUMBER */}
-                <h1
-                  className="
-                    text-6xl
-                    md:text-7xl
+                {/* OVERLAY */}
+                <div className="absolute inset-0 bg-black/45"></div>
 
-                    font-bold
+                {/* CONTENT */}
+                <div className="relative z-10 px-7 py-8">
 
-                    text-[#E9D5FF]
-                  "
-                >
-                  {item.number}
-                </h1>
+                  {/* TOP GRADIENT */}
+                  <div
+                    className={`
+                      absolute
+                      top-0
+                      left-0
 
-                {/* ICON */}
-                <div
-                  className={`
-                    mt-5
+                      w-full
+                      h-1.5
 
-                    w-16
-                    h-16
+                      rounded-t-[32px]
 
-                    rounded-2xl
+                      bg-gradient-to-r
+                      ${item.color}
+                    `}
+                  ></div>
 
-                    flex
-                    items-center
-                    justify-center
+                  {/* NUMBER */}
+                  <h1
+                    className="
+                      text-6xl
+                      md:text-7xl
 
-                    ${item.bg}
-                  `}
-                >
-                  <item.icon
-                    size={30}
-                    strokeWidth={2.2}
-                    className="text-[#7C3AED]"
-                  />
-                </div>
+                      font-bold
 
-                {/* BADGE */}
-                <div
-                  className={`
-                    mt-6
+                      text-[#E9D5FF]
+                    "
+                  >
+                    {item.number}
+                  </h1>
 
-                    inline-flex
+                  {/* ICON */}
+                  <div
+                    className={`
+                      mt-5
 
-                    px-4
-                    py-2
+                      w-16
+                      h-16
 
-                    rounded-full
+                      rounded-2xl
 
-                    text-xs
-                    font-semibold
-                    uppercase
-                    tracking-wide
+                      flex
+                      items-center
+                      justify-center
 
-                    ${item.badgeBg}
-                    ${item.badgeText}
-                  `}
-                >
-                  {item.badge}
-                </div>
+                      ${item.bg}
+                    `}
+                  >
+                    <item.icon
+                      size={30}
+                      strokeWidth={2.2}
+                      className="text-[#7C3AED]"
+                    />
+                  </div>
 
-                {/* TITLE */}
-                <h3
-                  className="
-                    mt-5
+                  {/* BADGE */}
+                  <div
+                    className={`
+                      mt-6
 
-                    text-3xl
+                      inline-flex
 
-                    font-bold
+                      px-4
+                      py-2
 
-                    text-gray-900
-                  "
-                >
-                  {item.title}
-                </h3>
+                      rounded-full
 
-                {/* DESC */}
-                <p
-                  className="
-                    mt-5
+                      text-xs
+                      font-semibold
+                      uppercase
+                      tracking-wide
 
-                    text-gray-600
+                      ${item.badgeBg}
+                      ${item.badgeText}
+                    `}
+                  >
+                    {item.badge}
+                  </div>
 
-                    leading-relaxed
+                  {/* TITLE */}
+                  <h3
+                    className="
+                      mt-5
 
-                    text-base
-                  "
-                >
-                  {item.desc}
-                </p>
+                      text-3xl
 
-                {/* POINTS */}
-                <div className="mt-8 space-y-3">
-                  {item.points.map((point, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-start gap-3"
-                    >
+                      font-bold
+
+                      text-white
+                    "
+                  >
+                    {item.title}
+                  </h3>
+
+                  {/* DESC */}
+                  <p
+                    className="
+                      mt-5
+
+                      text-white/90
+
+                      leading-relaxed
+
+                      text-base
+                    "
+                  >
+                    {item.desc}
+                  </p>
+
+                  {/* POINTS */}
+                  <div className="mt-8 space-y-3">
+                    {item.points.map((point, idx) => (
                       <div
-                        className={`
-                          mt-2
+                        key={idx}
+                        className="flex items-start gap-3"
+                      >
+                        <div
+                          className={`
+                            mt-2
 
-                          w-2
-                          h-2
+                            w-2
+                            h-2
 
-                          rounded-full
+                            rounded-full
 
-                          bg-gradient-to-r
-                          ${item.color}
-                        `}
-                      ></div>
+                            bg-gradient-to-r
+                            ${item.color}
+                          `}
+                        ></div>
 
-                      <p className="text-gray-700 text-sm md:text-base">
-                        {point}
-                      </p>
-                    </div>
-                  ))}
+                        <p className="text-white/90 text-sm md:text-base">
+                          {point}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
                 </div>
 
               </div>
