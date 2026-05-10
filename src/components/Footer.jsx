@@ -61,28 +61,12 @@ function Footer() {
             </p>
 
             {/* GERCEB */}
-            <div
-              className="
-                mt-6
-
-                inline-flex
-                items-center
-
-                px-4
-                py-2
-
-                rounded-full
-
-                bg-[#F3E8FF]
-
-                text-[#700087]
-
-                text-sm
-                font-medium
-              "
-            >
-              Dikelola oleh Yayasan Generasi Cerdas Berdaya (GERCEB)
-            </div>
+            <p className="mt-6 text-sm text-gray-500 leading-relaxed">
+  Dikelola oleh{" "}
+  <span className="font-semibold text-[#700087]">
+    Yayasan Generasi Cerdas Berdaya (GERCEB)
+  </span>
+</p>
 
           </div>
 
