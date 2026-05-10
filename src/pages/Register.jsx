@@ -16,7 +16,7 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleRegister = async (e) => {
-    e.preventDefault(); // 🔥 biar ga reload
+    e.preventDefault();
 
     if (password !== confirmPassword) {
       alert("Password tidak sama!");
@@ -24,32 +24,33 @@ function Register() {
     }
 
     try {
-     await createUserWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, email, password);
 
-await emailjs.send(
-  "service_srxojgr",
-  "template_m1b4vrn",
-  {
-    user_email: email,
-  },
-  "XxKySkAy4sAVTwr1Y"
-);
+      await emailjs.send(
+        "service_srxojgr",
+        "template_m1b4vrn",
+        {
+          user_email: email,
+        },
+        "XxKySkAy4sAVTwr1Y"
+      );
 
-alert(
-  "Register berhasil! Silakan cek email untuk bergabung ke komunitas Guru Bermutu 🚀"
-);
+      alert(
+        "Register berhasil! Silakan cek email untuk bergabung ke komunitas Guru Bermutu 🚀"
+      );
 
-navigate("/login");
+      navigate("/login");
+
     } catch (error) {
-  console.log(error);
-  alert(JSON.stringify(error));
-}
+      console.log(error);
+      alert(JSON.stringify(error));
+    }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center pt-24 overflow-y-auto bg-gradient-to-br from-[#f1bff8] via-[#e8dfea] to-[#a985cb] px-4">
+    <div className="h-screen flex items-center justify-center pt-20 overflow-hidden bg-gradient-to-br from-[#f1bff8] via-[#e8dfea] to-[#a985cb] px-4">
 
-      <div className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl p-6 sm:p-8 w-full max-w-md mt-10 mb-10">
+      <div className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl p-5 sm:p-6 w-full max-w-sm">
 
         <h1 className="text-2xl sm:text-3xl font-bold text-center text-[#5B21B6] mb-2">
           Gurubermutu
@@ -59,12 +60,13 @@ navigate("/login");
           Buat akun baru 🚀
         </p>
 
-        {/* 🔥 FORM FIX */}
+        {/* FORM */}
         <form onSubmit={handleRegister} className="space-y-5">
 
           {/* EMAIL */}
           <div>
             <label className="text-sm text-gray-600">Email</label>
+
             <div className="relative mt-1">
               <input
                 type="email"
@@ -72,13 +74,17 @@ navigate("/login");
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-2 pl-10 border rounded-lg"
               />
-              <span className="absolute left-3 top-2.5 text-gray-400">📧</span>
+
+              <span className="absolute left-3 top-2.5 text-gray-400">
+                📧
+              </span>
             </div>
           </div>
 
           {/* PASSWORD */}
           <div>
             <label className="text-sm text-gray-600">Password</label>
+
             <div className="relative mt-1">
               <input
                 type={showPassword ? "text" : "password"}
@@ -86,9 +92,11 @@ navigate("/login");
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-2 pl-10 pr-12 border rounded-lg"
               />
-              <span className="absolute left-3 top-2.5 text-gray-400">🔒</span>
 
-              {/* 🔥 ICON MATA */}
+              <span className="absolute left-3 top-2.5 text-gray-400">
+                🔒
+              </span>
+
               <span
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-2.5 cursor-pointer text-gray-500"
@@ -100,7 +108,10 @@ navigate("/login");
 
           {/* CONFIRM PASSWORD */}
           <div>
-            <label className="text-sm text-gray-600">Konfirmasi Password</label>
+            <label className="text-sm text-gray-600">
+              Konfirmasi Password
+            </label>
+
             <div className="relative mt-1">
               <input
                 type={showConfirm ? "text" : "password"}
@@ -108,9 +119,11 @@ navigate("/login");
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 className="w-full px-4 py-2 pl-10 pr-12 border rounded-lg"
               />
-              <span className="absolute left-3 top-2.5 text-gray-400">🔒</span>
 
-              {/* 🔥 ICON MATA */}
+              <span className="absolute left-3 top-2.5 text-gray-400">
+                🔒
+              </span>
+
               <span
                 onClick={() => setShowConfirm(!showConfirm)}
                 className="absolute right-3 top-2.5 cursor-pointer text-gray-500"
@@ -142,6 +155,7 @@ navigate("/login");
         </p>
 
       </div>
+
     </div>
   );
 }

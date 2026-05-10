@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
-import { Eye, EyeOff } from "lucide-react"; // 🔥 ini penting
+import { Eye, EyeOff } from "lucide-react";
 
 function Login() {
   const navigate = useNavigate();
@@ -23,66 +23,92 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f1bff8] via-[#e8dfea] to-[#a985cb] px-6">
+    <div className="h-screen flex items-center justify-center pt-20 overflow-hidden bg-gradient-to-br from-[#f1bff8] via-[#e8dfea] to-[#a985cb] px-4">
 
-      <div className="bg-white/90 rounded-2xl shadow-xl p-8 w-full max-w-md">
+      <div className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl p-5 sm:p-6 w-full max-w-sm">
 
-        <h1 className="text-2xl font-bold text-center text-[#5B21B6] mb-2">
+        <h1 className="text-2xl sm:text-3xl font-bold text-center text-[#5B21B6] mb-2">
           Gurubermutu
         </h1>
 
-        <p className="text-center text-gray-500 mb-6">
+        <p className="text-center text-gray-500 mb-6 text-sm sm:text-base">
           Welcome back 👋
         </p>
 
         <form onSubmit={handleLogin} className="space-y-5">
 
+          {/* EMAIL */}
           <div>
-            <label>Email</label>
-            <input
-              type="email"
-              required
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full mt-1 px-4 py-2 border rounded-lg"
-            />
+            <label className="text-sm text-gray-600">
+              Email
+            </label>
+
+            <div className="relative mt-1">
+              <input
+                type="email"
+                required
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-2 pl-10 border rounded-lg"
+              />
+
+              <span className="absolute left-3 top-2.5 text-gray-400">
+                📧
+              </span>
+            </div>
           </div>
 
           {/* PASSWORD */}
-          <div className="relative">
-            <label>Password</label>
+          <div>
+            <label className="text-sm text-gray-600">
+              Password
+            </label>
 
-            <input
-              type={showPassword ? "text" : "password"}
-              required
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full mt-1 px-4 py-2 pr-10 border rounded-lg"
-            />
+            <div className="relative mt-1">
 
-            <span
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-9 cursor-pointer text-gray-500"
-            >
-              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-            </span>
+              <input
+                type={showPassword ? "text" : "password"}
+                required
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-2 pl-10 pr-12 border rounded-lg"
+              />
+
+              <span className="absolute left-3 top-2.5 text-gray-400">
+                🔒
+              </span>
+
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-2.5 cursor-pointer text-gray-500"
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </span>
+
+            </div>
           </div>
 
+          {/* BUTTON */}
           <button
             type="submit"
-            className="w-full bg-[#5B21B6] text-white py-2 rounded-lg"
+            className="w-full bg-[#5B21B6] text-white py-2.5 rounded-lg hover:scale-105 transition"
           >
             Sign In
           </button>
 
         </form>
 
+        {/* FOOTER */}
         <p className="text-sm text-center mt-6">
           Belum punya akun?{" "}
-          <span onClick={() => navigate("/register")} className="text-[#5B21B6] cursor-pointer">
+          <span
+            onClick={() => navigate("/register")}
+            className="text-[#5B21B6] cursor-pointer hover:underline"
+          >
             Daftar di sini
           </span>
         </p>
 
       </div>
+
     </div>
   );
 }
