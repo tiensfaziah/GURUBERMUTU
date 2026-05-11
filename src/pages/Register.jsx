@@ -24,8 +24,10 @@ function Register() {
     }
 
     try {
+      // REGISTER FIREBASE
       await createUserWithEmailAndPassword(auth, email, password);
 
+      // KIRIM EMAIL
       await emailjs.send(
         "service_srxojgr",
         "template_m1b4vrn",
@@ -35,6 +37,7 @@ function Register() {
         "XxKySkAy4sAVTwr1Y"
       );
 
+      // SUCCESS
       alert(
         "Register berhasil! Silakan cek email untuk bergabung ke komunitas Guru Bermutu 🚀"
       );
@@ -43,7 +46,17 @@ function Register() {
 
     } catch (error) {
       console.log(error);
-      alert(JSON.stringify(error));
+
+      // ERROR HANDLE
+      if (error.code === "auth/email-already-in-use") {
+        alert("Email sudah terdaftar!");
+      } else if (error.code === "auth/invalid-email") {
+        alert("Format email tidak valid!");
+      } else if (error.code === "auth/weak-password") {
+        alert("Password minimal 6 karakter!");
+      } else {
+        alert("Terjadi kesalahan, coba lagi!");
+      }
     }
   };
 
@@ -64,7 +77,9 @@ function Register() {
 
           {/* EMAIL */}
           <div>
-            <label className="text-sm text-gray-600">Email</label>
+            <label className="text-sm text-gray-600">
+              Email
+            </label>
 
             <div className="relative mt-1">
               <input
@@ -82,7 +97,9 @@ function Register() {
 
           {/* PASSWORD */}
           <div>
-            <label className="text-sm text-gray-600">Password</label>
+            <label className="text-sm text-gray-600">
+              Password
+            </label>
 
             <div className="relative mt-1">
               <input
