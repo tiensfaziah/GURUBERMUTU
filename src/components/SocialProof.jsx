@@ -1,6 +1,11 @@
 import React from "react";
 import ScrollAnimation from "../components/ScrollAnimation";
 
+// 🔥 IMPORT FOTO
+import joinImage from "../assets/join.jpeg";
+import materiImage from "../assets/materi.jpeg";
+import pelatihanImage from "../assets/pelatihan.jpeg";
+
 const testimonials = [
   {
     text: "Berkat Gurubermutu.id, efektivitas mengajar saya naik pesat dan siswa jadi jauh lebih antusias!",
@@ -27,7 +32,7 @@ const testimonials = [
 // 🔥 fungsi ambil inisial
 const getInitial = (name) => name.charAt(0);
 
-// 🔥 warna avatar random (biar hidup)
+// 🔥 warna avatar random
 const colors = [
   "bg-red-400",
   "bg-pink-400",
@@ -40,25 +45,89 @@ const colors = [
 const SocialProof = () => {
   return (
     <section className="relative z-10 py-16 pb-20 px-6 bg-[#FCFCFD] text-center overflow-hidden">
-      
+
       {/* FADE KE CTA */}
       <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-b from-white to-transparent pointer-events-none"></div>
 
       {/* STATS */}
       <ScrollAnimation>
-        <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-8 mb-12">
-          <div>
-            <h3 className="text-3xl font-bold text-[#700087]">1,200+</h3>
-            <p className="text-gray-600">Guru Bergabung</p>
+        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 mb-14">
+
+          {/* CARD 1 */}
+          <div className="bg-white border border-[#E9D5FF] rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+
+            {/* FOTO */}
+            <div className="h-36 overflow-hidden">
+              <img
+                src={joinImage}
+                alt="guru bergabung"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* CONTENT */}
+            <div className="p-5 text-center">
+              <h3 className="text-4xl font-bold text-[#7C3AED]">
+                1,200+
+              </h3>
+
+              <p className="text-black text-lg mt-1">
+                Guru Bergabung
+              </p>
+            </div>
+
           </div>
-          <div>
-            <h3 className="text-3xl font-bold text-[#700087]">350+</h3>
-            <p className="text-gray-600">Materi Dibagikan</p>
+
+          {/* CARD 2 */}
+          <div className="bg-white border border-[#E9D5FF] rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+
+            {/* FOTO */}
+            <div className="h-36 overflow-hidden">
+              <img
+                src={materiImage}
+                alt="materi dibagikan"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* CONTENT */}
+            <div className="p-5 text-center">
+              <h3 className="text-4xl font-bold text-[#7C3AED]">
+                350+
+              </h3>
+
+              <p className="text-black text-lg mt-1">
+                Materi Dibagikan
+              </p>
+            </div>
+
           </div>
-          <div>
-            <h3 className="text-3xl font-bold text-[#700087]">50+</h3>
-            <p className="text-gray-600">Pelatihan Aktif</p>
+
+          {/* CARD 3 */}
+          <div className="bg-white border border-[#E9D5FF] rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+
+            {/* FOTO */}
+            <div className="h-36 overflow-hidden">
+              <img
+                src={pelatihanImage}
+                alt="pelatihan aktif"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* CONTENT */}
+            <div className="p-5 text-center">
+              <h3 className="text-4xl font-bold text-[#7C3AED]">
+                50+
+              </h3>
+
+              <p className="text-black text-lg mt-1">
+                Pelatihan Aktif
+              </p>
+            </div>
+
           </div>
+
         </div>
       </ScrollAnimation>
 
@@ -66,12 +135,14 @@ const SocialProof = () => {
       <ScrollAnimation delay={0.2}>
         <h2 className="text-3xl font-bold mb-8 text-[#700087]">
           Cerita Guru yang
-<span className="text-[#700087]"> Bertumbuh Bersama </span>
-Gurubermutu
+          <span className="text-[#700087]">
+            {" "}Bertumbuh Bersama{" "}
+          </span>
+          Gurubermutu
         </h2>
       </ScrollAnimation>
 
-      {/* SCROLL */}
+      {/* TESTIMONIAL */}
       <ScrollAnimation delay={0.3}>
         <div className="overflow-hidden">
           <div className="flex gap-6 w-max animate-[scroll_20s_linear_infinite] pb-4">
@@ -85,7 +156,7 @@ Gurubermutu
                   className="bg-white border border-[#E9D5FF] min-w-[280px] max-w-[280px] p-6 rounded-2xl shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
                 >
 
-                  {/* ⭐ STARS */}
+                  {/* STARS */}
                   <div className="flex justify-center mb-3 text-yellow-400 text-lg">
                     ⭐⭐⭐⭐⭐
                   </div>
@@ -95,28 +166,23 @@ Gurubermutu
                     “{item.text}”
                   </p>
 
-                  {/* AVATAR + NAME */}
+                  {/* AVATAR */}
                   <div className="flex items-center gap-3 mt-auto pt-6">
 
                     <div
-  className={`
-    w-10
-    h-10
-
-    min-w-[40px]
-
-    rounded-full
-
-    flex
-    items-center
-    justify-center
-
-    text-white
-    font-bold
-
-    ${color}
-  `}
->
+                      className={`
+                        w-10
+                        h-10
+                        min-w-[40px]
+                        rounded-full
+                        flex
+                        items-center
+                        justify-center
+                        text-white
+                        font-bold
+                        ${color}
+                      `}
+                    >
                       {getInitial(item.name)}
                     </div>
 
