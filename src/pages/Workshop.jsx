@@ -39,82 +39,82 @@ const workshops = [
 const Workshop = () => {
   const navigate = useNavigate();
 
-  const [search, setSearch] = useState("");
+  const [selectedLocation, setSelectedLocation] =
+    useState("Yogyakarta");
 
-  const filteredWorkshop = workshops.filter((item) =>
-    item.location.toLowerCase().includes(search.toLowerCase())
+  const filteredWorkshop = workshops.filter(
+    (item) => item.location === selectedLocation
   );
 
   return (
     <div className="min-h-screen bg-[#F5F7FB]">
 
-      {/* HERO */}
-      <div className="bg-gradient-to-r from-[#7B2CBF] to-[#C77DFF] text-white py-16 px-6">
+      {/* HEADER */}
+      <div className="bg-white shadow-sm border-b">
 
-        <div className="max-w-6xl mx-auto">
-
-          <h1 className="text-4xl font-bold mb-4">
-            Workshop & Seminar Hub 🎓
-          </h1>
-
-          <p className="text-lg opacity-90 mb-6">
-            Temukan workshop terbaik untuk meningkatkan skill mengajar kamu.
-          </p>
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center gap-4">
 
           {/* SEARCH */}
-          <div className="bg-white rounded-2xl p-3 flex items-center max-w-2xl shadow-lg">
+          <input
+            type="text"
+            placeholder="Cari workshop..."
+            className="border rounded-xl px-4 py-2 w-full max-w-md outline-none"
+          />
 
-            <input
-              type="text"
-              placeholder="Cari lokasi workshop..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="flex-1 outline-none px-3 text-gray-700"
-            />
-
-            <button className="bg-[#7B2CBF] text-white px-5 py-2 rounded-xl">
-              Cari
-            </button>
-
-          </div>
+          {/* LOCATION */}
+          <select
+            value={selectedLocation}
+            onChange={(e) =>
+              setSelectedLocation(e.target.value)
+            }
+            className="border rounded-xl px-4 py-2 outline-none"
+          >
+            <option>Yogyakarta</option>
+            <option>Jakarta</option>
+            <option>Bandung</option>
+          </select>
 
         </div>
 
       </div>
 
-      {/* LIST WORKSHOP */}
-      <div className="max-w-6xl mx-auto px-6 py-10">
+      {/* CONTENT */}
+      <div className="max-w-7xl mx-auto px-6 py-10">
 
-        <h2 className="text-2xl font-bold mb-6 text-gray-800">
-          Workshop Tersedia
+        <h2 className="text-3xl font-bold mb-8">
+          Workshop di {selectedLocation}
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-4 gap-6">
 
           {filteredWorkshop.map((item) => (
             <div
               key={item.id}
-              onClick={() => navigate(`/workshop/${item.id}`)}
+              onClick={() =>
+                navigate(`/workshop/${item.id}`)
+              }
               className="bg-white rounded-2xl overflow-hidden shadow hover:shadow-xl transition cursor-pointer"
             >
 
+              {/* IMAGE */}
               <img
                 src={item.image}
                 alt={item.title}
-                className="w-full h-48 object-cover"
+                className="w-full h-44 object-cover"
               />
 
-              <div className="p-5">
+              {/* CONTENT */}
+              <div className="p-4">
 
-                <p className="text-sm text-[#7B2CBF] font-semibold mb-2">
-                  📍 {item.location}
-                </p>
-
-                <h3 className="text-lg font-bold text-gray-800 mb-2">
+                <h3 className="font-bold text-lg mb-2">
                   {item.title}
                 </h3>
 
-                <p className="text-gray-500 text-sm">
+                <p className="text-sm text-gray-500 mb-2">
+                  📍 {item.location}
+                </p>
+
+                <p className="text-sm text-gray-500">
                   📅 {item.date}
                 </p>
 
