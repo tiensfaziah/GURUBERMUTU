@@ -641,7 +641,7 @@ terasa stagnan.
         text-[#7C3AED]
       "
     >
-      — Dinda, Guru SMP
+       Dinda, Guru SMP
     </p>
   </div>
 
@@ -682,7 +682,7 @@ terasa stagnan.
         text-[#7C3AED]
       "
     >
-      — Riko, Guru SMA
+       Riko, Guru SMA
     </p>
   </div>
 
