@@ -1,45 +1,42 @@
 import React from "react";
 import ScrollAnimation from "../components/ScrollAnimation";
-
-// 🔥 IMPORT FOTO
 import joinImage from "../assets/join.jpeg";
 import materiImage from "../assets/materi.jpeg";
 import pelatihanImage from "../assets/pelatihan.jpeg";
+
+// 🔥 FOTO PROFILE
+import profile1 from "../assets/profile1.jpeg";
+import profile2 from "../assets/profile2.jpeg";
+import profile3 from "../assets/profile3.jpeg";
+import profile4 from "../assets/profile4.jpeg";
+import profile5 from "../assets/profile5.jpeg";
 
 const testimonials = [
   {
     text: "Berkat Gurubermutu.id, efektivitas mengajar saya naik pesat dan siswa jadi jauh lebih antusias!",
     name: "Budi, Guru Muda Penggerak",
+    image: profile1,
   },
   {
     text: "Berkat Gamified Skill Tree, saya jadi lebih semangat upgrade diri karena progresnya terlihat nyata!",
-    name: "Andi, Guru Muda & Content Creator Pendidikan",
+    name: "Sabrina, Guru Muda & Content Creator Pendidikan",
+    image: profile2,
   },
   {
     text: "Dulu saya sering bingung mencari alat bantu mengajar yang pas, tapi sejak ada Curated Tech Stack, persiapan kelas jadi jauh lebih efisien.",
     name: "Rina, Guru Matematika SMP",
+    image: profile3,
   },
   {
     text: "Fitur Gamified Skill Tree bikin proses belajar jadi ketagihan; saya merasa sangat termotivasi untuk terus naik level.",
-    name: "Fajar, Mahasiswa Calon Guru",
+    name: "Alea, Mahasiswa Calon Guru",
+    image: profile4,
   },
   {
     text: "Resource Marketplace sangat membantu, saya bisa berbagi aset digital sekaligus belajar dari modul pedagogi kreatif.",
-    name: "Siska, Guru SD & Edu-Creator",
+    name: "Fajar, Guru SD & Edu-Creator",
+    image: profile5,
   },
-];
-
-// 🔥 fungsi ambil inisial
-const getInitial = (name) => name.charAt(0);
-
-// 🔥 warna avatar random
-const colors = [
-  "bg-red-400",
-  "bg-pink-400",
-  "bg-purple-400",
-  "bg-indigo-400",
-  "bg-blue-400",
-  "bg-green-400",
 ];
 
 const SocialProof = () => {
@@ -148,8 +145,6 @@ const SocialProof = () => {
           <div className="flex gap-6 w-max animate-[scroll_20s_linear_infinite] pb-4">
 
             {[...testimonials, ...testimonials].map((item, index) => {
-              const color = colors[index % colors.length];
-
               return (
                 <div
                   key={index}
@@ -166,27 +161,26 @@ const SocialProof = () => {
                     “{item.text}”
                   </p>
 
-                  {/* AVATAR */}
+                  {/* PROFILE */}
                   <div className="flex items-center gap-3 mt-auto pt-6">
 
-                    <div
-                      className={`
-                        w-10
-                        h-10
-                        min-w-[40px]
+                    {/* FOTO PROFILE */}
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="
+                        w-12
+                        h-12
+                        min-w-[48px]
                         rounded-full
-                        flex
-                        items-center
-                        justify-center
-                        text-white
-                        font-bold
-                        ${color}
-                      `}
-                    >
-                      {getInitial(item.name)}
-                    </div>
+                        object-cover
+                        border-2
+                        border-[#E9D5FF]
+                      "
+                    />
 
-                    <h4 className="font-semibold text-[#700087] text-sm">
+                    {/* NAMA */}
+                    <h4 className="font-semibold text-[#700087] text-sm text-left">
                       {item.name}
                     </h4>
 

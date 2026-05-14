@@ -46,8 +46,9 @@ function Footer() {
                   Gurubermutu.id
                 </h2>
 
-                <p className="text-sm text-[#700087]/70">
-                  Future-Ready Teacher Platform
+                {/* 🔥 REVISI TAGLINE */}
+                <p className="text-sm text-[#700087]/70 font-medium">
+                  Scale Impact Together
                 </p>
               </div>
 
@@ -62,11 +63,11 @@ function Footer() {
 
             {/* GERCEB */}
             <p className="mt-6 text-sm text-gray-500 leading-relaxed">
-  Dikelola oleh{" "}
-  <span className="font-semibold text-[#700087]">
-    Yayasan Generasi Cerdas Berdaya (GERCEB)
-  </span>
-</p>
+              Dikelola oleh{" "}
+              <span className="font-semibold text-[#700087]">
+                Yayasan Generasi Cerdas Berdaya (GERCEB)
+              </span>
+            </p>
 
           </div>
 
@@ -156,9 +157,9 @@ function Footer() {
               © 2026 Gurubermutu.id — All rights reserved.
             </p>
 
-            {/* TAGLINE */}
+            {/* TAGLINE BOTTOM */}
             <p className="text-sm text-[#700087] font-medium text-center md:text-right">
-              Empowering Future-Ready Educators 🚀
+              Scale Impact Together 🚀
             </p>
 
           </div>

@@ -5,6 +5,9 @@ import {
   TrendingUp
 } from "lucide-react";
 
+// 🔥 FOTO
+import fotoproblem from "../assets/fotoproblem.jpeg";
+
 function ProblemSection() {
   return (
     <section
@@ -41,7 +44,7 @@ function ProblemSection() {
           grid
           md:grid-cols-2
           gap-14
-          items-start
+          items-stretch
         "
       >
 
@@ -72,7 +75,6 @@ function ProblemSection() {
                 uppercase
               "
             >
-             
             </div>
           </ScrollAnimation>
 
@@ -91,14 +93,14 @@ function ProblemSection() {
               "
             >
               Masih Merasa
-<br />
+              <br />
 
-<span className="text-[#700087]">
-  Tertinggal
-</span>
+              <span className="text-[#700087]">
+                Tertinggal
+              </span>
 
-<br />
-di Era Digital?🤔
+              <br />
+              di Era Digital?🤔
             </h2>
           </ScrollAnimation>
 
@@ -115,15 +117,15 @@ di Era Digital?🤔
               "
             >
               Apakah Anda merasa metode mengajar mulai
-tertinggal zaman dan sulit mengikuti
-perkembangan teknologi yang begitu cepat?
+              tertinggal zaman dan sulit mengikuti
+              perkembangan teknologi yang begitu cepat?
 
-<br />
-<br />
+              <br />
+              <br />
 
-Menjadi guru Gen Z bukan hanya tentang
-mengajar, tetapi juga menciptakan dampak
-dan pengalaman belajar yang relevan.
+              Menjadi guru Gen Z bukan hanya tentang
+              mengajar, tetapi juga menciptakan dampak
+              dan pengalaman belajar yang relevan.
             </p>
           </ScrollAnimation>
 
@@ -200,8 +202,8 @@ dan pengalaman belajar yang relevan.
                     "
                   >
                     Siswa semakin cepat berubah,
-namun metode mengajar masih terasa
-monoton dan kurang interaktif.
+                    namun metode mengajar masih terasa
+                    monoton dan kurang interaktif.
                   </p>
                 </div>
 
@@ -277,9 +279,9 @@ monoton dan kurang interaktif.
                       leading-relaxed
                     "
                   >
-Perkembangan tools dan platform digital
-yang cepat membuat proses adaptasi menjadi
-tantangan tersendiri.
+                    Perkembangan tools dan platform digital
+                    yang cepat membuat proses adaptasi menjadi
+                    tantangan tersendiri.
                   </p>
                 </div>
 
@@ -355,9 +357,9 @@ tantangan tersendiri.
                       leading-relaxed
                     "
                   >
-Belajar banyak hal tanpa arah yang jelas
-sering membuat proses pengembangan diri
-terasa stagnan.
+                    Belajar banyak hal tanpa arah yang jelas
+                    sering membuat proses pengembangan diri
+                    terasa stagnan.
                   </p>
                 </div>
 
@@ -398,298 +400,86 @@ terasa stagnan.
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="space-y-10 md:pt-28">
+        <ScrollAnimation delay={0.3}>
+          <div className="relative w-full">
 
-          {/* STAT 1 */}
-          <ScrollAnimation delay={0.2}>
-            <div>
-              <p className="text-base md:text-lg text-gray-900">
-                Guru merasa burnout setiap tahun
-              </p>
-
-              <h3
-                className="
-                  text-4xl
-                  md:text-5xl
-                  font-bold
-                  text-[#700087]
-                  mt-3
-                "
-              >
-                74%
-              </h3>
-
-              <p
-                className="
-                  mt-2
-                  text-sm
-                  md:text-base
-                  text-gray-600
-                  leading-relaxed
-                "
-              >
-                akibat beban kerja & kurangnya support
-                pengembangan diri
-              </p>
-            </div>
-          </ScrollAnimation>
-
-          {/* STAT 2 */}
-          <ScrollAnimation delay={0.3}>
-            <div>
-              <p className="text-base md:text-lg text-gray-900">
-                Pelatihan yang benar-benar relevan
-              </p>
-
-              <h3
-                className="
-                  text-4xl
-                  md:text-5xl
-                  font-bold
-                  text-[#700087]
-                  mt-3
-                "
-              >
-                1 dari 5
-              </h3>
-
-              <p
-                className="
-                  mt-2
-                  text-sm
-                  md:text-base
-                  text-gray-600
-                  leading-relaxed
-                "
-              >
-                guru merasa pelatihan yang tersedia
-                sesuai kebutuhan mereka
-              </p>
-            </div>
-          </ScrollAnimation>
-
-          {/* TESTIMONI */}
-          <ScrollAnimation delay={0.4}>
+            {/* IMAGE CARD */}
             <div
               className="
                 relative
-
-                mt-4
-
-                bg-[#F8F5FF]
-                border
-                border-[#D8B4FE]
-
-                rounded-3xl
-
-                p-6
-                md:p-8
-
-                shadow-sm
-
                 overflow-hidden
+                rounded-[32px]
+                shadow-2xl
+                min-h-[350px]
+                md:min-h-[760px]
               "
             >
 
-              {/* BLUR DECORATION */}
+              {/* FOTO */}
+              <img
+                src={fotoproblem}
+                alt="guru berkembang"
+                className="
+                  absolute
+                  inset-0
+                  w-full
+                  h-full
+                  object-cover
+                "
+              />
+
+              {/* OVERLAY */}
               <div
                 className="
                   absolute
-                  -bottom-10
-                  -right-10
-
-                  w-40
-                  h-40
-
-                  bg-[#C084FC]/20
-
-                  rounded-full
-                  blur-3xl
+                  inset-0
+                  bg-gradient-to-t
+                  from-black/70
+                  via-black/20
+                  to-transparent
                 "
               ></div>
 
-              {/* QUOTE ICON */}
+              {/* CONTENT */}
               <div
                 className="
                   absolute
-                  top-4
-                  right-6
-
-                  text-7xl
-                  md:text-8xl
-
-                  text-[#E9D5FF]
-
-                  font-serif
-                  opacity-70
-
-                  pointer-events-none
-                  select-none
+                  bottom-0
+                  left-0
+                  p-6
+                  md:p-10
+                  text-white
                 "
               >
-                ”
-              </div>
-
-              {/* CONTENT */}
-              <div className="relative z-10">
 
                 <p
                   className="
-                    text-base
-                    md:text-xl
-
-                    italic
-                    leading-relaxed
-                    text-gray-900
-
-                    pr-10
+                    inline-block
+                    bg-white/20
+                    backdrop-blur-md
+                    border
+                    border-white/20
+                    px-4
+                    py-2
+                    rounded-full
+                    text-sm
+                    mb-4
                   "
                 >
-                  "Saya sudah ikut banyak pelatihan,
-                  tapi tetap ngerasa bingung harus
-                  mulai dari mana untuk berkembang."
+                  Komunitas Guru Modern 🚀
                 </p>
 
-                {/* PROFILE */}
-                <div className="flex items-center gap-4 mt-8">
-
-                  <div
-                    className="
-                      w-12
-                      h-12
-
-                      rounded-full
-
-                      bg-[#E9D5FF]
-
-                      flex
-                      items-center
-                      justify-center
-
-                      font-bold
-                      text-[#7C3AED]
-                    "
-                  >
-                    SR
-                  </div>
-
-                  <div>
-                    <h4
-                      className="
-                        font-bold
-                        text-lg
-                        text-gray-900
-                      "
-                    >
-                      Sari Rahayu
-                    </h4>
-
-                    <p
-                      className="
-                        text-sm
-                        md:text-base
-                        text-gray-600
-                        mt-1
-                      "
-                    >
-                      Guru SD, Bandung
-                    </p>
-                  </div>
-
-                </div>
-
+                <h3 className="text-2xl md:text-4xl font-bold leading-tight mb-4">
+                  Belajar Bersama,
+                  <br />
+                  Bertumbuh Bersama
+                </h3>
               </div>
 
             </div>
-            {/* MINI TESTIMONIALS */}
-<div className="mt-6 space-y-4">
 
-  {/* TESTI 2 */}
-  <div
-    className="
-      bg-white/80
-      border
-      border-[#E9D5FF]
-
-      rounded-2xl
-
-      p-4
-
-      backdrop-blur-sm
-    "
-  >
-    <p
-      className="
-        text-sm
-        md:text-base
-
-        text-gray-700
-        leading-relaxed
-      "
-    >
-      “Kadang bingung harus mulai belajar dari mana
-      karena materi yang tersedia terlalu banyak.”
-    </p>
-
-    <p
-      className="
-        mt-3
-
-        text-sm
-        font-semibold
-
-        text-[#7C3AED]
-      "
-    >
-       Dinda, Guru SMP
-    </p>
-  </div>
-
-  {/* TESTI 3 */}
-  <div
-    className="
-      bg-white/80
-      border
-      border-[#E9D5FF]
-
-      rounded-2xl
-
-      p-4
-
-      backdrop-blur-sm
-    "
-  >
-    <p
-      className="
-        text-sm
-        md:text-base
-
-        text-gray-700
-        leading-relaxed
-      "
-    >
-      “Saya ingin mengajar lebih interaktif,
-      tapi masih kesulitan memahami tools digital.”
-    </p>
-
-    <p
-      className="
-        mt-3
-
-        text-sm
-        font-semibold
-
-        text-[#7C3AED]
-      "
-    >
-       Riko, Guru SMA
-    </p>
-  </div>
-
-</div>
-          </ScrollAnimation>
-
-        </div>
+          </div>
+        </ScrollAnimation>
 
       </div>
     </section>
