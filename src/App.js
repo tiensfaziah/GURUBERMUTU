@@ -110,7 +110,7 @@ function Layout() {
 function App() {
   return (
     <div className="overflow-x-hidden">
-      <Router basename="/gurubermutu">
+      <Router>
         <Layout />
       </Router>
     </div>
