@@ -36,9 +36,6 @@ export default function GameDetail() {
         <div className="text-center">
           <div className="text-6xl mb-4">🎮</div>
           <h1 className="text-xl font-bold text-gray-800 mb-3">Game tidak ditemukan</h1>
-          <Link to="/gurubermutu/tech-stack" className="text-[#7C3AED] font-semibold text-sm">
-            ← Kembali ke Tech Stack
-          </Link>
         </div>
       </div>
     );
