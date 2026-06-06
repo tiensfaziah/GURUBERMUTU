@@ -1,5 +1,16 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import games from "../data/games";
+import {
+  BarChart,
+  Bar,
+  Cell,
+  LabelList,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  CartesianGrid,
+} from "recharts";
 
 function InfoCard({ title, value }) {
   return (
@@ -25,10 +36,39 @@ function ScoreCard({ title, score }) {
     </div>
   );
 }
+const COLORS = [
+  "#3B82F6", // PQ
+  "#22C55E", // CQ
+  "#A855F7", // GQ
+  "#FACC15", // EQ
+  "#6366F1", // PrQ
+];
 
 export default function GameDetail() {
   const { slug } = useParams();
   const game = games.find((g) => g.slug === slug);
+  const egqiData = [
+  {
+    name: "PQ",
+    score: Number(game.pq),
+  },
+  {
+    name: "CQ",
+    score: Number(game.cq),
+  },
+  {
+    name: "GQ",
+    score: Number(game.gq),
+  },
+  {
+    name: "EQ",
+    score: Number(game.eq),
+  },
+  {
+    name: "PrQ",
+    score: Number(game.prq),
+  },
+];
 
   if (!game) {
     return (
@@ -139,7 +179,84 @@ export default function GameDetail() {
             ))}
           </div>
         </div>
+{/* DASHBOARD EGQI */}
+<div className="bg-white rounded-3xl p-4 sm:p-5 border border-purple-50 mb-4">
 
+  <p className="text-xs sm:text-sm font-bold text-gray-800 mb-4">
+    Dashboard EGQI
+  </p>
+
+  <div className="h-[420px]">
+
+    <ResponsiveContainer width="100%" height="100%">
+
+      <BarChart
+        data={egqiData}
+        margin={{
+          top: 20,
+          right: 20,
+          left: -20,
+          bottom: 0,
+        }}
+      >
+
+        <CartesianGrid strokeDasharray="3 3" />
+
+        <XAxis dataKey="name" />
+
+        <YAxis
+  domain={[0, 5]}
+  ticks={[0,1,2,3,4,5]}
+/>
+
+        <Tooltip />
+
+        <Bar
+  dataKey="score"
+  radius={[12, 12, 0, 0]}
+>
+  <LabelList
+    dataKey="score"
+    position="top"
+    formatter={(value) => value.toFixed(2)}
+  />
+
+  {egqiData.map((entry, index) => (
+    <Cell
+      key={index}
+      fill={COLORS[index]}
+    />
+  ))}
+</Bar>
+
+      </BarChart>
+
+    </ResponsiveContainer>
+
+  </div>
+
+</div>
+<Link
+  to={`/game/${game.slug}/report`}
+  className="
+    inline-flex
+    items-center
+    justify-center
+    gap-2
+    mt-4
+    px-5
+    py-3
+    rounded-xl
+    bg-[#ffffff]
+    text-grey-800
+    font-semibold
+    hover:bg-[#6D28D9]
+    transition
+    shadow-sm
+  "
+>
+  📄 View Full Report
+</Link>
         {/* KEUNGGULAN */}
         <div className="bg-white rounded-3xl p-4 sm:p-5 border border-purple-50 mb-4">
           <p className="text-xs sm:text-sm font-bold text-gray-800 mb-3">Keunggulan Utama</p>
