@@ -49,6 +49,7 @@ const Features = () => {
 
   const next = () => setCurrent((prev) => (prev + 1) % N);
   const prev = () => setCurrent((prev) => (prev - 1 + N) % N);
+  
 
   return (
     <section

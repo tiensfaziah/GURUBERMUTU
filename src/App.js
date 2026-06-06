@@ -16,6 +16,8 @@ import SkillTree from "./fitur/SkillTree";
 import Footer from "./components/Footer";
 import HowItWorks from "./components/HowItWorks";
 import Faq from "./components/Faq";
+import TechStack from "./pages/TechStack";
+import AllTechStack from "./pages/AllTechStack";
 
 function Layout() {
   const location = useLocation();
@@ -23,7 +25,8 @@ function Layout() {
   const hideNavbar =
     location.pathname === "/dashboard" ||
     location.pathname === "/skill-tree" ||
-    location.pathname.startsWith("/workshop"); 
+    location.pathname === "/tech-stack" ||
+    location.pathname.startsWith("/workshop");
 
   return (
     <>
@@ -66,7 +69,22 @@ function Layout() {
             </ProtectedRoute>
           }
         />
-
+<Route
+  path="/tech-stack"
+  element={
+    <ProtectedRoute>
+      <TechStack />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/tech-stack/all"
+  element={
+    <ProtectedRoute>
+      <AllTechStack />
+    </ProtectedRoute>
+  }
+/>
         <Route
           path="/workshop"
           element={
@@ -91,8 +109,8 @@ function Layout() {
 
 function App() {
   return (
-    <div className="overflow-x-hidden"> {/* 🔥 FIX UTAMA */}
-      <Router>
+    <div className="overflow-x-hidden">
+      <Router basename="/gurubermutu">
         <Layout />
       </Router>
     </div>

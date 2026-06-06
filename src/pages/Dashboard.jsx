@@ -137,10 +137,14 @@ function Dashboard() {
           </button>
 
           <button
-            className="block w-full text-left text-gray-700 font-medium py-3"
-          >
-            🛠 Tech Stack
-          </button>
+  onClick={() => {
+    navigate("/tech-stack");
+    setMenuOpen(false);
+  }}
+  className="block w-full text-left text-gray-700 font-medium py-3"
+>
+  🛠 Tech Stack
+</button>
 
           <button
             className="block w-full text-left text-gray-700 font-medium py-3"
@@ -230,9 +234,12 @@ function Dashboard() {
               🌳 Skill Tree
             </p>
 
-            <p className="cursor-pointer hover:text-[#7C3AED] transition">
-              🛠 Tech Stack
-            </p>
+            <p
+  onClick={() => navigate("/tech-stack")}
+  className="cursor-pointer hover:text-[#7C3AED] transition"
+>
+  🛠 Tech Stack
+</p>
 
             <p className="cursor-pointer hover:text-[#7C3AED] transition">
               🛒 Marketplace
