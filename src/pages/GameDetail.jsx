@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import games from "../data/games";
 
 function InfoCard({ title, value }) {
@@ -44,17 +44,6 @@ export default function GameDetail() {
   return (
     <div className="min-h-screen bg-[#F8F5FF]">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
-
-        {/* BACK */}
-        <Link
-          to="/gurubermutu/tech-stack"
-          className="inline-flex items-center gap-1.5 text-[#7C3AED] font-semibold text-sm mb-5"
-        >
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-          </svg>
-          Kembali ke Tech Stack
-        </Link>
 
         {/* HERO CARD */}
         <div className="bg-white rounded-3xl overflow-hidden border border-purple-50 mb-4">
