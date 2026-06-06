@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams} from "react-router-dom";
 import games from "../data/games";
 
 export default function GameDetail() {
@@ -22,14 +22,6 @@ export default function GameDetail() {
     <div className="min-h-screen bg-[#F8F5FF]">
 
       <div className="max-w-6xl mx-auto px-6 py-8">
-
-        <Link
-          to="/tech-stack"
-          className="text-[#7C3AED] font-semibold"
-        >
-          ← Kembali
-        </Link>
-
         {/* HERO */}
         <div className="bg-white rounded-3xl overflow-hidden mt-6 shadow-sm">
 

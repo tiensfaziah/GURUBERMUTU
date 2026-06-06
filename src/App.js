@@ -27,6 +27,8 @@ function Layout() {
     location.pathname === "/dashboard" ||
     location.pathname === "/skill-tree" ||
     location.pathname === "/tech-stack" ||
+    location.pathname === "/tech-stack/all" ||
+    location.pathname.startsWith("/game/") ||
     location.pathname.startsWith("/workshop");
 
   return (
