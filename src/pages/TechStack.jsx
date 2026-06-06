@@ -130,7 +130,7 @@ export default function TechStack() {
     <div className="min-h-screen bg-[#F8F5FF] p-6 md:p-8">
 
       {/* HERO */}
-      <div className="relative h-[280px] md:h-[320px] rounded-[32px] overflow-hidden mb-8">
+      <div className="relative min-h-[520px] md:min-h-[320px] rounded-[32px] overflow-hidden mb-10">
         <img
           src={curatedImage}
           alt="Curated Tech Stack"
