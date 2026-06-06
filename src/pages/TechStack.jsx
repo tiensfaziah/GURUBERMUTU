@@ -7,11 +7,61 @@ const ITEMS_PER_PAGE = 5;
 const TOPICS = ["Aljabar", "Aritmetika", "Geometri", "Statistika", "Pengukuran"];
 const DIFFICULTIES = ["Beginner", "Intermediate", "Expert"];
 const RATINGS = [
-  { label: "4 ke atas", min: 4 },
-  { label: "3 ke atas", min: 3 },
-  { label: "2 ke atas", min: 2 },
-  { label: "1 ke atas", min: 1 },
+  { label: "4 ke atas", min: 4, stars: 4 },
+  { label: "3 ke atas", min: 3, stars: 3 },
+  { label: "2 ke atas", min: 2, stars: 2 },
+  { label: "1 ke atas", min: 1, stars: 1 },
 ];
+
+function StarRow({ filled, total = 5 }) {
+  return (
+    <span className="inline-flex gap-0.5">
+      {Array.from({ length: total }).map((_, i) => (
+        <svg
+          key={i}
+          className={`w-3 h-3 ${i < filled ? "text-amber-400" : "text-gray-300"}`}
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118L10 14.347l-3.35 2.437c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.664 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69L9.049 2.927z" />
+        </svg>
+      ))}
+    </span>
+  );
+}
+
+function FilterChip({ label, active, onClick, extra }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`
+        w-full flex items-center gap-2.5 text-sm px-3 py-2 rounded-xl text-left transition
+        ${active
+          ? "bg-[#EEEDFE] text-[#3C3489] font-medium"
+          : "text-gray-500 hover:bg-gray-50"
+        }
+      `}
+    >
+      <span
+        className={`
+          w-4 h-4 flex-shrink-0 rounded flex items-center justify-center border transition
+          ${active
+            ? "bg-[#534AB7] border-[#534AB7]"
+            : "border-gray-300 bg-white"
+          }
+        `}
+      >
+        {active && (
+          <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 10 10">
+            <path d="M1.5 5l2.5 2.5 4.5-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        )}
+      </span>
+      {extra && <span>{extra}</span>}
+      <span>{label}</span>
+    </button>
+  );
+}
 
 export default function TechStack() {
   const [search, setSearch] = useState("");
@@ -80,7 +130,7 @@ export default function TechStack() {
     <div className="min-h-screen bg-[#F8F5FF] p-6 md:p-8">
 
       {/* HERO */}
-      <div className="relative h-[280px] md:h-[320px] rounded-[32px] overflow-hidden mb-10">
+      <div className="relative h-[280px] md:h-[320px] rounded-[32px] overflow-hidden mb-8">
         <img
           src={curatedImage}
           alt="Curated Tech Stack"
@@ -89,13 +139,13 @@ export default function TechStack() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/20" />
         <div className="relative z-10 h-full flex items-center">
           <div className="max-w-3xl px-8 md:px-12 text-white">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-sm font-semibold mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-sm font-semibold mb-5">
               🔬 EGQI VERIFIED
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6">
+            <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-4">
               Curated Tech Stack
             </h1>
-            <p className="text-lg md:text-2xl text-white/90 leading-relaxed">
+            <p className="text-base md:text-lg text-white/85 leading-relaxed max-w-xl">
               Temukan game edukasi terbaik yang telah dikurasi menggunakan
               Educational Game Quality Instrument (EGQI) untuk membantu
               pembelajaran yang lebih interaktif dan efektif.
@@ -105,151 +155,107 @@ export default function TechStack() {
       </div>
 
       {/* SEARCH */}
-      <div className="mb-8">
+      <div className="relative mb-6">
+        <svg
+          className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none"
+          fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
+        </svg>
         <input
           type="text"
           placeholder="Cari game..."
           value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            setCurrentPage(1);
-          }}
-          className="w-full px-6 py-4 rounded-2xl border border-gray-200 bg-white text-lg focus:outline-none focus:ring-2 focus:ring-[#7C3AED]"
+          onChange={(e) => { setSearch(e.target.value); setCurrentPage(1); }}
+          className="w-full pl-12 pr-5 py-3.5 rounded-2xl border border-gray-200 bg-white text-base focus:outline-none focus:ring-2 focus:ring-[#7C3AED] focus:border-transparent transition"
         />
       </div>
 
       {/* MAIN CONTENT */}
-      <div className="grid lg:grid-cols-[240px_1fr] gap-8">
+      <div className="grid lg:grid-cols-[220px_1fr] gap-6">
 
-        {/* SIDEBAR */}
-        <div className="bg-white rounded-3xl p-6 h-fit shadow-sm border border-gray-100">
-          <h3 className="font-bold text-xl mb-6">Filter</h3>
+        {/* ── SIDEBAR ── */}
+        <div className="bg-white rounded-2xl p-5 h-fit border border-gray-100">
+
+          <p className="text-base font-semibold text-gray-900 mb-4">Filter</p>
 
           {/* Topik */}
-          <div className="mb-8">
-            <p className="font-semibold text-gray-900 mb-4">Topik</p>
-            <div className="space-y-2">
-              <label
-                className={`flex items-center gap-3 text-sm px-3 py-2 rounded-xl cursor-pointer transition ${
-                  selectedTopics.length === 0
-                    ? "bg-purple-100 text-purple-700 font-semibold"
-                    : "text-gray-600 hover:bg-gray-50"
-                }`}
+          <div className="mb-5">
+            <p className="text-[11px] font-semibold uppercase tracking-widest text-gray-400 mb-2">Topik</p>
+            <div className="space-y-0.5">
+              <FilterChip
+                label="Semua Topik"
+                active={selectedTopics.length === 0}
                 onClick={() => { setSelectedTopics([]); setCurrentPage(1); }}
-              >
-                <input
-                  type="checkbox"
-                  className="accent-purple-600"
-                  checked={selectedTopics.length === 0}
-                  readOnly
-                />
-                Semua Topik
-              </label>
+              />
               {TOPICS.map((t) => (
-                <label
+                <FilterChip
                   key={t}
-                  className={`flex items-center gap-3 text-sm px-3 py-2 rounded-xl cursor-pointer transition ${
-                    selectedTopics.includes(t)
-                      ? "bg-purple-50 text-purple-700 font-medium"
-                      : "text-gray-600 hover:bg-gray-50"
-                  }`}
+                  label={t}
+                  active={selectedTopics.includes(t)}
                   onClick={() => toggleTopic(t)}
-                >
-                  <input
-                    type="checkbox"
-                    className="accent-purple-600"
-                    checked={selectedTopics.includes(t)}
-                    readOnly
-                  />
-                  {t}
-                </label>
+                />
               ))}
             </div>
           </div>
 
           {/* Tingkat Kesulitan */}
-          <div className="mb-8">
-            <p className="font-semibold text-gray-900 mb-4">Tingkat Kesulitan</p>
-            <div className="space-y-2">
-              <label
-                className={`flex items-center gap-3 text-sm px-3 py-2 rounded-xl cursor-pointer transition ${
-                  !selectedDifficulty
-                    ? "bg-purple-100 text-purple-700 font-semibold"
-                    : "text-gray-600 hover:bg-gray-50"
-                }`}
+          <div className="mb-5">
+            <p className="text-[11px] font-semibold uppercase tracking-widest text-gray-400 mb-2">Tingkat Kesulitan</p>
+            <div className="space-y-0.5">
+              <FilterChip
+                label="Semua Tingkat"
+                active={!selectedDifficulty}
                 onClick={() => { setSelectedDifficulty(null); setCurrentPage(1); }}
-              >
-                <input type="checkbox" className="accent-purple-600" checked={!selectedDifficulty} readOnly />
-                Semua Tingkat
-              </label>
+              />
               {DIFFICULTIES.map((d) => (
-                <label
+                <FilterChip
                   key={d}
-                  className={`flex items-center gap-3 text-sm px-3 py-2 rounded-xl cursor-pointer transition ${
-                    selectedDifficulty === d
-                      ? "bg-purple-50 text-purple-700 font-medium"
-                      : "text-gray-600 hover:bg-gray-50"
-                  }`}
+                  label={d}
+                  active={selectedDifficulty === d}
                   onClick={() => { setSelectedDifficulty(d); setCurrentPage(1); }}
-                >
-                  <input type="checkbox" className="accent-purple-600" checked={selectedDifficulty === d} readOnly />
-                  {d}
-                </label>
+                />
               ))}
             </div>
           </div>
 
           {/* Rating */}
           <div>
-            <p className="font-semibold text-gray-900 mb-4">Rating</p>
-            <div className="space-y-2">
-              <label
-                className={`flex items-center gap-3 text-sm px-3 py-2 rounded-xl cursor-pointer transition ${
-                  !selectedRating
-                    ? "bg-purple-100 text-purple-700 font-semibold"
-                    : "text-gray-600 hover:bg-gray-50"
-                }`}
+            <p className="text-[11px] font-semibold uppercase tracking-widest text-gray-400 mb-2">Rating</p>
+            <div className="space-y-0.5">
+              <FilterChip
+                label="Semua Rating"
+                active={!selectedRating}
                 onClick={() => { setSelectedRating(null); setCurrentPage(1); }}
-              >
-                <input type="radio" name="rating" className="accent-purple-600" checked={!selectedRating} readOnly />
-                <span>Semua Rating</span>
-              </label>
+              />
               {RATINGS.map((r) => (
-                <label
+                <FilterChip
                   key={r.min}
-                  className={`flex items-center gap-3 text-sm px-3 py-2 rounded-xl cursor-pointer transition ${
-                    selectedRating === r.min
-                      ? "bg-purple-50 text-purple-700 font-medium"
-                      : "text-gray-600 hover:bg-gray-50"
-                  }`}
+                  label={r.label}
+                  active={selectedRating === r.min}
                   onClick={() => { setSelectedRating(r.min); setCurrentPage(1); }}
-                >
-                  <input type="radio" name="rating" className="accent-purple-600" checked={selectedRating === r.min} readOnly />
-                  <span>
-                    {"⭐".repeat(r.min)} {r.label}
-                  </span>
-                </label>
+                  extra={<StarRow filled={r.stars} />}
+                />
               ))}
             </div>
           </div>
+
         </div>
 
-        {/* CONTENT */}
+        {/* ── CONTENT ── */}
         <div>
+
           {/* Header row */}
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900">Daftar Game Edukasi</h2>
-              <p className="text-gray-500 mt-1 text-sm">
-                Total {filteredGames.length} game yang telah dikurasi
-              </p>
-            </div>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
+            <p className="text-sm text-gray-500">
+              Total <span className="font-semibold text-gray-800">{filteredGames.length} game</span> yang telah dikurasi
+            </p>
             <div className="flex items-center gap-2">
               <span className="text-sm text-gray-500">Urutkan</span>
               <select
                 value={sortBy}
                 onChange={(e) => { setSortBy(e.target.value); setCurrentPage(1); }}
-                className="bg-white border border-gray-200 rounded-xl px-4 py-2 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-[#7C3AED]"
+                className="bg-white border border-gray-200 rounded-xl px-3 py-2 text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#7C3AED] focus:border-transparent cursor-pointer"
               >
                 <option value="terbaru">Terbaru</option>
                 <option value="rating">Rating Tertinggi</option>
@@ -259,78 +265,85 @@ export default function TechStack() {
           </div>
 
           {/* Game list */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             {paginated.map((game) => (
               <div
                 key={game.id}
-                className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-lg transition group"
+                className="bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-[#C4B5FD] hover:shadow-md transition-all group"
               >
-                <div className="flex flex-col lg:flex-row">
+                <div className="flex flex-col sm:flex-row">
 
                   {/* THUMBNAIL */}
-                  <div className="lg:w-[220px] h-[180px] lg:h-auto bg-gradient-to-br from-[#6D28D9] to-[#EC4899] flex items-center justify-center relative flex-shrink-0">
-                    <span className="absolute top-3 left-3 bg-[#4C1D95]/80 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-full font-semibold">
+                  <div className="sm:w-[180px] h-[160px] sm:h-auto bg-gradient-to-br from-[#6D28D9] to-[#EC4899] flex items-center justify-center relative flex-shrink-0">
+                    <span className="absolute top-3 left-3 bg-black/35 text-white text-[10px] font-semibold px-2.5 py-1 rounded-full">
                       {game.gradeLevel}
                     </span>
-                    <span className="text-6xl drop-shadow-lg">🎮</span>
+                    <span className="text-5xl drop-shadow">🎮</span>
                   </div>
 
                   {/* CONTENT */}
-                  <div className="flex-1 p-5 flex flex-col justify-between">
+                  <div className="flex-1 p-4 flex flex-col justify-between gap-3">
+
+                    {/* Top: tags + title + desc */}
                     <div>
-                      {/* Tags */}
-                      <div className="flex flex-wrap gap-2 mb-3">
-                        <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-medium">
+                      <div className="flex flex-wrap gap-1.5 mb-2">
+                        <span className="bg-[#EEEDFE] text-[#3C3489] px-2.5 py-0.5 rounded-full text-xs font-medium">
                           {game.category}
                         </span>
                         {game.topic && (
-                          <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-medium">
+                          <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-full text-xs font-medium">
                             {game.topic}
                           </span>
                         )}
                         {game.platform && (
-                          <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-medium">
+                          <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-full text-xs font-medium">
                             {game.platform}
                           </span>
                         )}
                       </div>
 
-                      {/* Title */}
-                      <h2 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#7C3AED] transition">
+                      <h2 className="text-base font-semibold text-gray-900 mb-1 group-hover:text-[#534AB7] transition leading-snug">
                         {game.title}
                       </h2>
 
-                      {/* Scores */}
-                      <div className="flex flex-wrap gap-2 mb-3">
-                        <span className="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-semibold">
-                          ⭐ Expert {game.expertScore}
-                        </span>
-                        <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-semibold">
-                          👩‍🏫 Teacher {game.teacherScore}
-                        </span>
-                      </div>
-
-                      {/* Description */}
                       {game.description && (
-                        <p className="text-gray-500 text-sm leading-relaxed line-clamp-2">
+                        <p className="text-gray-400 text-xs leading-relaxed line-clamp-2">
                           {game.description}
                         </p>
                       )}
                     </div>
 
-                    {/* CTA */}
-                    <div className="mt-4">
+                    {/* Bottom: scores + CTA */}
+                    <div className="flex items-center justify-between flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-1.5">
+                        <span className="inline-flex items-center gap-1.5 bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full text-xs font-medium">
+                          <svg className="w-3 h-3 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118L10 14.347l-3.35 2.437c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.664 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69L9.049 2.927z" />
+                          </svg>
+                          Expert {game.expertScore}
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 bg-[#EEEDFE] text-[#3C3489] px-2.5 py-1 rounded-full text-xs font-medium">
+                          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                          </svg>
+                          Teacher {game.teacherScore}
+                        </span>
+                      </div>
+
                       <a
                         href={game.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#7C3AED] text-white text-sm font-semibold hover:bg-[#6D28D9] transition"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#7C3AED] text-white text-xs font-semibold hover:bg-[#6D28D9] transition"
                       >
-                        ▶ Mainkan Game
+                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M6.3 2.841A1.5 1.5 0 004 4.11v11.78a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.841z" />
+                        </svg>
+                        Mainkan Game
                       </a>
                     </div>
-                  </div>
 
+                  </div>
                 </div>
               </div>
             ))}
@@ -338,36 +351,42 @@ export default function TechStack() {
 
           {/* EMPTY STATE */}
           {filteredGames.length === 0 && (
-            <div className="bg-white rounded-3xl p-12 text-center border border-gray-100">
-              <div className="text-6xl mb-4">🎮</div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-2">Game tidak ditemukan</h3>
-              <p className="text-gray-500">Coba gunakan kata kunci atau filter lain.</p>
+            <div className="bg-white rounded-2xl p-12 text-center border border-gray-100">
+              <div className="text-5xl mb-4">🎮</div>
+              <h3 className="text-lg font-semibold text-gray-800 mb-1">Game tidak ditemukan</h3>
+              <p className="text-gray-400 text-sm">Coba gunakan kata kunci atau filter lain.</p>
             </div>
           )}
 
           {/* PAGINATION */}
           {totalPages > 1 && (
-            <div className="flex items-center justify-center gap-2 mt-8">
+            <div className="flex items-center justify-center gap-1.5 mt-6">
+
               <button
                 onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                 disabled={currentPage === 1}
-                className="w-9 h-9 flex items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition text-sm font-bold"
+                className="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-500 hover:bg-gray-50 disabled:opacity-30 disabled:cursor-not-allowed transition"
               >
-                ‹
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
               </button>
 
               {getPageNumbers().map((page, idx) =>
                 page === "..." ? (
-                  <span key={`ellipsis-${idx}`} className="w-9 h-9 flex items-center justify-center text-gray-400 text-sm">
+                  <span
+                    key={`ellipsis-${idx}`}
+                    className="w-8 h-8 flex items-center justify-center text-gray-400 text-sm"
+                  >
                     ...
                   </span>
                 ) : (
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={`w-9 h-9 flex items-center justify-center rounded-xl text-sm font-semibold transition ${
+                    className={`w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium transition ${
                       currentPage === page
-                        ? "bg-[#7C3AED] text-white shadow-md shadow-purple-200"
+                        ? "bg-[#7C3AED] text-white"
                         : "border border-gray-200 bg-white text-gray-600 hover:bg-gray-50"
                     }`}
                   >
@@ -379,10 +398,13 @@ export default function TechStack() {
               <button
                 onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                 disabled={currentPage === totalPages}
-                className="w-9 h-9 flex items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition text-sm font-bold"
+                className="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-500 hover:bg-gray-50 disabled:opacity-30 disabled:cursor-not-allowed transition"
               >
-                ›
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
               </button>
+
             </div>
           )}
 

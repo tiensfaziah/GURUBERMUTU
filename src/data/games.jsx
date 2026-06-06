@@ -89,7 +89,7 @@ const games = [
   platform: "Web",
 
   url:
-    "https://www.abcya.com/games/dirt_bike_proportions",
+    "https://www.abcya.com/games/fractions_equal_proportions",
 
   // PEDAGOGICAL
   topic:
@@ -234,7 +234,7 @@ const games = [
   platform: "Web",
 
   url:
-    "https://www.abcya.com/games/brainie",
+    "https://www.abcya.com/games/brainie_math_game",
 
   topic:
     "Aritmetika Dasar & Mental Math",
@@ -574,7 +574,7 @@ const games = [
   platform: "Web",
 
   url:
-    "https://www.abcya.com/games/adventure_man_dungeon_dash_numbers",
+    "https://www.abcya.com/games/adventure_man_dash_numbers",
 
   topic:
     "Pola Bilangan & Number Sequence",
@@ -710,7 +710,7 @@ const games = [
   platform: "Web",
 
   url:
-    "https://www.abcya.com/games/adventure_man_counting_quest",
+    "https://www.abcya.com/games/adventure-man-counting",
 
   topic:
     "Counting & Skip Counting",
@@ -778,7 +778,7 @@ const games = [
   platform: "Web",
 
   url:
-    "https://www.abcya.com/games/100_snowballs",
+    "https://www.abcya.com/games/one_hundred_snowballs",
 
   topic:
     "Kuantitas & Pengelompokan Bilangan",
