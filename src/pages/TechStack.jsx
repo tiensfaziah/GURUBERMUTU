@@ -137,8 +137,8 @@ export default function TechStack() {
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/20" />
-        <div className="relative z-10 h-full flex items-center">
-          <div className="max-w-3xl px-8 md:px-12 text-white">
+        <div className="relative z-10 h-full flex items-start md:items-center">
+          <div className="max-w-3xl px-6 md:px-12 pt-10 md:pt-0 text-white">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-sm font-semibold mb-5">
               🔬 EGQI VERIFIED
             </div>
