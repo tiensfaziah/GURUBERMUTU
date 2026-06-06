@@ -21,39 +21,39 @@ export default function GameDetail() {
   return (
     <div className="min-h-screen bg-[#F8F5FF]">
 
-      <div className="max-w-6xl mx-auto px-6 py-8">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-4 md:py-8">
         {/* HERO */}
-        <div className="bg-white rounded-3xl overflow-hidden mt-6 shadow-sm">
+        <div className="bg-white rounded-2xl md:rounded-3xl overflow-hidden mt-4 md:mt-6 shadow-sm">
 
-          <div className="h-[320px] bg-gradient-to-br from-[#6D28D9] to-[#EC4899] flex items-center justify-center">
-            <span className="text-8xl">🎮</span>
+          <div className="h-[180px] md:h-[320px] bg-gradient-to-br from-[#6D28D9] to-[#EC4899] flex items-center justify-center">
+            <span className="text-6xl md:text-8xl">🎮</span>
           </div>
 
-          <div className="p-8">
+          <div className="p-4 md:p-8">
 
             <div className="flex flex-wrap gap-3 mb-4">
 
-              <span className="bg-purple-100 text-purple-700 px-4 py-2 rounded-full">
+              <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs md:text-sm">
                 {game.category}
               </span>
 
-              <span className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full">
+              <span className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm">
                 {game.gradeLevel}
               </span>
 
             </div>
 
-            <h1 className="text-4xl font-bold mb-4">
+            <h1 className="text-xl md:text-4xl font-bold mb-3 md:mb-4">
               {game.title}
             </h1>
 
-            <p className="text-gray-600 text-lg mb-6">
+            <p className="text-gray-600 text-sm md:text-lg mb-5 md:mb-6 leading-relaxed">
               {game.description}
             </p>
 
             <div className="flex flex-wrap gap-4 mb-6">
 
-              <div className="bg-yellow-100 text-yellow-700 px-5 py-3 rounded-full font-semibold">
+              <div className="bg-yellow-100 text-yellow-700 px-3 py-2 rounded-full text-xs md:text-sm font-semibold">
                 ⭐ Expert {game.expertScore}
               </div>
 
@@ -68,15 +68,17 @@ export default function GameDetail() {
               target="_blank"
               rel="noreferrer"
               className="
-                inline-flex
-                items-center
-                px-8
-                py-4
-                rounded-2xl
-                bg-[#7C3AED]
-                text-white
-                font-semibold
-              "
+inline-flex
+items-center
+px-5
+md:px-8
+py-2.5
+md:py-4
+rounded-xl
+md:rounded-2xl
+text-sm
+md:text-base
+"
             >
               ▶ Mainkan Game
             </a>
@@ -85,7 +87,7 @@ export default function GameDetail() {
         </div>
 
         {/* INFORMASI */}
-        <div className="grid md:grid-cols-2 gap-6 mt-8">
+        <div className="grid grid-cols-2 gap-3 md:gap-6 mt-6 md:mt-8">
 
           <InfoCard
             title="Topik"
@@ -126,7 +128,7 @@ export default function GameDetail() {
             Skor EGQI
           </h2>
 
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-5 gap-2 md:gap-4">
 
             <ScoreCard title="PQ" score={game.pq} />
             <ScoreCard title="CQ" score={game.cq} />
@@ -184,12 +186,12 @@ export default function GameDetail() {
 
 function InfoCard({ title, value }) {
   return (
-    <div className="bg-white rounded-3xl p-6 shadow-sm">
-      <h3 className="font-bold mb-2">
+    <div className="bg-white rounded-2xl md:rounded-3xl p-3 md:p-6 shadow-sm">
+      <h3 className="text-[10px] md:text-base uppercase md:normal-case text-gray-400 font-bold mb-1 md:mb-2">
         {title}
       </h3>
 
-      <p className="text-gray-600">
+      <p className="text-[11px] md:text-base text-gray-600 leading-relaxed">
         {value}
       </p>
     </div>
