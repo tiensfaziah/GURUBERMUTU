@@ -1,7 +1,7 @@
 const games = [
     {
   id: 1,
-
+slug: "detective-x",
   title: "Detective X and the Missing Variable",
 
   thumbnail:
@@ -73,7 +73,7 @@ const games = [
 
   {
   id: 2,
-
+  slug: "dirt-bike-proportions",
   title: "Dirt Bike Proportions",
 
   thumbnail:
@@ -146,7 +146,7 @@ const games = [
 
  {
   id: 3,
-
+  slug: "2048",
   title: "2048",
 
   thumbnail:
@@ -218,7 +218,7 @@ const games = [
 },
   {
   id: 4,
-
+  slug: "brainie",
   title: "Brainie",
 
   thumbnail:
@@ -286,7 +286,7 @@ const games = [
 
 {
   id: 5,
-
+  slug: "clear-it-multiplication",
   title: "Clear It Multiplication",
 
   thumbnail:
@@ -354,7 +354,7 @@ const games = [
 
 {
   id: 6,
-
+slug: "Clear It Addition",
   title: "Clear It Addition",
 
   thumbnail:
@@ -422,7 +422,7 @@ const games = [
 
 {
   id: 7,
-
+slug: "break-the-bank-counting",
   title: "Break the Bank - Counting",
 
   thumbnail:
@@ -490,7 +490,7 @@ const games = [
 
 {
   id: 8,
-
+  slug: "comparing-number-values",
   title: "Comparing Number Values",
 
   thumbnail:
@@ -558,7 +558,7 @@ const games = [
 
 {
   id: 9,
-
+  slug: "adventure-man-dungeon-dash",
   title: "Adventure Man Dungeon Dash",
 
   thumbnail:
@@ -626,7 +626,7 @@ const games = [
 
 {
   id: 10,
-
+  slug: "base-ten-fun",
   title: "Base Ten Fun",
 
   thumbnail:
@@ -694,7 +694,7 @@ const games = [
 
 {
   id: 11,
-
+  slug: "adventure-man-counting-quest",
   title: "Adventure Man Counting Quest",
 
   thumbnail:
@@ -762,7 +762,7 @@ const games = [
 
 {
   id: 12,
-
+  slug: "100-snowballs",
   title: "100 Snowballs!",
 
   thumbnail:

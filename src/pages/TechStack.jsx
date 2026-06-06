@@ -1,8 +1,9 @@
 import { useState, useMemo } from "react";
+import { Link } from "react-router-dom";
 import games from "../data/games";
 import curatedImage from "../assets/curated1.jpg";
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 4;
 
 const TOPICS = ["Aljabar", "Aritmetika", "Geometri", "Statistika", "Pengukuran"];
 const DIFFICULTIES = ["Beginner", "Intermediate", "Expert"];
@@ -13,7 +14,7 @@ const RATINGS = [
   { label: "1 ke atas", min: 1, stars: 1 },
 ];
 
-function StarRow({ filled, total = 5 }) {
+function StarRow({ filled, total = 4 }) {
   return (
     <span className="inline-flex gap-0.5">
       {Array.from({ length: total }).map((_, i) => (
@@ -314,35 +315,41 @@ export default function TechStack() {
                     </div>
 
                     {/* Bottom: scores + CTA */}
-                    <div className="flex items-center justify-between flex-wrap gap-2">
-                      <div className="flex flex-wrap gap-1.5">
-                        <span className="inline-flex items-center gap-1.5 bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full text-xs font-medium">
-                          <svg className="w-3 h-3 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118L10 14.347l-3.35 2.437c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.664 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69L9.049 2.927z" />
-                          </svg>
-                          Expert {game.expertScore}
-                        </span>
-                        <span className="inline-flex items-center gap-1.5 bg-[#EEEDFE] text-[#3C3489] px-2.5 py-1 rounded-full text-xs font-medium">
-                          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                          </svg>
-                          Teacher {game.teacherScore}
-                        </span>
-                      </div>
+                    <div className="mt-3">
 
-                      <a
-                        href={game.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#7C3AED] text-white text-xs font-semibold hover:bg-[#6D28D9] transition"
-                      >
-                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M6.3 2.841A1.5 1.5 0 004 4.11v11.78a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.841z" />
-                        </svg>
-                        Mainkan Game
-                      </a>
-                    </div>
+  <div className="flex flex-wrap gap-2 mb-3">
 
+    <span className="bg-amber-50 text-amber-700 px-3 py-1 rounded-full text-xs font-medium">
+      ⭐ Expert {game.expertScore}
+    </span>
+
+    <span className="bg-[#EEEDFE] text-[#3C3489] px-3 py-1 rounded-full text-xs font-medium">
+      👩‍🏫 Teacher {game.teacherScore}
+    </span>
+
+  </div>
+
+  <div className="flex gap-2">
+
+    <Link
+      to={`/game/${game.slug}`}
+      className="px-4 py-2 border border-[#7C3AED] text-[#7C3AED] rounded-xl text-xs font-semibold"
+    >
+      📄 Lihat Detail
+    </Link>
+
+    <a
+      href={game.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="px-4 py-2 bg-[#7C3AED] text-white rounded-xl text-xs font-semibold"
+    >
+      ▶ Mainkan Game
+    </a>
+
+  </div>
+
+</div>
                   </div>
                 </div>
               </div>

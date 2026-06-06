@@ -18,6 +18,7 @@ import HowItWorks from "./components/HowItWorks";
 import Faq from "./components/Faq";
 import TechStack from "./pages/TechStack";
 import AllTechStack from "./pages/AllTechStack";
+import GameDetail from "./pages/GameDetail";
 
 function Layout() {
   const location = useLocation();
@@ -84,6 +85,10 @@ function Layout() {
       <AllTechStack />
     </ProtectedRoute>
   }
+/>
+<Route
+  path="/game/:slug"
+  element={<GameDetail />}
 />
         <Route
           path="/workshop"
