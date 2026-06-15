@@ -161,7 +161,7 @@ export default function TechStack() {
       <div className="grid lg:grid-cols-[220px_1fr] gap-6">
 
         {/* ── SIDEBAR ── */}
-        <div className="bg-white rounded-2xl p-5 h-fit border border-gray-100 shadow-sm">
+        <div className="bg-white rounded-2xl p-5 h-fit border border-gray-100 shadow-sm lg:mt-[130px]">
 
           <p className="text-base font-semibold text-gray-900 mb-4">Filter</p>
 
@@ -230,7 +230,48 @@ export default function TechStack() {
 
         {/* ── CONTENT ── */}
         <div>
+{/* SEARCH */}
+  <div className="mb-5">
+    <div className="relative">
+      <svg
+        className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M21 21l-4.35-4.35m1.85-5.15a7 7 0 11-14 0 7 7 0 0114 0z"
+        />
+      </svg>
 
+      <input
+        type="text"
+        value={search}
+        onChange={(e) => {
+          setSearch(e.target.value);
+          setCurrentPage(1);
+        }}
+        placeholder="Cari game..."
+        className="
+          w-full
+          bg-white
+          border border-gray-200
+          rounded-2xl
+          pl-12
+          pr-4
+          py-3
+          text-sm
+          focus:outline-none
+          focus:ring-2
+          focus:ring-[#7C3AED]
+          focus:border-transparent
+        "
+      />
+    </div>
+  </div>
           {/* Header row */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
             <p className="text-sm text-gray-500">
