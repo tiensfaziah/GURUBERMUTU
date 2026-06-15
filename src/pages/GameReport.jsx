@@ -1,5 +1,6 @@
 import { useParams} from "react-router-dom";
 import games from "../data/games";
+import { useEffect } from "react";
 
 import {
   RadarChart,
@@ -11,6 +12,9 @@ import {
 } from "recharts";
 
 export default function GameReport() {
+    useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { slug } = useParams();
 
   const game = games.find(

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import games from "../data/games";
 import curatedImage from "../assets/curated1.jpg";
 
-const ITEMS_PER_PAGE = 4;
+const ITEMS_PER_PAGE = 6;
 
 const TOPICS = ["Aljabar", "Aritmetika", "Geometri", "Statistika", "Pengukuran"];
 const DIFFICULTIES = ["Beginner", "Intermediate", "Expert"];
@@ -13,6 +13,8 @@ const RATINGS = [
   { label: "2 ke atas", min: 2, stars: 2 },
   { label: "1 ke atas", min: 1, stars: 1 },
 ];
+
+
 
 function StarRow({ filled, total = 4 }) {
   return (
@@ -130,7 +132,7 @@ export default function TechStack() {
   return (
     <div className="min-h-screen bg-[#F8F5FF] p-6 md:p-8">
 
-      {/* HERO */}
+      {/* HERO — tidak diubah */}
       <div className="relative min-h-[520px] md:min-h-[320px] rounded-[32px] overflow-hidden mb-10">
         <img
           src={curatedImage}
@@ -155,28 +157,11 @@ export default function TechStack() {
         </div>
       </div>
 
-      {/* SEARCH */}
-      <div className="relative mb-6">
-        <svg
-          className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none"
-          fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
-        </svg>
-        <input
-          type="text"
-          placeholder="Cari game..."
-          value={search}
-          onChange={(e) => { setSearch(e.target.value); setCurrentPage(1); }}
-          className="w-full pl-12 pr-5 py-3.5 rounded-2xl border border-gray-200 bg-white text-base focus:outline-none focus:ring-2 focus:ring-[#7C3AED] focus:border-transparent transition"
-        />
-      </div>
-
       {/* MAIN CONTENT */}
       <div className="grid lg:grid-cols-[220px_1fr] gap-6">
 
         {/* ── SIDEBAR ── */}
-        <div className="bg-white rounded-2xl p-5 h-fit border border-gray-100">
+        <div className="bg-white rounded-2xl p-5 h-fit border border-gray-100 shadow-sm">
 
           <p className="text-base font-semibold text-gray-900 mb-4">Filter</p>
 
@@ -266,91 +251,84 @@ export default function TechStack() {
           </div>
 
           {/* Game list */}
-          <div className="space-y-3">
-            {paginated.map((game) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {paginated.map((game, index) => (
               <div
                 key={game.id}
-                className="bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-[#C4B5FD] hover:shadow-md transition-all group"
+                className="bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-[#C4B5FD] hover:shadow-md transition-all group flex flex-col"
               >
-                <div className="flex flex-col sm:flex-row">
 
-                  {/* THUMBNAIL */}
-                  <div className="sm:w-[180px] h-[160px] sm:h-auto bg-gradient-to-br from-[#6D28D9] to-[#EC4899] flex items-center justify-center relative flex-shrink-0">
-                    <span className="absolute top-3 left-3 bg-black/35 text-white text-[10px] font-semibold px-2.5 py-1 rounded-full">
-                      {game.gradeLevel}
-                    </span>
-                    <span className="text-5xl drop-shadow">🎮</span>
-                  </div>
+                {/* THUMBNAIL */}
+                <div className="h-[110px] bg-gradient-to-br from-[#6D28D9] to-[#EC4899] flex items-center justify-center relative">
+  <span className="absolute top-3 left-3 bg-black/35 text-white text-[10px] font-semibold px-2.5 py-1 rounded-full">
+    {game.gradeLevel}
+  </span>
 
-                  {/* CONTENT */}
-                  <div className="flex-1 p-4 flex flex-col justify-between gap-3">
-
-                    {/* Top: tags + title + desc */}
-                    <div>
-                      <div className="flex flex-wrap gap-1.5 mb-2">
-                        <span className="bg-[#EEEDFE] text-[#3C3489] px-2.5 py-0.5 rounded-full text-xs font-medium">
-                          {game.category}
-                        </span>
-                        {game.topic && (
-                          <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-full text-xs font-medium">
-                            {game.topic}
-                          </span>
-                        )}
-                        {game.platform && (
-                          <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-full text-xs font-medium">
-                            {game.platform}
-                          </span>
-                        )}
-                      </div>
-
-                      <h2 className="text-base font-semibold text-gray-900 mb-1 group-hover:text-[#534AB7] transition leading-snug">
-                        {game.title}
-                      </h2>
-
-                      {game.description && (
-                        <p className="text-gray-400 text-xs leading-relaxed line-clamp-2">
-                          {game.description}
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Bottom: scores + CTA */}
-                    <div className="mt-3">
-
-  <div className="flex flex-wrap gap-2 mb-3">
-
-    <span className="bg-amber-50 text-amber-700 px-3 py-1 rounded-full text-xs font-medium">
-      ⭐ Expert {game.expertScore}
-    </span>
-
-    <span className="bg-[#EEEDFE] text-[#3C3489] px-3 py-1 rounded-full text-xs font-medium">
-      👩‍🏫 Teacher {game.teacherScore}
-    </span>
-
-  </div>
-
-  <div className="flex gap-2">
-
-    <Link
-      to={`/game/${game.slug}`}
-      className="px-4 py-2 border border-[#7C3AED] text-[#7C3AED] rounded-xl text-xs font-semibold"
-    >
-      📄 Lihat Detail
-    </Link>
-
-    <a
-      href={game.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="px-4 py-2 bg-[#7C3AED] text-white rounded-xl text-xs font-semibold"
-    >
-      ▶ Mainkan Game
-    </a>
-
-  </div>
-
+  <span className="text-5xl drop-shadow">
+    🎮
+  </span>
 </div>
+
+                {/* CONTENT */}
+                <div className="p-4 flex flex-col flex-1">
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-1.5 mb-2">
+                    <span className="bg-[#EEEDFE] text-[#3C3489] px-2.5 py-0.5 rounded-full text-xs font-medium">
+                      {game.category}
+                    </span>
+                    {game.topic && (
+                      <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-full text-xs font-medium">
+                        {game.topic}
+                      </span>
+                    )}
+                    {game.platform && (
+                      <span className="bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-full text-xs font-medium">
+                        {game.platform}
+                      </span>
+                    )}
                   </div>
+
+                  {/* Title */}
+                  <h2 className="text-base font-semibold text-gray-900 mb-1 group-hover:text-[#534AB7] transition leading-snug">
+                    {game.title}
+                  </h2>
+
+                  {/* Description */}
+                  {game.description && (
+                    <p className="text-gray-400 text-xs leading-relaxed line-clamp-2 flex-1">
+                      {game.description}
+                    </p>
+                  )}
+
+                  {/* Scores */}
+                  <div className="flex flex-wrap gap-2 mt-3 mb-3">
+                    <span className="bg-amber-50 text-amber-700 px-3 py-1 rounded-full text-xs font-medium">
+                      ⭐ Expert {game.expertScore}
+                    </span>
+                    <span className="bg-[#EEEDFE] text-[#3C3489] px-3 py-1 rounded-full text-xs font-medium">
+                      👩‍🏫 Teacher {game.teacherScore}
+                    </span>
+                  </div>
+
+                  {/* CTA Buttons */}
+                  <div className="grid grid-cols-2 gap-2 mt-auto">
+                    <Link
+                      to={`/game/${game.slug}`}
+                      className="w-full text-center px-4 py-2 border border-[#7C3AED] text-[#7C3AED] rounded-xl text-xs font-semibold hover:bg-[#EEEDFE] transition"
+                    >
+                      📄 Lihat Detail
+                    </Link>
+                    <a
+                      href={game.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full text-center px-4 py-2 bg-[#7C3AED] text-white rounded-xl text-xs font-semibold hover:bg-[#6D28D9] transition"
+                    >
+                      ▶ Mainkan Game
+                    </a>
+                  </div>
+
                 </div>
               </div>
             ))}
@@ -381,10 +359,7 @@ export default function TechStack() {
 
               {getPageNumbers().map((page, idx) =>
                 page === "..." ? (
-                  <span
-                    key={`ellipsis-${idx}`}
-                    className="w-8 h-8 flex items-center justify-center text-gray-400 text-sm"
-                  >
+                  <span key={`ellipsis-${idx}`} className="w-8 h-8 flex items-center justify-center text-gray-400 text-sm">
                     ...
                   </span>
                 ) : (

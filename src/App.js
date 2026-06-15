@@ -20,6 +20,7 @@ import TechStack from "./pages/TechStack";
 import AllTechStack from "./pages/AllTechStack";
 import GameDetail from "./pages/GameDetail";
 import GameReport from "./pages/GameReport";
+import ScrollToTop from "./components/ScrollToTop";
 
 function Layout() {
   const location = useLocation();
@@ -114,6 +115,7 @@ function Layout() {
   path="/game/:slug/report"
   element={<GameReport />}
 />
+
       </Routes>
   
     </>
@@ -124,7 +126,11 @@ function App() {
   return (
     <div className="overflow-x-hidden">
       <Router>
+
+        <ScrollToTop />
+
         <Layout />
+
       </Router>
     </div>
   );
