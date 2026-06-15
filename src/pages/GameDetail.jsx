@@ -1,5 +1,6 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import games from "../data/games";
+import NavigationButtons from "../components/NavigationButtons";
 import {
   BarChart,
   Bar,
@@ -10,6 +11,11 @@ import {
   Tooltip,
   ResponsiveContainer,
   CartesianGrid,
+  RadarChart,
+  Radar,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
 } from "recharts";
 
 function InfoCard({ title, value }) {
@@ -69,7 +75,13 @@ export default function GameDetail() {
     score: Number(game.prq),
   },
 ];
-
+const radarData = [
+  { subject: "PQ", score: Number(game.pq) },
+  { subject: "CQ", score: Number(game.cq) },
+  { subject: "GQ", score: Number(game.gq) },
+  { subject: "EQ", score: Number(game.eq) },
+  { subject: "PrQ", score: Number(game.prq) },
+];
   if (!game) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#F8F5FF] px-6">
@@ -84,6 +96,10 @@ export default function GameDetail() {
   return (
     <div className="min-h-screen bg-[#F8F5FF]">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+      <NavigationButtons
+  showBack={true}
+  showForward={false}
+/>
 
         {/* HERO CARD */}
         <div className="bg-white rounded-3xl overflow-hidden border border-purple-50 mb-4">
@@ -236,27 +252,101 @@ export default function GameDetail() {
   </div>
 
 </div>
-<Link
-  to={`/game/${game.slug}/report`}
-  className="
-    inline-flex
-    items-center
-    justify-center
-    gap-2
-    mt-4
-    px-5
-    py-3
-    rounded-xl
-    bg-[#ffffff]
-    text-grey-800
-    font-semibold
-    hover:bg-[#6D28D9]
-    transition
-    shadow-sm
-  "
->
-  📄 View Full Report
-</Link>
+{/* LAPORAN EGQI */}
+<div className="bg-white rounded-3xl p-6 border border-purple-50 mb-4">
+
+  <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">
+    Educational Game Quality Evaluation
+  </h2>
+
+  <p className="text-sm text-gray-500 mb-6">
+    Laporan evaluasi kualitas game edukasi berdasarkan EGQI.
+  </p>
+
+  <div className="h-[350px] sm:h-[450px]">
+
+    <ResponsiveContainer width="100%" height="100%">
+
+      <RadarChart data={radarData}>
+
+        <PolarGrid />
+
+        <PolarAngleAxis dataKey="subject" />
+
+        <PolarRadiusAxis domain={[0, 5]} />
+
+        <Radar
+          dataKey="score"
+          stroke="#7C3AED"
+          fill="#7C3AED"
+          fillOpacity={0.5}
+        />
+
+      </RadarChart>
+
+    </ResponsiveContainer>
+
+  </div>
+
+</div>
+<div className="bg-white rounded-3xl p-6 border border-purple-50 mb-4">
+
+  <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-5">
+    Evaluation Summary
+  </h2>
+
+  <div className="grid md:grid-cols-2 gap-4">
+
+    <div className="bg-green-50 rounded-2xl p-5">
+
+      <p className="text-green-700 font-semibold mb-2">
+        Strength
+      </p>
+
+      <p className="text-gray-700">
+        {game.bestScore}
+      </p>
+
+      <p className="text-2xl font-bold text-green-700 mt-2">
+        {game.bestScoreValue}
+      </p>
+
+    </div>
+
+    <div className="bg-yellow-50 rounded-2xl p-5">
+
+      <p className="text-yellow-700 font-semibold mb-2">
+        Secondary Strength
+      </p>
+
+      <p className="text-gray-700">
+        {game.secondBest}
+      </p>
+
+      <p className="text-2xl font-bold text-yellow-700 mt-2">
+        {game.secondBestValue}
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+<div className="bg-white rounded-3xl p-6 border border-purple-50 mb-4">
+
+  <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-4">
+    Insight & Recommendation
+  </h2>
+
+  <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+
+    Game <strong>{game.title}</strong> menunjukkan performa yang baik berdasarkan hasil evaluasi EGQI.
+
+    Dimensi tertinggi berada pada <strong>{game.bestScore}</strong>, sehingga game ini sangat direkomendasikan untuk digunakan dalam proses pembelajaran sesuai dengan tujuan pedagogisnya.
+
+  </p>
+
+</div>
         {/* KEUNGGULAN */}
         <div className="bg-white rounded-3xl p-4 sm:p-5 border border-purple-50 mb-4">
           <p className="text-xs sm:text-sm font-bold text-gray-800 mb-3">Keunggulan Utama</p>

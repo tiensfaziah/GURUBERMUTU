@@ -2,10 +2,21 @@ import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import games from "../data/games";
 import curatedImage from "../assets/curated1.jpg";
+import { useNavigate } from "react-router-dom";
 
 const ITEMS_PER_PAGE = 6;
 
-const TOPICS = ["Aljabar", "Aritmetika", "Geometri", "Statistika", "Pengukuran"];
+const TOPICS = [
+  "Aljabar",
+  "Aritmetika",
+  "Rasio",
+  "Perkalian",
+  "Penjumlahan",
+  "Nilai Tempat",
+  "Counting",
+  "Pola Bilangan",
+  "Perbandingan",
+];
 const DIFFICULTIES = ["Beginner", "Intermediate", "Expert"];
 const RATINGS = [
   { label: "4 ke atas", min: 4, stars: 4 },
@@ -13,8 +24,6 @@ const RATINGS = [
   { label: "2 ke atas", min: 2, stars: 2 },
   { label: "1 ke atas", min: 1, stars: 1 },
 ];
-
-
 
 function StarRow({ filled, total = 4 }) {
   return (
@@ -67,6 +76,8 @@ function FilterChip({ label, active, onClick, extra }) {
 }
 
 export default function TechStack() {
+  const navigate = useNavigate();
+
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState("terbaru");
   const [selectedTopics, setSelectedTopics] = useState([]);
@@ -82,27 +93,64 @@ export default function TechStack() {
   };
 
   const filteredGames = useMemo(() => {
-    return [...games]
-      .filter((game) => {
-        const matchSearch = game.title.toLowerCase().includes(search.toLowerCase());
-        const matchTopic =
-          selectedTopics.length === 0 ||
-          selectedTopics.some((t) =>
-            game.category?.toLowerCase().includes(t.toLowerCase())
-          );
-        const matchDifficulty =
-          !selectedDifficulty ||
-          game.difficulty?.toLowerCase() === selectedDifficulty.toLowerCase();
-        const matchRating =
-          !selectedRating || game.expertScore >= selectedRating;
-        return matchSearch && matchTopic && matchDifficulty && matchRating;
-      })
-      .sort((a, b) => {
-        if (sortBy === "rating") return b.expertScore - a.expertScore;
-        if (sortBy === "name") return a.title.localeCompare(b.title);
-        return 0;
-      });
-  }, [search, sortBy, selectedTopics, selectedDifficulty, selectedRating]);
+  return [...games]
+    .filter((game) => {
+      const keyword = search.toLowerCase();
+
+      const matchSearch =
+        game.title?.toLowerCase().includes(keyword) ||
+        game.topic?.toLowerCase().includes(keyword) ||
+        game.category?.toLowerCase().includes(keyword);
+
+      const matchTopic =
+      selectedTopics.length === 0 ||
+      selectedTopics.some((t) =>
+        game.topic?.toLowerCase().includes(t.toLowerCase())
+  );
+
+      const matchDifficulty =
+        !selectedDifficulty ||
+        (game.difficulty &&
+          game.difficulty.toLowerCase() ===
+            selectedDifficulty.toLowerCase());
+
+      const matchRating =
+        !selectedRating ||
+        game.expertScore >= selectedRating;
+
+      return (
+        matchSearch &&
+        matchTopic &&
+        matchDifficulty &&
+        matchRating
+      );
+    })
+
+    .sort((a, b) => {
+      if (sortBy === "rating") {
+        return b.expertScore - a.expertScore;
+      }
+
+      if (sortBy === "name") {
+        return a.title.localeCompare(b.title);
+      }
+
+      if (sortBy === "terbaru") {
+        return (
+          new Date(b.createdAt) -
+          new Date(a.createdAt)
+        );
+      }
+
+      return 0;
+    });
+}, [
+  search,
+  sortBy,
+  selectedTopics,
+  selectedDifficulty,
+  selectedRating,
+]);
 
   const totalPages = Math.max(1, Math.ceil(filteredGames.length / ITEMS_PER_PAGE));
   const paginated = filteredGames.slice(
@@ -132,8 +180,24 @@ export default function TechStack() {
   return (
     <div className="min-h-screen bg-[#F8F5FF] p-6 md:p-8">
 
-      {/* HERO — tidak diubah */}
+     {/* HERO */}
       <div className="relative min-h-[520px] md:min-h-[320px] rounded-[32px] overflow-hidden mb-10">
+        <button
+  onClick={() => navigate(-1)}
+  className="
+    absolute
+    top-6
+    left-6
+    z-20
+    text-white
+    text-4xl
+    font-light
+    hover:opacity-70
+    transition
+  "
+>
+  &lt;
+</button>
         <img
           src={curatedImage}
           alt="Curated Tech Stack"
@@ -436,3 +500,4 @@ export default function TechStack() {
     </div>
   );
 }
+

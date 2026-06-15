@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { Eye, EyeOff } from "lucide-react";
 import emailjs from "@emailjs/browser";
+import NavigationButtons from "../components/NavigationButtons";
 
 function Register() {
   const navigate = useNavigate();
@@ -61,9 +62,16 @@ function Register() {
   };
 
   return (
-    <div className="min-h-[100dvh] flex items-center justify-center pt-20 overflow-hidden bg-gradient-to-br from-[#f1bff8] via-[#e8dfea] to-[#a985cb] px-4">
+    <div className="min-h-[100dvh] relative overflow-hidden bg-gradient-to-br from-[#f1bff8] via-[#e8dfea] to-[#a985cb] px-4 pt-20">
+      <div className="max-w-7xl mx-auto pt-6">
+  <NavigationButtons
+    showBack={true}
+    showForward={false}
+  />
+</div>
+      <div className="flex justify-center items-center mt-6">
 
-      <div className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl p-5 sm:p-6 w-full max-w-sm">
+  <div className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl p-5 sm:p-6 w-full max-w-sm">
 
         <h1 className="text-2xl sm:text-3xl font-bold text-center text-[#5B21B6] mb-2">
           Gurubermutu
@@ -173,6 +181,7 @@ function Register() {
       </div>
 
     </div>
+  </div>
   );
 }
 
