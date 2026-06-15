@@ -1,8 +1,9 @@
 const games = [
     {
   id: 1,
-slug: "detective-x",
+  slug: "detective-x",
   title: "Detective X and the Missing Variable",
+  
 
   thumbnail:
     "https://via.placeholder.com/400x250",

@@ -185,16 +185,19 @@ export default function TechStack() {
         <button
   onClick={() => navigate(-1)}
   className="
-    absolute
-    top-6
-    left-6
-    z-20
-    text-white
-    text-4xl
-    font-light
-    hover:opacity-70
-    transition
-  "
+  absolute
+  top-4
+  left-6
+  md:top-6
+  md:left-6
+  z-20
+  text-white
+  text-3xl
+  md:text-4xl
+  font-light
+  hover:opacity-70
+  transition
+"
 >
   &lt;
 </button>
@@ -206,7 +209,7 @@ export default function TechStack() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/20" />
         <div className="relative z-10 h-full flex items-start md:items-center">
           <div className="max-w-3xl px-6 md:px-12 pt-10 md:pt-0 text-white">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-sm font-semibold mb-5">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-sm font-semibold mb-5 mt-8 md:mt-0">
               🔬 EGQI VERIFIED
             </div>
             <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-4">
