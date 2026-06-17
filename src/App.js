@@ -11,7 +11,6 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Workshop from "./pages/Workshop";
 import WorkshopDetail from "./pages/WorkshopDetail";
-import ProtectedRoute from "./routes/ProtectedRoute";
 import SkillTree from "./fitur/SkillTree";
 import Footer from "./components/Footer";
 import HowItWorks from "./components/HowItWorks";
@@ -21,6 +20,7 @@ import AllTechStack from "./pages/AllTechStack";
 import GameDetail from "./pages/GameDetail";
 import GameReport from "./pages/GameReport";
 import ScrollToTop from "./components/ScrollToTop";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function Layout() {
   const location = useLocation();
@@ -58,13 +58,13 @@ function Layout() {
         <Route path="/register" element={<Register />} />
 
         <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
+  path="/dashboard"
+  element={
+    <ProtectedRoute>
+      <Dashboard />
+    </ProtectedRoute>
+  }
+/>
 
         <Route
           path="/skill-tree"
@@ -92,7 +92,11 @@ function Layout() {
 />
 <Route
   path="/game/:slug"
-  element={<GameDetail />}
+  element={
+    <ProtectedRoute>
+      <GameDetail />
+    </ProtectedRoute>
+  }
 />
         <Route
           path="/workshop"

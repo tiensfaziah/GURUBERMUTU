@@ -84,12 +84,18 @@ export default function TechStack() {
   const [selectedDifficulty, setSelectedDifficulty] = useState(null);
   const [selectedRating, setSelectedRating] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-
+  
   const toggleTopic = (topic) => {
     setSelectedTopics((prev) =>
       prev.includes(topic) ? prev.filter((t) => t !== topic) : [...prev, topic]
     );
     setCurrentPage(1);
+  };
+
+  const getDifficulty = (score) => {
+    if (score >= 4.5) return "Expert";
+    if (score >= 4.0) return "Intermediate";
+    return "Beginner";
   };
 
   const filteredGames = useMemo(() => {
@@ -109,10 +115,9 @@ export default function TechStack() {
   );
 
       const matchDifficulty =
-        !selectedDifficulty ||
-        (game.difficulty &&
-          game.difficulty.toLowerCase() ===
-            selectedDifficulty.toLowerCase());
+      !selectedDifficulty ||
+      getDifficulty(game.expertScore) ===
+      selectedDifficulty;
 
       const matchRating =
         !selectedRating ||
@@ -179,28 +184,23 @@ export default function TechStack() {
 
   return (
     <div className="min-h-screen bg-[#F8F5FF] p-6 md:p-8">
-
+{/* BACK BUTTON */}
+<div className="mb-4">
+  <button
+    onClick={() => navigate(-1)}
+    className="
+      text-gray-700
+      text-4xl
+      font-light
+      hover:text-[#7C3AED]
+      transition
+    "
+  >
+    &lt;
+  </button>
+</div>
      {/* HERO */}
       <div className="relative min-h-[520px] md:min-h-[320px] rounded-[32px] overflow-hidden mb-10">
-        <button
-  onClick={() => navigate(-1)}
-  className="
-  absolute
-  top-4
-  left-6
-  md:top-6
-  md:left-6
-  z-20
-  text-white
-  text-3xl
-  md:text-4xl
-  font-light
-  hover:opacity-70
-  transition
-"
->
-  &lt;
-</button>
         <img
           src={curatedImage}
           alt="Curated Tech Stack"
@@ -228,7 +228,7 @@ export default function TechStack() {
       <div className="grid lg:grid-cols-[220px_1fr] gap-6">
 
         {/* ── SIDEBAR ── */}
-        <div className="bg-white rounded-2xl p-5 h-fit border border-gray-100 shadow-sm lg:mt-[130px]">
+        <div className="bg-white rounded-2xl p-5 h-fit border border-gray-100 shadow-sm lg:mt-[50px]">
 
           <p className="text-base font-semibold text-gray-900 mb-4">Filter</p>
 
@@ -359,12 +359,12 @@ export default function TechStack() {
           </div>
 
           {/* Game list */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
             {paginated.map((game, index) => (
               <div
                 key={game.id}
-                className="bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-[#C4B5FD] hover:shadow-md transition-all group flex flex-col"
-              >
+                className="bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-[#C4B5FD] hover:shadow-md transition-all group flex flex-col h-full"
+          >
 
                 {/* THUMBNAIL */}
                 <div className="h-[110px] bg-gradient-to-br from-[#6D28D9] to-[#EC4899] flex items-center justify-center relative">
@@ -404,7 +404,7 @@ export default function TechStack() {
 
                   {/* Description */}
                   {game.description && (
-                    <p className="text-gray-400 text-xs leading-relaxed line-clamp-2 flex-1">
+                    <p className="text-gray-400 text-xs leading-relaxed line-clamp-2 min-h-[40px]">
                       {game.description}
                     </p>
                   )}
