@@ -104,12 +104,21 @@ const radarData = [
         {/* HERO CARD */}
         <div className="bg-white rounded-3xl overflow-hidden border border-purple-50 mb-4">
           {/* Thumb */}
-          <div className="h-[180px] sm:h-[220px] bg-gradient-to-br from-[#6D28D9] via-[#8B5CF6] to-[#EC4899] flex items-center justify-center relative">
-            <span className="absolute top-3 left-3 sm:top-4 sm:left-4 bg-black/30 text-white text-[10px] font-semibold px-2.5 py-1 rounded-full">
-              {game.gradeLevel}
-            </span>
-            <span className="text-6xl sm:text-7xl drop-shadow-lg">🎮</span>
-          </div>
+          <div className="h-[180px] sm:h-[220px] relative overflow-hidden">
+
+  <img
+    src={game.thumbnail}
+    alt={game.title}
+    className="w-full h-full object-cover"
+  />
+
+  <div className="absolute inset-0 bg-black/20" />
+
+  <span className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 bg-black/40 text-white text-[10px] font-semibold px-2.5 py-1 rounded-full">
+    {game.gradeLevel}
+  </span>
+
+</div>
 
           <div className="p-4 sm:p-6">
             {/* Tags */}

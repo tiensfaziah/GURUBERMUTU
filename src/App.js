@@ -18,7 +18,6 @@ import Faq from "./components/Faq";
 import TechStack from "./pages/TechStack";
 import AllTechStack from "./pages/AllTechStack";
 import GameDetail from "./pages/GameDetail";
-import GameReport from "./pages/GameReport";
 import ScrollToTop from "./components/ScrollToTop";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -115,10 +114,7 @@ function Layout() {
             </ProtectedRoute>
           }
         />
-        <Route
-  path="/game/:slug/report"
-  element={<GameReport />}
-/>
+        
 
       </Routes>
   
