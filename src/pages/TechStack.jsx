@@ -365,16 +365,19 @@ export default function TechStack() {
                 key={game.id}
                 className="bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-[#C4B5FD] hover:shadow-md transition-all group flex flex-col h-full"
           >
-
                 {/* THUMBNAIL */}
-                <div className="h-[110px] bg-gradient-to-br from-[#6D28D9] to-[#EC4899] flex items-center justify-center relative">
-  <span className="absolute top-3 left-3 bg-black/35 text-white text-[10px] font-semibold px-2.5 py-1 rounded-full">
+<div className="h-[110px] relative overflow-hidden">
+
+  <span className="absolute top-3 left-3 z-10 bg-black/35 text-white text-[10px] font-semibold px-2.5 py-1 rounded-full">
     {game.gradeLevel}
   </span>
 
-  <span className="text-5xl drop-shadow">
-    🎮
-  </span>
+  <img
+    src={game.thumbnail}
+    alt={game.title}
+    className="w-full h-full object-cover"
+  />
+
 </div>
 
                 {/* CONTENT */}

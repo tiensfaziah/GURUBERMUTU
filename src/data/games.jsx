@@ -1,3 +1,16 @@
+import thumbnail1 from "../assets/detectiveX.png";
+import thumbnail2 from "../assets/dirtbike.png";
+import thumbnail3 from "../assets/2048.png";
+import thumbnail4 from "../assets/brainie.png"
+import thumbnail5 from "../assets/clearitmul.png"
+import thumbnail6 from "../assets/clearitadd.png"
+import thumbnail7 from "../assets/breakthebank.png"
+import thumbnail8 from "../assets/comparing.png"
+import thumbnail9 from "../assets/mandange.png"
+import thumbnail10 from "../assets/baseten.png"
+import thumbnail11 from "../assets/mancount.png"
+import thumbnail12 from "../assets/snow.png"
+
 const games = [
     {
   id: 1,
@@ -6,7 +19,7 @@ const games = [
   
 
   thumbnail:
-    "https://via.placeholder.com/400x250",
+    thumbnail1,
 
   description:
     "Menjadi detektif yang bertugas mengisolasi dan mencari nilai variabel X yang hilang dari suatu persamaan.",
@@ -78,7 +91,7 @@ const games = [
   title: "Dirt Bike Proportions",
 
   thumbnail:
-    "https://via.placeholder.com/400x250",
+    thumbnail2,
 
   description:
     "Balapan motor trail dimana kecepatan motor ditentukan oleh ketepatan memilih pecahan senilai dan rasio yang benar.",
@@ -151,7 +164,7 @@ const games = [
   title: "2048",
 
   thumbnail:
-    "https://via.placeholder.com/400x250",
+    thumbnail3,
 
   description:
     "Menggeser dan menggabungkan kotak dengan angka yang sama untuk mencapai angka 2048 menggunakan kelipatan dua.",
@@ -223,7 +236,7 @@ const games = [
   title: "Brainie",
 
   thumbnail:
-    "https://via.placeholder.com/400x250",
+    thumbnail4,
 
   description:
     "Permainan berhitung cepat yang menantang siswa menyelesaikan operasi matematika dalam waktu terbatas.",
@@ -291,7 +304,7 @@ const games = [
   title: "Clear It Multiplication",
 
   thumbnail:
-    "https://via.placeholder.com/400x250",
+    thumbnail5,
 
   description:
     "Puzzle bubble shooter yang mengharuskan siswa menyelesaikan soal perkalian untuk menghilangkan gelembung.",
@@ -359,7 +372,7 @@ slug: "Clear It Addition",
   title: "Clear It Addition",
 
   thumbnail:
-    "https://via.placeholder.com/400x250",
+    thumbnail6,
 
   description:
     "Permainan puzzle yang melatih kemampuan penjumlahan melalui mekanisme bubble shooter interaktif.",
@@ -427,7 +440,7 @@ slug: "break-the-bank-counting",
   title: "Break the Bank - Counting",
 
   thumbnail:
-    "https://via.placeholder.com/400x250",
+    thumbnail7,
 
   description:
     "Simulasi menghitung uang dan kembalian menggunakan berbagai denominasi koin dan uang kertas.",
@@ -495,7 +508,7 @@ slug: "break-the-bank-counting",
   title: "Comparing Number Values",
 
   thumbnail:
-    "https://via.placeholder.com/400x250",
+    thumbnail8,
 
   description:
     "Melatih kemampuan membandingkan bilangan menggunakan simbol lebih besar, lebih kecil, dan sama dengan.",
@@ -563,7 +576,7 @@ slug: "break-the-bank-counting",
   title: "Adventure Man Dungeon Dash",
 
   thumbnail:
-    "https://via.placeholder.com/400x250",
+    thumbnail9,
 
   description:
     "Petualangan platformer yang mengajak siswa menyelesaikan tantangan pola dan urutan angka untuk melanjutkan perjalanan.",
@@ -631,7 +644,7 @@ slug: "break-the-bank-counting",
   title: "Base Ten Fun",
 
   thumbnail:
-    "https://via.placeholder.com/400x250",
+    thumbnail10,
 
   description:
     "Menggunakan blok digital untuk membantu siswa memahami nilai tempat, puluhan, ratusan, dan ribuan secara visual.",
@@ -699,7 +712,7 @@ slug: "break-the-bank-counting",
   title: "Adventure Man Counting Quest",
 
   thumbnail:
-    "https://via.placeholder.com/400x250",
+    thumbnail11,
 
   description:
     "Petualangan edukatif yang melatih kemampuan menghitung berurutan dan skip counting melalui tantangan interaktif.",
@@ -767,7 +780,7 @@ slug: "break-the-bank-counting",
   title: "100 Snowballs!",
 
   thumbnail:
-    "https://via.placeholder.com/400x250",
+    thumbnail12,
 
   description:
     "Permainan kreatif yang membantu siswa memahami kuantitas dan pengelompokan angka melalui aktivitas melempar bola salju.",
