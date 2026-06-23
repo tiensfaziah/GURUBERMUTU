@@ -31,4 +31,4 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./build/ # Ganti ./dist/ kalau project-mu pake Vite
-        server-dir: /public_html/gurubermutu.id/ # Target folder di cPanel nanti
+        server-dir: / # Target folder di cPanel nanti
