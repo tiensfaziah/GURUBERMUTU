@@ -16,10 +16,15 @@ import Footer from "./components/Footer";
 import HowItWorks from "./components/HowItWorks";
 import Faq from "./components/Faq";
 import TechStack from "./pages/TechStack";
+import AdminDashboard from "./pages/AdminDashboard";
 import AllTechStack from "./pages/AllTechStack";
 import GameDetail from "./pages/GameDetail";
 import ScrollToTop from "./components/ScrollToTop";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AdminLogin from "./pages/AdminLogin";
+import KelolaGame from "./pages/KelolaGame";
+import PenilaianAhli from "./pages/Penilaianahli";
+import DataGuru from "./pages/Dataguru";
 
 function Layout() {
   const location = useLocation();
@@ -30,6 +35,10 @@ function Layout() {
     location.pathname === "/tech-stack" ||
     location.pathname === "/tech-stack/all" ||
     location.pathname.startsWith("/game/") ||
+    location.pathname === "/admin" ||
+    location.pathname === "/admin/kelola-game" ||
+    location.pathname === "/admin/penilaian-ahli" ||
+    location.pathname === "/admin/data-guru" ||
     location.pathname.startsWith("/workshop");
 
   return (
@@ -55,7 +64,7 @@ function Layout() {
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-
+        
         <Route
   path="/dashboard"
   element={
@@ -78,6 +87,18 @@ function Layout() {
   element={
     <ProtectedRoute>
       <TechStack />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/admin-login"
+  element={<AdminLogin />}
+/>
+<Route
+  path="/admin"
+  element={
+    <ProtectedRoute>
+      <AdminDashboard />
     </ProtectedRoute>
   }
 />
@@ -114,8 +135,12 @@ function Layout() {
             </ProtectedRoute>
           }
         />
-        
-
+        <Route path="/admin/kelola-game" 
+        element={<KelolaGame />} />
+        <Route path="/admin/penilaian-ahli" 
+        element={<PenilaianAhli />} />
+        <Route path="/admin/data-guru" 
+        element={<DataGuru />} />
       </Routes>
   
     </>

@@ -80,7 +80,12 @@ function Navbar() {
           >
             Fitur
           </button>
-
+          <button
+            onClick={() => navigate("/admin-login")}
+            className="hover:text-[#5B21B6] transition"
+        >
+            Admin
+          </button>
           <button
             onClick={() => navigate("/login")}
             className="
@@ -182,7 +187,24 @@ function Navbar() {
           >
             Fitur
           </button>
-
+          <button
+           onClick={() => {
+             setOpen(false);
+             navigate("/admin-login");
+             }}
+  className="
+    w-full
+    text-left
+    text-lg
+    font-medium
+    text-gray-700
+    py-2
+    hover:text-[#5B21B6]
+    transition
+  "
+>
+  Admin
+</button>
           <button
             onClick={() => {
               setOpen(false);

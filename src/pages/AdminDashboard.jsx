@@ -1,0 +1,158 @@
+import AdminLayout from "./AdminLayout";
+import games from "../data/games";
+
+// ── Hitung statistik dari data games ──
+function useDashboardStats() {
+  const totalGame = games.length;
+
+  const topics = new Set(games.map((g) => g.topic).filter(Boolean));
+  const totalTopik = topics.size;
+
+  const avgDim = (key) =>
+    (games.reduce((sum, g) => sum + (g[key] || 0), 0) / games.length).toFixed(2);
+
+  const avgPQ = avgDim("pq");
+  const avgCQ = avgDim("cq");
+  const avgGQ = avgDim("gq");
+  const avgEQ = avgDim("eq");
+  const avgPrQ = avgDim("prq");
+
+  const overallAvg = (
+    games.reduce((sum, g) => sum + (g.expertScore || 0), 0) / games.length
+  ).toFixed(2);
+
+  const recentGames = [...games].slice(-3).reverse();
+
+  return { totalGame, totalTopik, avgPQ, avgCQ, avgGQ, avgEQ, avgPrQ, overallAvg, recentGames };
+}
+
+function StatCard({ icon, iconBg, label, value, trend }) {
+  return (
+    <div className="bg-white rounded-[18px] p-5 border border-[#f0edfb] hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(124,58,237,0.1)] transition-all">
+      <div
+        className="w-[38px] h-[38px] rounded-[11px] flex items-center justify-center mb-3.5 text-[17px]"
+        style={{ background: iconBg.bg, color: iconBg.color }}
+      >
+        {icon}
+      </div>
+      <p className="text-[11.5px] text-gray-400 font-medium mb-0.5">{label}</p>
+      <p className="text-[1.7rem] font-bold text-gray-900 tracking-tight">{value}</p>
+      {trend && <p className="text-[10.5px] text-emerald-500 font-semibold mt-1">{trend}</p>}
+    </div>
+  );
+}
+
+function DimRow({ label, score, color }) {
+  const pct = Math.min(100, (score / 5) * 100);
+  return (
+    <div className="flex items-center gap-2.5 py-2">
+      <div className="w-[130px] text-xs font-semibold text-gray-600 flex-shrink-0">{label}</div>
+      <div className="flex-1 bg-[#F3F0FF] rounded-full h-[7px] overflow-hidden">
+        <div
+          className="h-[7px] rounded-full"
+          style={{ width: `${pct}%`, background: color }}
+        />
+      </div>
+      <div className="w-8 text-right text-xs font-bold text-[#7C3AED] flex-shrink-0">{score}</div>
+    </div>
+  );
+}
+
+export default function AdminDashboard() {
+  const stats = useDashboardStats();
+
+  return (
+    <AdminLayout>
+
+      <div className="mb-7">
+        <h1 className="text-[1.6rem] font-bold text-gray-900 tracking-tight mb-0.5">
+          Dashboard Admin
+        </h1>
+        <p className="text-[13.5px] text-gray-400">
+          Kelola data game, penilaian EGQI, dan guru terdaftar
+        </p>
+      </div>
+
+      {/* STAT CARDS */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 mb-6">
+        <StatCard
+          icon="🎮"
+          iconBg={{ bg: "#EEEDFE", color: "#7C3AED" }}
+          label="Total Game"
+          value={stats.totalGame}
+          trend="↑ Terkurasi EGQI"
+        />
+        <StatCard
+          icon="📚"
+          iconBg={{ bg: "#DBEAFE", color: "#2563EB" }}
+          label="Total Topik Materi"
+          value={stats.totalTopik}
+          trend="Aljabar, Rasio, dll"
+        />
+        <StatCard
+          icon="👩‍🏫"
+          iconBg={{ bg: "#D1FAE5", color: "#059669" }}
+          label="Guru Terdaftar"
+          value="25"
+          trend="↑ 5 guru baru"
+        />
+        <StatCard
+          icon="⭐"
+          iconBg={{ bg: "#FEF3C7", color: "#D97706" }}
+          label="Rata-rata EGQI"
+          value={stats.overallAvg}
+          trend="Skala 1–5"
+        />
+      </div>
+
+      {/* ROW 2 COL */}
+      <div className="grid lg:grid-cols-[1.4fr_1fr] gap-3.5 mb-6">
+
+        {/* RATA-RATA DIMENSI EGQI */}
+        <div className="bg-white rounded-[20px] p-5 border border-[#f0edfb]">
+          <div className="flex items-center justify-between mb-4">
+            <p className="text-[14.5px] font-bold text-gray-900">Rata-rata Skor per Dimensi EGQI</p>
+          </div>
+          <DimRow label="Pedagogical (PQ)" score={stats.avgPQ} color="linear-gradient(90deg,#7C3AED,#A78BFA)" />
+          <DimRow label="Content (CQ)" score={stats.avgCQ} color="linear-gradient(90deg,#2563EB,#60A5FA)" />
+          <DimRow label="Gameplay (GQ)" score={stats.avgGQ} color="linear-gradient(90deg,#059669,#34D399)" />
+          <DimRow label="Engagement (EQ)" score={stats.avgEQ} color="linear-gradient(90deg,#D97706,#FBBF24)" />
+          <DimRow label="Practicality (PrQ)" score={stats.avgPrQ} color="linear-gradient(90deg,#DB2777,#F472B6)" />
+        </div>
+
+        {/* PENILAIAN GURU TERBARU */}
+        <div className="bg-white rounded-[20px] p-5 border border-[#f0edfb]">
+          <div className="flex items-center justify-between mb-4">
+            <p className="text-[14.5px] font-bold text-gray-900">Penilaian Guru Terbaru</p>
+            <span className="text-[11.5px] font-semibold text-[#7C3AED] cursor-pointer">Semua →</span>
+          </div>
+
+          {[
+            { name: "Rini", game: "Detective X", time: "2 jam lalu", score: 4.8, color: "linear-gradient(135deg,#7C3AED,#EC4899)" },
+            { name: "Andi", game: "Dirt Bike", time: "5 jam lalu", score: 4.5, color: "linear-gradient(135deg,#059669,#34D399)" },
+            { name: "Sari", game: "Brainie", time: "1 hari lalu", score: 4.2, color: "linear-gradient(135deg,#D97706,#FBBF24)" },
+          ].map((r) => (
+            <div key={r.name} className="flex items-center gap-2.5 py-2 px-2.5 rounded-xl hover:bg-[#FAFAFF] transition">
+              <div
+                className="w-8 h-8 rounded-full flex items-center justify-center text-white text-[11px] font-bold flex-shrink-0"
+                style={{ background: r.color }}
+              >
+                {r.name.slice(0, 2).toUpperCase()}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-semibold text-gray-900 truncate">{r.name} · {r.game}</p>
+                <p className="text-[10.5px] text-gray-400">{r.time}</p>
+              </div>
+              <span className="text-[10px] font-semibold px-2 py-1 rounded-full bg-amber-50 text-amber-700 flex-shrink-0">
+                ⭐ {r.score}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+     
+
+    </AdminLayout>
+  );
+}
