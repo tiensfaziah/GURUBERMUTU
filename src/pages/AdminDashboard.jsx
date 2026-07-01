@@ -28,15 +28,15 @@ function useDashboardStats() {
 
 function StatCard({ icon, iconBg, label, value, trend }) {
   return (
-    <div className="bg-white rounded-[18px] p-5 border border-[#f0edfb] hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(124,58,237,0.1)] transition-all">
+    <div className="bg-white rounded-[18px] p-3 md:p-5 border border-[#f0edfb] hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(124,58,237,0.1)] transition-all">
       <div
-        className="w-[38px] h-[38px] rounded-[11px] flex items-center justify-center mb-3.5 text-[17px]"
+        className="w-8 h-8 md:w-[38px] md:h-[38px] rounded-[11px] flex items-center justify-center mb-3.5 text-[17px]"
         style={{ background: iconBg.bg, color: iconBg.color }}
       >
         {icon}
       </div>
       <p className="text-[11.5px] text-gray-400 font-medium mb-0.5">{label}</p>
-      <p className="text-[1.7rem] font-bold text-gray-900 tracking-tight">{value}</p>
+      <p className="text-xl md:text-[1.7rem] font-bold text-gray-900 tracking-tight">{value}</p>
       {trend && <p className="text-[10.5px] text-emerald-500 font-semibold mt-1">{trend}</p>}
     </div>
   );
@@ -46,7 +46,7 @@ function DimRow({ label, score, color }) {
   const pct = Math.min(100, (score / 5) * 100);
   return (
     <div className="flex items-center gap-2.5 py-2">
-      <div className="w-[130px] text-xs font-semibold text-gray-600 flex-shrink-0">{label}</div>
+      <div className="w-[90px] md:w-[130px] text-[11px] md:text-xs font-semibold text-gray-600 flex-shrink-0">{label}</div>
       <div className="flex-1 bg-[#F3F0FF] rounded-full h-[7px] overflow-hidden">
         <div
           className="h-[7px] rounded-full"
@@ -65,16 +65,16 @@ export default function AdminDashboard() {
     <AdminLayout>
 
       <div className="mb-7">
-        <h1 className="text-[1.6rem] font-bold text-gray-900 tracking-tight mb-0.5">
+        <h1 className="text-xl md:text-[1.6rem] font-bold text-gray-900 tracking-tight mb-0.5">
           Dashboard Admin
         </h1>
-        <p className="text-[13.5px] text-gray-400">
+        <p className="text-xs md:text-[13.5px] text-gray-400">
           Kelola data game, penilaian EGQI, dan guru terdaftar
         </p>
       </div>
 
       {/* STAT CARDS */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 mb-6">
         <StatCard
           icon="🎮"
           iconBg={{ bg: "#EEEDFE", color: "#7C3AED" }}
@@ -106,7 +106,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* ROW 2 COL */}
-      <div className="grid lg:grid-cols-[1.4fr_1fr] gap-3.5 mb-6">
+      <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-3.5 mb-6">
 
         {/* RATA-RATA DIMENSI EGQI */}
         <div className="bg-white rounded-[20px] p-5 border border-[#f0edfb]">
@@ -121,10 +121,9 @@ export default function AdminDashboard() {
         </div>
 
         {/* PENILAIAN GURU TERBARU */}
-        <div className="bg-white rounded-[20px] p-5 border border-[#f0edfb]">
+        <div className="bg-white rounded-[20px] p-4 md:p-5 border border-[#f0edfb]">
           <div className="flex items-center justify-between mb-4">
             <p className="text-[14.5px] font-bold text-gray-900">Penilaian Guru Terbaru</p>
-            <span className="text-[11.5px] font-semibold text-[#7C3AED] cursor-pointer">Semua →</span>
           </div>
 
           {[
@@ -140,7 +139,7 @@ export default function AdminDashboard() {
                 {r.name.slice(0, 2).toUpperCase()}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-xs font-semibold text-gray-900 truncate">{r.name} · {r.game}</p>
+                <p className="text-[11px] md:text-xs font-semibold text-gray-900 truncate">{r.name} · {r.game}</p>
                 <p className="text-[10.5px] text-gray-400">{r.time}</p>
               </div>
               <span className="text-[10px] font-semibold px-2 py-1 rounded-full bg-amber-50 text-amber-700 flex-shrink-0">

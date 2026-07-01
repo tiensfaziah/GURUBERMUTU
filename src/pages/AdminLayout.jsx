@@ -58,7 +58,19 @@ export default function AdminLayout({ children }) {
     <div className="min-h-screen bg-[#F7F5FF] flex">
 
       {/* SIDEBAR */}
-      <div className="w-[230px] bg-white p-5 border-r border-[#f0edfb] flex flex-col flex-shrink-0">
+      <div
+  className="
+  hidden
+  md:flex
+  w-[230px]
+  bg-white
+  p-5
+  border-r
+  border-[#f0edfb]
+  flex-col
+  flex-shrink-0
+"
+>
 
         {/* Brand */}
         <div className="flex items-center gap-2.5 mb-9">
@@ -106,7 +118,7 @@ export default function AdminLayout({ children }) {
       </div>
 
       {/* CONTENT */}
-      <div className="flex-1 p-8 overflow-x-hidden">
+      <div className="flex-1 p-3 md:p-8 overflow-x-hidden">
         {children}
       </div>
     </div>

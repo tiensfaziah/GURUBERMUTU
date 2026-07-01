@@ -5,128 +5,288 @@ const workshops = [
   {
     id: 1,
     title: "Canva untuk Guru Pemula",
+    category: "Teknologi",
     location: "Yogyakarta",
+    mode: "Offline",
     date: "20 Mei 2026",
-    image:
-      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
+    quota: 100,
+    registered: 75,
+    organizer: "Komunitas Guru Kreatif",
+    friendsGoing: 3,
+    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
   },
   {
     id: 2,
     title: "Workshop AI untuk Guru",
+    category: "AI",
     location: "Jakarta",
+    mode: "Online",
     date: "25 Mei 2026",
-    image:
-      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3",
+    quota: 150,
+    registered: 120,
+    organizer: "GuruBermutu Academy",
+    friendsGoing: 8,
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3",
   },
   {
     id: 3,
     title: "Pelatihan Quizizz Interaktif",
+    category: "Assessment",
     location: "Yogyakarta",
+    mode: "Offline",
     date: "28 Mei 2026",
-    image:
-      "https://images.unsplash.com/photo-1509062522246-3755977927d7",
-  },
-  {
-    id: 4,
-    title: "Google Classroom Academy",
-    location: "Bandung",
-    date: "30 Mei 2026",
-    image:
-      "https://images.unsplash.com/photo-1497633762265-9d179a990aa6",
+    quota: 80,
+    registered: 45,
+    organizer: "Komunitas Guru Kreatif",
+    friendsGoing: 0,
+    image: "https://images.unsplash.com/photo-1509062522246-3755977927d7",
   },
 ];
+
+const timeFilters = ["Semua", "Untukmu", "Hari Ini", "Akhir Pekan"];
 
 const Workshop = () => {
   const navigate = useNavigate();
 
-  const [selectedLocation, setSelectedLocation] =
-    useState("Yogyakarta");
+  const [search, setSearch] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("Semua Lokasi");
+  const [activeTime, setActiveTime] = useState("Semua");
+  const [savedIds, setSavedIds] = useState([]);
+  const [detectedLocation] = useState("Yogyakarta");
 
-  const filteredWorkshop = workshops.filter(
-    (item) => item.location === selectedLocation
-  );
+  const toggleSave = (id, e) => {
+    e.stopPropagation();
+    setSavedIds((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    );
+  };
+
+  const filteredWorkshop = workshops.filter((item) => {
+    const matchLocation =
+      selectedLocation === "Semua Lokasi" || item.location === selectedLocation;
+    const matchSearch = item.title.toLowerCase().includes(search.toLowerCase());
+    return matchLocation && matchSearch;
+  });
 
   return (
-    <div className="min-h-screen bg-[#F5F7FB]">
+    <div className="min-h-screen" style={{ background: "#F5F3FF" }}>
+      {/* HERO */}
+      <div className="max-w-7xl mx-auto px-4 md:px-6 pt-4 md:pt-8">
+        <div
+          className="relative rounded-[24px] md:rounded-[28px] overflow-hidden"
+          style={{ background: "#2D1B69", minHeight: 260 }}
+        >
+          {/* dekorasi dot grid + lingkaran, senada dashboard */}
+          <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" viewBox="0 0 800 260">
+            {[0, 1, 2, 3, 4, 5].map((row) =>
+              [0, 1, 2, 3, 4, 5].map((col) => (
+                <circle
+                  key={`d-${row}-${col}`}
+                  cx={col * 40 + 20}
+                  cy={row * 40 + 10}
+                  r="1.5"
+                  fill="white"
+                  opacity="0.12"
+                />
+              ))
+            )}
+            <circle cx="690" cy="120" r="150" fill="none" stroke="white" strokeWidth="0.8" opacity="0.1" />
+            <circle cx="690" cy="120" r="110" fill="none" stroke="white" strokeWidth="0.8" opacity="0.1" />
+            <circle cx="690" cy="120" r="70" fill="none" stroke="white" strokeWidth="0.8" opacity="0.12" />
+            <circle cx="710" cy="90" r="40" fill="#3D2380" opacity="0.8" />
+            <ellipse cx="710" cy="90" rx="55" ry="10" fill="none" stroke="white" strokeWidth="1.2" opacity="0.25" transform="rotate(-20 710 90)" />
+            {[[120, 40], [220, 25], [360, 35], [510, 20], [600, 60], [110, 190], [320, 200], [470, 220], [640, 200], [760, 150]].map(([x, y], i) => (
+              <circle key={i} cx={x} cy={y} r="1.5" fill="white" opacity="0.6" />
+            ))}
+            {/* buku & pensil, mortarboard senada tema edukasi */}
+            <g transform="translate(600, 150)" opacity="0.18">
+              <rect x="0" y="0" width="50" height="65" rx="4" fill="white" />
+              <rect x="5" y="8" width="35" height="3" rx="1.5" fill="#2D1B69" />
+              <rect x="5" y="16" width="30" height="3" rx="1.5" fill="#2D1B69" />
+              <rect x="5" y="24" width="25" height="3" rx="1.5" fill="#2D1B69" />
+              <rect x="5" y="32" width="32" height="3" rx="1.5" fill="#2D1B69" />
+            </g>
+            <g transform="translate(660, 160)" opacity="0.15">
+              <rect x="0" y="0" width="8" height="55" rx="3" fill="white" transform="rotate(-20 4 27)" />
+              <polygon points="0,-4 8,-4 4,4" fill="#F59E0B" transform="rotate(-20 4 27)" />
+            </g>
+            <g transform="translate(510, 175)" opacity="0.2">
+              <ellipse cx="18" cy="10" rx="22" ry="6" fill="white" />
+              <rect x="8" y="0" width="20" height="12" rx="2" fill="white" />
+              <rect x="16" y="-5" width="4" height="8" rx="1" fill="white" />
+              <circle cx="18" cy="-5" r="3" fill="white" />
+              <line x1="30" y1="6" x2="36" y2="18" stroke="white" strokeWidth="2" />
+              <circle cx="36" cy="20" r="3" fill="white" />
+            </g>
+          </svg>
 
-      {/* HEADER */}
-      <div className="bg-white shadow-sm border-b">
-
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center gap-4">
-
-          {/* SEARCH */}
-          <input
-            type="text"
-            placeholder="Cari workshop..."
-            className="border rounded-xl px-4 py-2 w-full max-w-md outline-none"
-          />
-
-          {/* LOCATION */}
-          <select
-            value={selectedLocation}
-            onChange={(e) =>
-              setSelectedLocation(e.target.value)
-            }
-            className="border rounded-xl px-4 py-2 outline-none"
+          <button
+            onClick={() => navigate(-1)}
+            className="absolute top-4 left-4 md:top-6 md:left-6 z-20 w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-white/15 backdrop-blur text-white hover:bg-white/25 transition"
           >
-            <option>Yogyakarta</option>
-            <option>Jakarta</option>
-            <option>Bandung</option>
-          </select>
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
 
+          <div className="relative z-10 flex flex-col justify-center h-full px-6 md:px-10 py-12 md:py-16">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#F59E0B" }}>
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              Menampilkan event dekat {detectedLocation}
+            </span>
+            <h1 className="text-2xl md:text-4xl font-bold text-white mb-3">Workshop GuruBermutu</h1>
+            <p className="text-white/75 text-sm md:text-lg max-w-2xl leading-relaxed">
+              Temukan workshop, webinar, dan pelatihan terbaik untuk meningkatkan kompetensi guru.
+            </p>
+          </div>
         </div>
-
       </div>
 
-      {/* CONTENT */}
-      <div className="max-w-7xl mx-auto px-6 py-10">
+      {/* FILTER BAR */}
+      <div className="bg-white border-b border-purple-100 sticky top-0 z-10 mt-4 md:mt-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex flex-col gap-4">
+          <div className="flex gap-2 overflow-x-auto pb-1">
+            {timeFilters.map((tf) => (
+              <button
+                key={tf}
+                onClick={() => setActiveTime(tf)}
+                className="px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition"
+                style={
+                  activeTime === tf
+                    ? { background: "#5B21B6", color: "#fff" }
+                    : { background: "#F5F3FF", color: "#6B7280" }
+                }
+              >
+                {tf}
+              </button>
+            ))}
+          </div>
 
-        <h2 className="text-3xl font-bold mb-8">
-          Workshop di {selectedLocation}
-        </h2>
-
-        <div className="grid md:grid-cols-4 gap-6">
-
-          {filteredWorkshop.map((item) => (
-            <div
-              key={item.id}
-              onClick={() =>
-                navigate(`/workshop/${item.id}`)
-              }
-              className="bg-white rounded-2xl overflow-hidden shadow hover:shadow-xl transition cursor-pointer"
-            >
-
-              {/* IMAGE */}
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-full h-44 object-cover"
+          <div className="flex flex-col md:flex-row gap-3">
+            <div className="relative flex-1">
+              <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <circle cx="11" cy="11" r="7" strokeLinecap="round" />
+                <path strokeLinecap="round" d="M21 21l-4.3-4.3" />
+              </svg>
+              <input
+                type="text"
+                placeholder="Cari workshop, mis. 'Canva' atau 'AI'..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full border border-purple-100 rounded-xl pl-10 pr-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-200"
               />
-
-              {/* CONTENT */}
-              <div className="p-4">
-
-                <h3 className="font-bold text-lg mb-2">
-                  {item.title}
-                </h3>
-
-                <p className="text-sm text-gray-500 mb-2">
-                  📍 {item.location}
-                </p>
-
-                <p className="text-sm text-gray-500">
-                  📅 {item.date}
-                </p>
-
-              </div>
-
             </div>
-          ))}
 
+            <select
+              value={selectedLocation}
+              onChange={(e) => setSelectedLocation(e.target.value)}
+              className="border border-purple-100 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-200"
+            >
+              <option>Semua Lokasi</option>
+              <option>Yogyakarta</option>
+              <option>Jakarta</option>
+              <option>Bandung</option>
+            </select>
+          </div>
         </div>
-
       </div>
 
+      {/* LIST */}
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-10">
+        <div className="flex items-baseline justify-between mb-6 md:mb-8">
+          <h2 className="text-xl md:text-2xl font-bold text-gray-800">Workshop Tersedia</h2>
+          <span className="text-xs md:text-sm text-gray-400">{filteredWorkshop.length} workshop ditemukan</span>
+        </div>
+
+        {filteredWorkshop.length === 0 ? (
+          <div className="text-center py-20 text-gray-400">
+            Tidak ada workshop yang cocok. Coba kata kunci atau lokasi lain.
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6">
+            {filteredWorkshop.map((item) => {
+              const isSaved = savedIds.includes(item.id);
+              const slotsLeft = item.quota - item.registered;
+              const pctFull = Math.round((item.registered / item.quota) * 100);
+
+              return (
+                <div
+                  key={item.id}
+                  onClick={() => navigate(`/workshop/${item.id}`)}
+                  className="group bg-white rounded-2xl overflow-hidden border border-purple-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer"
+                >
+                  <div className="relative">
+                    <img src={item.image} alt={item.title} className="w-full h-40 md:h-44 object-cover" />
+
+                    <button
+                      onClick={(e) => toggleSave(item.id, e)}
+                      className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur flex items-center justify-center shadow hover:scale-110 transition"
+                    >
+                      <svg
+                        className="w-4 h-4 transition"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        style={isSaved ? { fill: "#EC4899", color: "#EC4899" } : { fill: "none", color: "#5B21B6" }}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 21l-7.682-8.318a4.5 4.5 0 010-6.364z" />
+                      </svg>
+                    </button>
+
+                    <span className="absolute bottom-3 left-3 text-[10px] font-semibold px-2 py-1 rounded-full text-white backdrop-blur" style={{ background: "rgba(45,27,105,0.8)" }}>
+                      {item.mode}
+                    </span>
+                  </div>
+
+                  <div className="p-4">
+                    <span className="text-xs font-medium px-2 py-1 rounded-full" style={{ background: "#FDF2F8", color: "#EC4899" }}>
+                      {item.category}
+                    </span>
+
+                    <h3 className="font-bold text-base mt-3 mb-1 text-gray-800 leading-snug">
+                      {item.title}
+                    </h3>
+
+                    <p className="text-xs text-gray-400 mb-3">oleh {item.organizer}</p>
+
+                    <div className="space-y-1 text-sm text-gray-500">
+                      <p className="flex items-center gap-1.5">📍 {item.location}</p>
+                      <p className="flex items-center gap-1.5">📅 {item.date}</p>
+                    </div>
+
+                    <div className="mt-3">
+                      <div className="flex justify-between text-xs text-gray-400 mb-1">
+                        <span>{item.registered}/{item.quota} peserta</span>
+                        <span>{slotsLeft <= 10 ? `Sisa ${slotsLeft} slot` : ""}</span>
+                      </div>
+                      <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "#F3E8FF" }}>
+                        <div className="h-full rounded-full" style={{ width: `${pctFull}%`, background: "#F59E0B" }} />
+                      </div>
+                    </div>
+
+                    {item.friendsGoing > 0 && (
+                      <p className="text-xs text-gray-400 mt-3">
+                        👥 {item.friendsGoing} rekan guru lain akan hadir
+                      </p>
+                    )}
+
+                    <button
+                      onClick={() => navigate(`/workshop/${item.id}`)}
+                      className="w-full mt-4 text-white py-2.5 rounded-xl text-sm font-medium transition hover:opacity-90"
+                      style={{ background: "#5B21B6" }}
+                    >
+                      Lihat Detail
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

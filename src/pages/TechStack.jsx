@@ -184,23 +184,27 @@ export default function TechStack() {
 
   return (
     <div className="min-h-screen bg-[#F8F5FF] p-6 md:p-8">
-{/* BACK BUTTON */}
-<div className="mb-4">
-  <button
-    onClick={() => navigate(-1)}
-    className="
-      text-gray-700
-      text-4xl
-      font-light
-      hover:text-[#7C3AED]
-      transition
-    "
-  >
-    &lt;
-  </button>
-</div>
      {/* HERO */}
       <div className="relative min-h-[520px] md:min-h-[320px] rounded-[32px] overflow-hidden mb-10">
+        <button
+  onClick={() => navigate(-1)}
+  className="absolute top-6 left-6 z-20 text-white hover:text-gray-200 transition"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-8 h-8"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={2.5}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M15 19l-7-7 7-7"
+    />
+  </svg>
+</button>
         <img
           src={curatedImage}
           alt="Curated Tech Stack"
