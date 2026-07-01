@@ -1,7 +1,6 @@
 import AdminLayout from "./AdminLayout";
 import games from "../data/games";
-import React, { useState } from "react";
-import { Menu, X } from "lucide-react";
+import React from "react";
 
 // ── Hitung statistik dari data games ──
 function useDashboardStats() {
@@ -61,7 +60,6 @@ function DimRow({ label, score, color }) {
 }
 
 export default function AdminDashboard() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const stats = useDashboardStats();
 
   return (
