@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
-
+import React, { useState } from "react";
+import { Menu, X } from "lucide-react";
 const navItems = [
   {
     to: "/admin",
@@ -49,6 +50,8 @@ const navItems = [
 export default function AdminLayout({ children }) {
   const navigate = useNavigate();
 
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const handleLogout = () => {
     // TODO: sesuaikan dengan logic auth kamu
     navigate("/login");
@@ -56,8 +59,84 @@ export default function AdminLayout({ children }) {
 
   return (
     <div className="min-h-screen bg-[#F7F5FF] flex">
+{/* MOBILE SIDEBAR */}
+<div
+  className={`
+    fixed inset-0 z-50 md:hidden transition-all duration-300
+    ${sidebarOpen ? "visible" : "invisible"}
+  `}
+>
+  {/* Overlay */}
+  <div
+    onClick={() => setSidebarOpen(false)}
+    className={`
+      absolute inset-0 bg-black/40 transition-opacity
+      ${sidebarOpen ? "opacity-100" : "opacity-0"}
+    `}
+  />
 
-      {/* SIDEBAR */}
+  {/* Drawer */}
+  <div
+    className={`
+      absolute left-0 top-0 h-full w-[260px]
+      bg-white p-5 border-r border-[#f0edfb]
+      flex flex-col
+      transition-transform duration-300
+      ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
+    `}
+  >
+    {/* Header */}
+    <div className="flex items-center justify-between mb-8">
+      <div className="flex items-center gap-2">
+        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#7C3AED] to-[#C026D3] flex items-center justify-center text-white">
+          🛡️
+        </div>
+
+        <span className="font-bold text-gray-900">
+          Admin Panel
+        </span>
+      </div>
+
+      <button
+        onClick={() => setSidebarOpen(false)}
+        className="p-2 rounded-lg hover:bg-gray-100"
+      >
+        <X size={20} />
+      </button>
+    </div>
+
+    {/* Menu */}
+    <div className="flex flex-col gap-1">
+      {navItems.map((item) => (
+        <NavLink
+          key={item.to}
+          to={item.to}
+          end={item.end}
+          onClick={() => setSidebarOpen(false)}
+          className={({ isActive }) =>
+            `flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] font-medium transition-all ${
+              isActive
+                ? "bg-gradient-to-br from-[#7C3AED] to-[#9333EA] text-white"
+                : "text-gray-500 hover:bg-[#f9f8ff]"
+            }`
+          }
+        >
+          {item.icon}
+          {item.label}
+        </NavLink>
+      ))}
+    </div>
+
+    {/* Logout */}
+    <button
+      onClick={handleLogout}
+      className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] font-medium text-red-500 hover:bg-red-50 mt-auto"
+    >
+      Logout
+    </button>
+  </div>
+</div>
+     {/* SIDEBAR */}
       <div
   className="
   hidden
@@ -117,8 +196,26 @@ export default function AdminLayout({ children }) {
         </button>
       </div>
 
+{/* MOBILE TOPBAR */}
+<div className="md:hidden fixed top-0 left-0 right-0 z-40 bg-white border-b border-[#f0edfb] px-4 py-3 flex items-center justify-between">
+  <div className="flex items-center gap-2">
+    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#7C3AED] to-[#C026D3] flex items-center justify-center text-white">
+      🛡️
+    </div>
+    <span className="font-bold text-gray-900">
+      Admin Panel
+    </span>
+  </div>
+
+  <button
+    onClick={() => setSidebarOpen(true)}
+    className="p-2 rounded-lg hover:bg-gray-100"
+  >
+    <Menu size={22} />
+  </button>
+</div>
       {/* CONTENT */}
-      <div className="flex-1 p-3 md:p-8 overflow-x-hidden">
+      <div className="flex-1 pt-20 md:pt-8 p-3 md:p-8 overflow-x-hidden">
         {children}
       </div>
     </div>

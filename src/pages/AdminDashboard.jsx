@@ -1,5 +1,7 @@
 import AdminLayout from "./AdminLayout";
 import games from "../data/games";
+import React, { useState } from "react";
+import { Menu, X } from "lucide-react";
 
 // ── Hitung statistik dari data games ──
 function useDashboardStats() {
@@ -36,7 +38,7 @@ function StatCard({ icon, iconBg, label, value, trend }) {
         {icon}
       </div>
       <p className="text-[11.5px] text-gray-400 font-medium mb-0.5">{label}</p>
-      <p className="text-xl md:text-[1.7rem] font-bold text-gray-900 tracking-tight">{value}</p>
+      <p className="text-lg md:text-[1.7rem] font-bold text-gray-900 tracking-tight">{value}</p>
       {trend && <p className="text-[10.5px] text-emerald-500 font-semibold mt-1">{trend}</p>}
     </div>
   );
@@ -46,7 +48,7 @@ function DimRow({ label, score, color }) {
   const pct = Math.min(100, (score / 5) * 100);
   return (
     <div className="flex items-center gap-2.5 py-2">
-      <div className="w-[90px] md:w-[130px] text-[11px] md:text-xs font-semibold text-gray-600 flex-shrink-0">{label}</div>
+      <div className="w-[75px] md:w-[130px] text-[11px] md:text-xs font-semibold text-gray-600 flex-shrink-0">{label}</div>
       <div className="flex-1 bg-[#F3F0FF] rounded-full h-[7px] overflow-hidden">
         <div
           className="h-[7px] rounded-full"
@@ -59,19 +61,56 @@ function DimRow({ label, score, color }) {
 }
 
 export default function AdminDashboard() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const stats = useDashboardStats();
 
   return (
-    <AdminLayout>
+  <AdminLayout>
+    <div className="max-w-7xl mx-auto">
 
-      <div className="mb-7">
-        <h1 className="text-xl md:text-[1.6rem] font-bold text-gray-900 tracking-tight mb-0.5">
-          Dashboard Admin
-        </h1>
-        <p className="text-xs md:text-[13.5px] text-gray-400">
-          Kelola data game, penilaian EGQI, dan guru terdaftar
-        </p>
-      </div>
+      {/* HERO ADMIN */}
+<div
+  className="
+    relative
+    overflow-hidden
+    rounded-[28px]
+    p-5
+    md:p-8
+    mb-6
+    bg-gradient-to-r
+    from-[#2D1B69]
+    to-[#4C1D95]
+  "
+>
+  {/* Background Icon */}
+  <div className="absolute right-4 top-0 text-[90px] md:text-[140px] opacity-10">
+    ⚙️
+  </div>
+
+  <div className="relative z-10">
+    <p className="text-purple-200 text-xs uppercase tracking-widest">
+      Admin Panel
+    </p>
+
+    <h1 className="text-2xl md:text-4xl font-bold text-white mt-2">
+      Selamat Datang Admin ⚙️
+    </h1>
+
+    <p className="text-white/70 mt-3 max-w-xl text-sm md:text-base">
+      Kelola seluruh ekosistem Gurubermutu dari satu tempat.
+    </p>
+
+    <div className="flex flex-wrap gap-3 mt-5">
+      <button className="px-4 py-2 rounded-xl bg-white text-[#2D1B69] font-medium text-sm">
+        + Tambah Workshop
+      </button>
+
+      <button className="px-4 py-2 rounded-xl border border-white/20 text-white text-sm">
+        Kelola Guru
+      </button>
+    </div>
+  </div>
+</div>
 
       {/* STAT CARDS */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 mb-6">
@@ -151,7 +190,7 @@ export default function AdminDashboard() {
       </div>
 
      
-
+</div>
     </AdminLayout>
   );
 }
