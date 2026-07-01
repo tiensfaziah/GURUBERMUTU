@@ -65,8 +65,8 @@ export default function KelolaGame() {
 
       {/* TABLE */}
       <div className="bg-white rounded-[15px] border border-[#f0edfb] overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
+        <div className="overflow-x-auto min-w-full">
+          <table className="min-w-[1000px] text-sm">
             <thead>
               <tr className="border-b border-gray-100 bg-[#FAFAFF]">
                 <th className="text-left font-semibold text-gray-500 text-xs px-5 py-3.5">Game</th>
