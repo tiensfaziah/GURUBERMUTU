@@ -121,7 +121,7 @@ const Workshop = () => {
           </svg>
 
           <button
-  onClick={() => navigate(-1)}
+  onClick={() => navigate("/dashboard")}
   className="absolute top-4 left-4 md:top-6 md:left-6 z-20 text-white hover:text-gray-200 transition"
 >
   <svg

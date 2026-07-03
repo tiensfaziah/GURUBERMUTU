@@ -1,6 +1,8 @@
 import AdminLayout from "./AdminLayout";
 import games from "../data/games";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 
 // ── Hitung statistik dari data games ──
 function useDashboardStats() {
@@ -61,6 +63,7 @@ function DimRow({ label, score, color }) {
 
 export default function AdminDashboard() {
   const stats = useDashboardStats();
+  const navigate = useNavigate();
 
   return (
   <AdminLayout>
@@ -99,13 +102,19 @@ export default function AdminDashboard() {
     </p>
 
     <div className="flex flex-wrap gap-3 mt-5">
-      <button className="px-4 py-2 rounded-xl bg-white text-[#2D1B69] font-medium text-sm">
-        + Tambah Workshop
-      </button>
+      <button
+  onClick={() => navigate("/admin/kelola-workshop")}
+  className="px-4 py-2 rounded-xl bg-white text-[#2D1B69] font-medium text-sm hover:bg-gray-100 transition"
+>
+  + Tambah Workshop
+</button>
 
-      <button className="px-4 py-2 rounded-xl border border-white/20 text-white text-sm">
-        Kelola Guru
-      </button>
+      <button
+  onClick={() => navigate("/admin/data-guru")}
+  className="px-4 py-2 rounded-xl border border-white/20 text-white text-sm hover:bg-white/10 transition"
+>
+  Kelola Guru
+</button>
     </div>
   </div>
 </div>
