@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { auth, db } from "../firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import { doc, onSnapshot } from "firebase/firestore";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Dashboard() {
   const [user, setUser] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const [userData, setUserData] = useState(null);
   const [currentDate, setCurrentDate] = useState("");
+  const isAdminActive = location.pathname.startsWith("/admin");
 
   useEffect(() => {
     const updateDate = () => {
@@ -73,22 +75,37 @@ function Dashboard() {
       {/* MOBILE MENU */}
       <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${menuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}>
         <div className="bg-white px-4 pb-5 pt-2 space-y-2 shadow-md border-b border-purple-100">
-          {[
-            { label: "🏠 Dashboard", path: "/dashboard" },
-            { label: "🌳 Skill Tree", path: "/skill-tree" },
-            { label: "🛠 Tech Stack", path: "/tech-stack" },
-            { label: "🛒 Marketplace", path: null },
-            { label: "🎓 Workshop", path: "/workshop" },
-            { label: "👤 Edit Profil", path: null },
-          ].map(({ label, path }) => (
-            <button
-              key={label}
-              onClick={() => { path && navigate(path); setMenuOpen(false); }}
-              className="block w-full text-left text-gray-700 font-medium py-3"
-            >
-              {label}
-            </button>
-          ))}
+   {[
+  { label: "🏠 Dashboard", path: "/dashboard" },
+  { label: "🌳 Skill Tree", path: "/skill-tree" },
+  { label: "🛠 Tech Stack", path: "/tech-stack" },
+  { label: "🛒 Marketplace", path: null },
+  { label: "🎓 Workshop", path: "/workshop" },
+  { label: "👤 Edit Profil", path: null },
+].map(({ label, path }) => {
+  const isActive = path && location.pathname === path;
+
+  return (
+    <button
+      key={label}
+      onClick={() => {
+        if (path) navigate(path);
+        setMenuOpen(false);
+      }}
+      className={`
+        block w-full text-left px-3 py-3 rounded-xl
+        font-medium transition-all
+        ${
+          isActive
+            ? "bg-[#EDE9FE] text-[#5B21B6]"
+            : "text-gray-600 hover:bg-[#EDE9FE] hover:text-[#5B21B6]"
+        }
+      `}
+    >
+      {label}
+    </button>
+  );
+})}
           <hr className="my-2 border-purple-100" />
           <button
             onClick={handleLogout}
@@ -122,36 +139,50 @@ function Dashboard() {
           </div>
 
           <nav className="space-y-1 flex-1">
+            
             <button
   onClick={() => navigate("/admin")}
-  className="w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all hover:bg-[#EDE9FE]"
-  style={{
-    color: "#5B21B6",
-  }}
+  className={`
+    w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-xl
+    text-sm font-medium transition-all
+    ${
+      isAdminActive
+        ? "bg-[#EDE9FE] text-[#5B21B6]"
+        : "text-gray-500 hover:bg-[#EDE9FE] hover:text-[#5B21B6]"
+    }
+  `}
 >
   <span className="text-base">⚙️</span>
   Admin Panel
 </button>
             {[
-              { icon: "🏠", label: "Dashboard", path: "/dashboard" },
-              { icon: "🌳", label: "Skill Tree", path: "/skill-tree" },
-              { icon: "🛠", label: "Tech Stack", path: "/tech-stack" },
-              { icon: "🛒", label: "Marketplace", path: null },
-              { icon: "🎓", label: "Workshop", path: "/workshop" },
-            ].map(({ icon, label, path }) => (
-              <button
-                key={label}
-                onClick={() => path && navigate(path)}
-                className="w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all"
-                style={{
-                  color: label === "Dashboard" ? "#5B21B6" : "#6B7280",
-                  background: label === "Dashboard" ? "#EDE9FE" : "transparent",
-                }}
-              >
-                <span className="text-base">{icon}</span>
-                {label}
-              </button>
-            ))}
+  { icon: "🏠", label: "Dashboard", path: "/dashboard" },
+  { icon: "🌳", label: "Skill Tree", path: "/skill-tree" },
+  { icon: "🛠", label: "Tech Stack", path: "/tech-stack" },
+  { icon: "🛒", label: "Marketplace", path: null },
+  { icon: "🎓", label: "Workshop", path: "/workshop" },
+].map(({ icon, label, path }) => {
+  const isActive = path && location.pathname === path;
+
+  return (
+    <button
+      key={label}
+      onClick={() => path && navigate(path)}
+      className={`
+        w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-xl
+        text-sm font-medium transition-all
+        ${
+          isActive
+            ? "bg-[#EDE9FE] text-[#5B21B6]"
+            : "text-gray-500 hover:bg-[#EDE9FE] hover:text-[#5B21B6]"
+        }
+      `}
+    >
+      <span className="text-base">{icon}</span>
+      {label}
+    </button>
+  );
+})}
           </nav>
 
           {/* Sidebar bottom decoration */}

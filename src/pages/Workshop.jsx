@@ -121,13 +121,24 @@ const Workshop = () => {
           </svg>
 
           <button
-            onClick={() => navigate(-1)}
-            className="absolute top-4 left-4 md:top-6 md:left-6 z-20 w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-white/15 backdrop-blur text-white hover:bg-white/25 transition"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
+  onClick={() => navigate(-1)}
+  className="absolute top-4 left-4 md:top-6 md:left-6 z-20 text-white hover:text-gray-200 transition"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-7 h-7"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={2.5}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M15 19l-7-7 7-7"
+    />
+  </svg>
+</button>
 
           <div className="relative z-10 flex flex-col justify-center h-full px-6 md:px-10 py-12 md:py-16">
             <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#F59E0B" }}>
