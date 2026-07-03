@@ -1,8 +1,8 @@
 import { useState } from "react";
 import AdminLayout from "./AdminLayout";
 import games from "../data/games";
+import Thumbnail from "../components/Thumbnail";
 
-// ── Struktur instrumen EGQI sesuai brief ──
 const DIMENSIONS = [
   {
     key: "pq",
@@ -98,7 +98,7 @@ function ScoreSelector({ value, onChange }) {
 
 export default function PenilaianAhli() {
   const [selectedGameId, setSelectedGameId] = useState(games[0]?.id);
-  const [scores, setScores] = useState({}); // { PQ1: 4, PQ2: 5, ... }
+  const [scores, setScores] = useState({});
 
   const selectedGame = games.find((g) => g.id === selectedGameId);
 
@@ -117,7 +117,6 @@ export default function PenilaianAhli() {
   );
 
   const handleSubmit = () => {
-    // TODO: kirim ke backend — payload contoh:
     const payload = {
       gameId: selectedGame.id,
       scores,
@@ -131,17 +130,15 @@ export default function PenilaianAhli() {
 
   return (
     <AdminLayout>
-
       <div className="mb-6">
         <h1 className="text-[1.6rem] font-bold text-gray-900 tracking-tight mb-0.5">
           Penilaian Ahli (EGQI)
         </h1>
         <p className="text-[13.5px] text-gray-400">
-          Educational Game Quality Evaluation Instrument — skala 1 (Sangat Tidak Setuju) sampai 5 (Sangat Setuju)
+          Educational Game Quality Evaluation Instrument
         </p>
       </div>
 
-      {/* PILIH GAME */}
       <div className="bg-white rounded-[20px] p-5 border border-[#f0edfb] mb-5">
         <label className="block text-xs font-semibold text-gray-600 mb-2">Pilih Game yang Akan Dinilai</label>
         <select
@@ -157,21 +154,20 @@ export default function PenilaianAhli() {
         {selectedGame && (
           <div className="flex items-center gap-3 mt-4 p-3 bg-[#FAFAFF] rounded-2xl">
             <div className="w-16 h-11 rounded-xl overflow-hidden border border-gray-100 flex-shrink-0">
-  <img
-    src={selectedGame.thumbnail}
-    alt={selectedGame.title}
-    className="w-full h-full object-cover"
-  />
-</div>
+              <Thumbnail
+                src={selectedGame.thumbnail}
+                alt={selectedGame.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
             <div className="min-w-0">
               <p className="text-sm font-semibold text-gray-900 truncate">{selectedGame.title}</p>
-              <p className="text-xs text-gray-400 truncate">{selectedGame.topic} · {selectedGame.gradeLevel}</p>
+              <p className="text-xs text-gray-400 truncate">{selectedGame.topic}</p>
             </div>
           </div>
         )}
       </div>
 
-      {/* FORM TIAP DIMENSI */}
       <div className="space-y-4">
         {DIMENSIONS.map((dim) => {
           const avg = dimensionAverage(dim);
@@ -179,17 +175,11 @@ export default function PenilaianAhli() {
             <div key={dim.key} className="bg-white rounded-[20px] p-5 border border-[#f0edfb]">
               <div className="flex items-center justify-between mb-1">
                 <div className="flex items-center gap-2.5">
-                  <span
-                    className="w-2.5 h-2.5 rounded-full flex-shrink-0"
-                    style={{ background: dim.color }}
-                  />
+                  <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: dim.color }} />
                   <p className="text-sm font-bold text-gray-900">{dim.label}</p>
                 </div>
                 {avg && (
-                  <span
-                    className="text-xs font-bold px-3 py-1 rounded-full flex-shrink-0"
-                    style={{ background: `${dim.color}1A`, color: dim.color }}
-                  >
+                  <span className="text-xs font-bold px-3 py-1 rounded-full flex-shrink-0" style={{ background: `${dim.color}1A`, color: dim.color }}>
                     Rata-rata: {avg}
                   </span>
                 )}
@@ -198,20 +188,14 @@ export default function PenilaianAhli() {
 
               <div className="space-y-3">
                 {dim.items.map((item) => (
-                  <div
-                    key={item.code}
-                    className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-4 p-3 rounded-xl hover:bg-[#FAFAFF] transition"
-                  >
+                  <div key={item.code} className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-4 p-3 rounded-xl hover:bg-[#FAFAFF] transition">
                     <div className="flex-1 flex items-start gap-2.5">
                       <span className="text-[10px] font-bold text-gray-400 bg-gray-100 px-2 py-0.5 rounded-md flex-shrink-0 mt-0.5">
                         {item.code}
                       </span>
                       <p className="text-xs text-gray-600 leading-relaxed">{item.text}</p>
                     </div>
-                    <ScoreSelector
-                      value={scores[item.code]}
-                      onChange={(v) => setScore(item.code, v)}
-                    />
+                    <ScoreSelector value={scores[item.code]} onChange={(v) => setScore(item.code, v)} />
                   </div>
                 ))}
               </div>
@@ -220,12 +204,9 @@ export default function PenilaianAhli() {
         })}
       </div>
 
-      {/* SUBMIT */}
       <div className="flex items-center justify-between mt-6 bg-white rounded-[20px] p-5 border border-[#f0edfb]">
         <p className="text-xs text-gray-500">
-          {allAnswered
-            ? "✅ Semua item sudah dinilai. Siap disimpan."
-            : "Lengkapi semua item penilaian sebelum menyimpan."}
+          {allAnswered ? "Semua item sudah dinilai. Siap disimpan." : "Lengkapi semua item penilaian sebelum menyimpan."}
         </p>
         <button
           onClick={handleSubmit}
@@ -235,7 +216,6 @@ export default function PenilaianAhli() {
           Simpan Penilaian
         </button>
       </div>
-
     </AdminLayout>
   );
 }

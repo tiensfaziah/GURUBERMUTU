@@ -1,40 +1,35 @@
 import Thumbnail from "./Thumbnail";
 
-export default function GameCard({ game, onEdit }) {
+export default function GameRow({ game, onEdit }) {
   return (
-    <div className="bg-white rounded-2xl border border-[#f0edfb] p-4">
-      <div className="flex items-center gap-3 mb-3">
-        <div className="w-16 h-12 rounded-xl overflow-hidden flex-shrink-0 border border-gray-100">
-          <Thumbnail src={game.thumbnail} alt={game.title} className="w-full h-full object-cover" />
+    <tr className="border-b border-gray-50 hover:bg-[#FAFAFF] transition">
+      <td className="px-5 py-3.5">
+        <div className="flex items-center gap-3">
+          <div className="w-14 h-10 rounded-xl overflow-hidden flex-shrink-0 border border-gray-100">
+            <Thumbnail src={game.thumbnail} alt={game.title} className="w-full h-full object-cover" />
+          </div>
+          <span className="font-semibold text-gray-900 text-[13px]">{game.title}</span>
         </div>
-        <div className="min-w-0 flex-1">
-          <p className="font-semibold text-gray-900 text-sm truncate">{game.title}</p>
-          <p className="text-xs text-gray-400 truncate">{game.topic}</p>
-        </div>
-      </div>
-
-      <div className="flex flex-wrap items-center gap-1.5 mb-3">
+      </td>
+      <td className="px-5 py-3.5 text-gray-600 text-xs max-w-[180px] truncate">{game.topic}</td>
+      <td className="px-5 py-3.5">
         <span className="text-[10.5px] font-semibold px-2.5 py-1 rounded-full bg-[#EEEDFE] text-[#5B21B6]">
           {game.gradeLevel}
         </span>
-        <span className="text-[10.5px] font-medium px-2.5 py-1 rounded-full bg-gray-100 text-gray-600">
-          {game.genre}
-        </span>
+      </td>
+      <td className="px-5 py-3.5 text-gray-600 text-xs">{game.genre}</td>
+      <td className="px-5 py-3.5">
         <span className="text-[10.5px] font-bold px-2.5 py-1 rounded-full bg-amber-50 text-amber-700">
           ⭐ {game.expertScore}
         </span>
-      </div>
-
-      <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-        <a
-          href={game.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-[#7C3AED] text-xs font-semibold hover:underline"
-        >
+      </td>
+      <td className="px-5 py-3.5">
+        <a href={game.url} target="_blank" rel="noopener noreferrer" className="text-[#7C3AED] text-xs font-semibold hover:underline">
           Buka ↗
         </a>
-        <div className="flex items-center gap-1.5">
+      </td>
+      <td className="px-5 py-3.5">
+        <div className="flex items-center justify-end gap-1.5">
           <button
             onClick={() => onEdit(game)}
             className="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 hover:text-[#7C3AED] hover:border-[#C4B5FD] transition"
@@ -53,7 +48,7 @@ export default function GameCard({ game, onEdit }) {
             </svg>
           </button>
         </div>
-      </div>
-    </div>
+      </td>
+    </tr>
   );
 }

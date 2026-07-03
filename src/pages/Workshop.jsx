@@ -267,11 +267,7 @@ const Workshop = () => {
                       </div>
                     </div>
 
-                    {item.friendsGoing > 0 && (
-                      <p className="text-xs text-gray-400 mt-3">
-                        👥 {item.friendsGoing} rekan guru lain akan hadir
-                      </p>
-                    )}
+                    
 
                     <button
                       onClick={() => navigate(`/workshop/${item.id}`)}
