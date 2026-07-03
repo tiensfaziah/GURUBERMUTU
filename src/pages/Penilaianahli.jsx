@@ -1,7 +1,6 @@
 import { useState } from "react";
 import AdminLayout from "./AdminLayout";
 import games from "../data/games";
-import Thumbnail from "../components/Thumbnail";
 
 const DIMENSIONS = [
   {

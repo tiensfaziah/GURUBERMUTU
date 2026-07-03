@@ -1,4 +1,3 @@
-import Thumbnail from "./Thumbnail";
 
 export default function GameCard({ game, onEdit }) {
     console.log(game.thumbnail);

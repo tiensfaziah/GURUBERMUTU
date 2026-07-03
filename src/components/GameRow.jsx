@@ -1,4 +1,3 @@
-import Thumbnail from "./Thumbnail";
 
 export default function GameRow({ game, onEdit }) {
   return (
