@@ -6,7 +6,11 @@ export default function GameRow({ game, onEdit }) {
       <td className="px-5 py-3.5">
         <div className="flex items-center gap-3">
           <div className="w-14 h-10 rounded-xl overflow-hidden flex-shrink-0 border border-gray-100">
-            <Thumbnail src={game.thumbnail} alt={game.title} className="w-full h-full object-cover" />
+            <img
+  src={game.thumbnail}
+  alt={game.title}
+  className="w-full h-full object-cover"
+/>
           </div>
           <span className="font-semibold text-gray-900 text-[13px]">{game.title}</span>
         </div>
