@@ -1,6 +1,7 @@
 import Thumbnail from "./Thumbnail";
 
 export default function GameCard({ game, onEdit }) {
+    console.log(game.thumbnail);
   return (
     <div className="bg-white rounded-2xl border border-[#f0edfb] p-4">
       <div className="flex items-center gap-3 mb-3">
