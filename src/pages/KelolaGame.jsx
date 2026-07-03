@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import AdminLayout from "./AdminLayout";
 import games from "../data/games";
 import GameRow from "../components/GameRow";
-import GameCard from "../components/GameCard";
+import GameCard from "../components/Gamecard";
 import GameFormModal from "../components/GameFormModal";
 
 export default function KelolaGame() {
