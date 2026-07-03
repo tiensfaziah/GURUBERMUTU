@@ -1,5 +1,5 @@
 
-export default function GameCard({ game, onEdit }) {
+export default function Gamecard({ game, onEdit }) {
     console.log(game.thumbnail);
   return (
     <div className="bg-white rounded-2xl border border-[#f0edfb] p-4">
