@@ -153,9 +153,9 @@ export default function PenilaianAhli() {
         {selectedGame && (
           <div className="flex items-center gap-3 mt-4 p-3 bg-[#FAFAFF] rounded-2xl">
             <div className="w-16 h-11 rounded-xl overflow-hidden border border-gray-100 flex-shrink-0">
-              <img
-  src={games.thumbnail}
-  alt={games.title}
+   <img
+  src={selectedGame.thumbnail}
+  alt={selectedGame.title}
   className="w-full h-full object-cover"
 />
             </div>
