@@ -25,6 +25,8 @@ import AdminLogin from "./pages/AdminLogin";
 import KelolaGame from "./pages/KelolaGame";
 import PenilaianAhli from "./pages/Penilaianahli";
 import DataGuru from "./pages/Dataguru";
+import WorkshopForm from "./pages/WorkshopForm";
+import KelolaWorkshop from "./pages/KelolaWorkshop";
 
 function Layout() {
   const location = useLocation();
@@ -39,6 +41,7 @@ function Layout() {
     location.pathname === "/admin/kelola-game" ||
     location.pathname === "/admin/penilaian-ahli" ||
     location.pathname === "/admin/data-guru" ||
+    location.pathname === "/admin/kelola-workshop" ||
     location.pathname.startsWith("/workshop");
 
   return (
@@ -73,7 +76,9 @@ function Layout() {
     </ProtectedRoute>
   }
 />
-
+<Route path="/workshop/buat" element={<WorkshopForm />} />
+<Route path="/workshop/edit/:id" element={<WorkshopForm />} />
+<Route path="/admin/kelola-workshop" element={<KelolaWorkshop />} />
         <Route
           path="/skill-tree"
           element={

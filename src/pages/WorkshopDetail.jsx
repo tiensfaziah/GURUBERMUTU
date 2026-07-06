@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import workshops from "../data/dataworkshop";
 
 //FIREBASE
 import { auth, db } from "../firebase";
@@ -8,72 +9,6 @@ import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 //LEVEL & BADGE
 import { getLevel } from "../utils/level";
 import { getBadges } from "../utils/badge";
-
-const workshops = [
-  {
-    id: 1,
-    title: "Canva untuk Guru Pemula",
-    desc: "Belajar membuat materi visual menarik menggunakan Canva, mulai dari poster kelas hingga media ajar interaktif.",
-    duration: "30 menit",
-    xp: 100,
-    mode: "Offline",
-    location: "Aula SMP Negeri 2, Yogyakarta",
-    date: "20 Mei 2026 · 09.00 WIB",
-    organizer: "Komunitas Guru Kreatif",
-    organizerFollowers: "1.240 pengikut",
-    registrationUrl: "https://www.eventbrite.com/e/canva-untuk-guru-pemula",
-    images: [
-      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
-      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3",
-    ],
-    friendsGoing: ["Bu Sari", "Pak Andi", "Bu Wulan"],
-  },
-  {
-    id: 4,
-    title: "Google Classroom",
-    desc: "Belajar menggunakan Google Classroom untuk mengajar, dari membuat kelas hingga mengelola tugas siswa.",
-    duration: "40 menit",
-    xp: 100,
-    mode: "Online",
-    location: "Tautan Zoom dikirim via email",
-    date: "22 Mei 2026 · 13.00 WIB",
-    organizer: "GuruBermutu Academy",
-    organizerFollowers: "3.580 pengikut",
-    registrationUrl: "https://www.eventbrite.com/e/google-classroom-workshop",
-    images: ["https://images.unsplash.com/photo-1509062522246-3755977927d7"],
-    friendsGoing: [],
-  },
-  {
-    id: 2,
-    title: "Quizizz Interaktif",
-    desc: "Membuat kuis interaktif untuk siswa, lengkap dengan analisis hasil belajar secara real-time.",
-    duration: "45 menit",
-    xp: 120,
-    mode: "Offline",
-    location: "Yogyakarta",
-    date: "28 Mei 2026 · 10.00 WIB",
-    organizer: "Komunitas Guru Kreatif",
-    organizerFollowers: "1.240 pengikut",
-    registrationUrl: "https://www.eventbrite.com/e/quizizz-interaktif",
-    images: ["https://images.unsplash.com/photo-1509062522246-3755977927d7"],
-    friendsGoing: ["Bu Sari"],
-  },
-  {
-    id: 3,
-    title: "Mentimeter Interaktif",
-    desc: "Membuat presentasi interaktif dengan Mentimeter untuk meningkatkan partisipasi siswa di kelas.",
-    duration: "60 menit",
-    xp: 150,
-    mode: "Online",
-    location: "Tautan dikirim via email",
-    date: "30 Mei 2026 · 15.00 WIB",
-    organizer: "GuruBermutu Academy",
-    organizerFollowers: "3.580 pengikut",
-    registrationUrl: "https://www.eventbrite.com/e/mentimeter-interaktif",
-    images: ["https://images.unsplash.com/photo-1516321318423-f06f85e504b3"],
-    friendsGoing: [],
-  },
-];
 
 const WorkshopDetail = () => {
   const { id } = useParams();
@@ -89,7 +24,7 @@ const WorkshopDetail = () => {
 
   const handleRegisterRedirect = () => {
     setHasRegistered(true);
-    window.open(workshop.registrationUrl, "_blank", "noopener,noreferrer");
+    window.open(workshop.registerLink, "_blank", "noopener,noreferrer");
   };
 
   const handleComplete = async () => {
@@ -250,9 +185,9 @@ const WorkshopDetail = () => {
 
 </div> 
 
-      <div className="max-w-4xl mx-auto px-4 md:px-6 mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+      <div className="max-w-4xl mx-auto px-4 md:px-6 mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-stretch">
         {/* LEFT: content */}
-        <div className="md:col-span-2 space-y-5 md:space-y-6">
+        <div className="md:col-span-2 flex flex-col gap-5 md:gap-6 h-full">
           {/* organizer */}
           <div className="flex items-center justify-between bg-white border border-purple-100 rounded-2xl p-4 shadow-[0_2px_10px_-4px_rgba(91,33,182,0.08)]">
             <div className="flex items-center gap-3">
@@ -267,7 +202,7 @@ const WorkshopDetail = () => {
                   Penyelenggara
                 </p>
                 <p className="text-sm font-semibold text-gray-800 leading-tight">{workshop.organizer}</p>
-                <p className="text-xs text-gray-400">{workshop.organizerFollowers}</p>
+                <p className="text-xs text-gray-400">{workshop.followers}</p>
               </div>
             </div>
             <button
@@ -283,34 +218,44 @@ const WorkshopDetail = () => {
             <h2 className="text-[11px] font-semibold uppercase tracking-wide mb-2.5" style={{ color: "#A78BFA" }}>
               Tentang workshop ini
             </h2>
-            <p className="text-gray-600 leading-relaxed text-sm md:text-base">{workshop.desc}</p>
+            <p className="text-gray-600 leading-relaxed text-sm md:text-base">{workshop.description}</p>
           </div>
 
           {/* access info */}
-          <div className="bg-white border border-purple-100 rounded-2xl p-4 shadow-[0_2px_10px_-4px_rgba(91,33,182,0.08)]">
-            <h2 className="text-[11px] font-semibold uppercase tracking-wide mb-3" style={{ color: "#A78BFA" }}>
+          <div className="bg-white border border-purple-100 rounded-2xl p-4 shadow-[0_2px_10px_-4px_rgba(91,33,182,0.08)] flex-1 flex flex-col">
+            <h2
+            className="text-[11px] font-semibold uppercase tracking-wide"
+            style={{ color: "#A78BFA" }}
+            >
               Info akses
-            </h2>
-            <div className="flex items-start gap-3">
-              <div
-                className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 mt-0.5"
-                style={{ background: "#EDE9FE" }}
-              >
-                <span className="text-sm">{workshop.mode === "Online" ? "🔗" : "📍"}</span>
-              </div>
-              <div>
-                <p className="text-sm font-medium text-gray-800 leading-snug">{workshop.location}</p>
-                <p className="text-xs text-gray-400 mt-1 leading-relaxed">
-                  {workshop.mode === "Online"
-                    ? "Tautan meeting akan dikirim ke email menjelang acara oleh penyelenggara."
-                    : "Tunjukkan e-tiket atau kode QR dari penyelenggara saat check-in di lokasi."}
-                </p>
-              </div>
-            </div>
-          </div>
+              </h2>
+              <div className="flex-1 flex items-center">
+                <div className="flex items-start gap-3 w-full">
+                  <div
+                  className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
+                  style={{ background: "#EDE9FE" }}
+                  >
+                    <span className="text-sm">
+                      {workshop.mode === "Online" ? "🔗" : "📍"}
+                      </span>
+                      </div>
+                      
+                       <div className="flex-1">
+                        <p className="text-sm font-medium text-gray-800 leading-snug">
+                          {workshop.location}
+                          </p>
+                          <p className="text-xs text-gray-400 mt-1 leading-relaxed">
+                             {workshop.mode === "Online"
+                              ? "Tautan meeting akan dikirim ke email menjelang acara oleh penyelenggara."
+                               : "Tunjukkan e-tiket atau kode QR dari penyelenggara saat check-in di lokasi."}
+                               </p>
+                                </div>
+                              </div>
+                             </div>
+                          </div>
 
           {/* social proof */}
-          {workshop.friendsGoing.length > 0 && (
+          {workshop.friendsGoing?.length > 0 && (
             <div className="bg-white border border-purple-100 rounded-2xl p-4 shadow-[0_2px_10px_-4px_rgba(91,33,182,0.08)]">
               <h2 className="text-[11px] font-semibold uppercase tracking-wide mb-3" style={{ color: "#A78BFA" }}>
                 Rekan guru yang akan hadir
@@ -360,7 +305,7 @@ const WorkshopDetail = () => {
                 </svg>
                 <p className="text-xs text-gray-400">Reward menyelesaikan di GuruBermutu</p>
               </div>
-              <p className="text-2xl font-bold mb-3.5" style={{ color: "#EC4899" }}>+{workshop.xp} XP</p>
+              <p className="text-2xl font-bold mb-3.5" style={{ color: "#EC4899" }}>+{workshop.reward} XP</p>
 
               <button
                 onClick={handleComplete}
@@ -383,7 +328,7 @@ const WorkshopDetail = () => {
             <button
               onClick={() =>
                 navigator.share
-                  ? navigator.share({ title: workshop.title, text: workshop.desc })
+                  ? navigator.share({ title: workshop.title, text: workshop.description })
                   : alert("Tautan workshop disalin!")
               }
               className="w-full py-3 rounded-xl font-medium border transition hover:bg-purple-50 active:scale-[0.98] flex items-center justify-center gap-2"
