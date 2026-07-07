@@ -445,10 +445,12 @@ activities.length > 0
                 </div>
               </div>
               <div className="mt-5 space-y-2">
-                <button className="w-full border border-purple-600 text-purple-600 py-2.5 rounded-xl text-sm">
-                  onClick={() => navigate("/edit-profile")}
-                  Edit Profil
-                </button>
+  <button
+    onClick={() => navigate("/edit-profile")}
+    className="w-full border border-purple-600 text-purple-600 py-2.5 rounded-xl text-sm hover:bg-purple-50 transition"
+  >
+    Edit Profil
+  </button>
                 <button
                   onClick={handleLogout}
                   className="w-full text-white py-2.5 rounded-xl text-sm"
