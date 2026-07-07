@@ -150,7 +150,7 @@ const SkillTree = () => {
               <div className="w-full bg-gray-200 rounded-full h-3">
                 <div
                   className="bg-gradient-to-r from-[#A64D8B] to-[#E0C3FC] h-3 rounded-full"
-                  style={{ width: `${progress}%` }}
+                  style={{ width: `${Math.min(progress,100)}%` }}
                 ></div>
               </div>
 

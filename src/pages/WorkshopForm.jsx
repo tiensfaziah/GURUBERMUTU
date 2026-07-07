@@ -11,9 +11,16 @@ const emptyForm = {
   time: "",
   mode: "Online",
   location: "",
+
   thumbnail: "",
+
   description: "",
-  registrationLink: "",
+
+  registerLink: "",
+
+  xp: 100,
+
+  skillTreeNode: "",
 };
 
 function formatDateID(dateStr) {
@@ -57,15 +64,86 @@ const WorkshopForm = () => {
         location: data.location || "",
         thumbnail: data.thumbnail || "",
         description: data.description || "",
-        registrationLink: data.registrationLink || "",
+        registerLink: data.registerLink || "",
+        xp:data.xp || 100,
+        skillTreeNode:data.skillTreeNode || "",
       });
       setLoading(false);
     })();
   }, [id, isEdit, user]);
 
   const handleChange = (field) => (e) => {
-    setForm((prev) => ({ ...prev, [field]: e.target.value }));
+  setForm((prev) => ({
+    ...prev,
+    [field]: e.target.value,
+  }));
+};
+const handleThumbnail = (e) => {
+  const file = e.target.files[0];
+
+  if (!file) return;
+
+  // Maksimal file asli 5 MB
+  if (file.size > 5 * 1024 * 1024) {
+    alert("Ukuran gambar maksimal 5 MB.");
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = (event) => {
+    const img = new Image();
+
+    img.onload = () => {
+      // ukuran maksimum
+      const MAX_WIDTH = 800;
+      const MAX_HEIGHT = 800;
+
+      let width = img.width;
+      let height = img.height;
+
+      if (width > height) {
+        if (width > MAX_WIDTH) {
+          height = height * (MAX_WIDTH / width);
+          width = MAX_WIDTH;
+        }
+      } else {
+        if (height > MAX_HEIGHT) {
+          width = width * (MAX_HEIGHT / height);
+          height = MAX_HEIGHT;
+        }
+      }
+
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+
+      const ctx = canvas.getContext("2d");
+
+      ctx.drawImage(img, 0, 0, width, height);
+
+      // Kompres JPEG kualitas 70%
+      const compressed = canvas.toDataURL(
+        "image/jpeg",
+        0.7
+      );
+      if (compressed.length > 900000) {
+  alert(
+    "Ukuran gambar masih terlalu besar. Gunakan gambar yang lebih kecil."
+  );
+  return;
+}
+      setForm((prev) => ({
+        ...prev,
+        thumbnail: compressed,
+      }));
+    };
+
+    img.src = event.target.result;
   };
+
+  reader.readAsDataURL(file);
+};
 
   const goBackTarget = user?.role === "admin" ? "/admin/kelola-workshop" : "/workshop";
 
@@ -73,7 +151,14 @@ const WorkshopForm = () => {
     e.preventDefault();
     setError("");
 
-    if (!form.title || !form.category || !form.dateRaw || !form.time || !form.location) {
+    if (
+!form.title ||
+!form.category ||
+!form.dateRaw ||
+!form.time ||
+!form.location ||
+!form.skillTreeNode
+) {
       setError("Mohon lengkapi semua field yang wajib diisi.");
       return;
     }
@@ -85,18 +170,29 @@ const WorkshopForm = () => {
     setSaving(true);
     try {
       const payload = {
-        title: form.title,
-        category: form.category,
-        speaker: form.speaker,
-        dateRaw: form.dateRaw,
-        date: formatDateID(form.dateRaw),
-        time: form.time,
-        mode: form.mode,
-        location: form.location,
-        thumbnail: form.thumbnail,
-        description: form.description,
-        registrationLink: form.registrationLink,
-      };
+  title: form.title,
+  category: form.category,
+  speaker: form.speaker,
+
+  dateRaw: form.dateRaw,
+  date: formatDateID(form.dateRaw),
+
+  time: form.time,
+
+  mode: form.mode,
+
+  location: form.location,
+
+  thumbnail: form.thumbnail,
+
+  description: form.description,
+
+  registerLink: form.registerLink,
+
+  xp: Number(form.xp),
+
+  skillTreeNode: form.skillTreeNode,
+};
 
       if (isEdit) {
         await updateWorkshop(id, payload);
@@ -104,12 +200,15 @@ const WorkshopForm = () => {
         await addWorkshop(payload, user);
       }
       navigate(goBackTarget);
-    } catch (err) {
-      console.error(err);
-      setError("Gagal menyimpan workshop. Coba lagi.");
-    } finally {
-      setSaving(false);
-    }
+    }catch(err){
+
+   console.error("ERROR WORKSHOP :",err);
+
+   alert(err.message);
+
+   setError(err.message);
+
+}
   };
 
   if (loading || userLoading) {
@@ -244,17 +343,25 @@ const WorkshopForm = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Thumbnail (URL gambar)</label>
-              <input
-                type="text"
-                value={form.thumbnail}
-                onChange={handleChange("thumbnail")}
-                placeholder="https://..."
-                className="w-full border border-purple-100 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-purple-200"
-              />
+              <div>
+  <label className="block text-sm font-medium text-gray-700 mb-1.5">
+    Thumbnail Workshop
+  </label>
+
+  <input
+    type="file"
+    accept="image/*"
+    onChange={handleThumbnail}
+    className="w-full border border-purple-100 rounded-xl px-4 py-2.5"
+  />
+</div>
               {form.thumbnail && (
-                <img src={form.thumbnail} alt="preview" className="mt-2 w-full h-32 object-cover rounded-xl border border-purple-100" />
-              )}
+  <img
+    src={form.thumbnail}
+    alt="Preview"
+    className="mt-3 w-full h-52 object-cover rounded-xl border"
+  />
+)}
             </div>
 
             <div>
@@ -272,13 +379,42 @@ const WorkshopForm = () => {
               <label className="block text-sm font-medium text-gray-700 mb-1.5">Link Pendaftaran</label>
               <input
                 type="text"
-                value={form.registrationLink}
-                onChange={handleChange("registrationLink")}
+                value={form.registerLink}
+                onChange={handleChange("registerLink")}
                 placeholder="https://..."
                 className="w-full border border-purple-100 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-purple-200"
               />
             </div>
+            <div>
+  <label className="block text-sm font-medium text-gray-700 mb-1.5">
+    Reward XP
+  </label>
 
+  <input
+    type="number"
+    min="10"
+    value={form.xp}
+    onChange={handleChange("xp")}
+    className="w-full border border-purple-100 rounded-xl px-4 py-2.5"
+  />
+</div>
+<div>
+  <label className="block text-sm font-medium text-gray-700 mb-1.5">
+    Skill Tree Node
+  </label>
+
+  <select
+    value={form.skillTreeNode}
+    onChange={handleChange("skillTreeNode")}
+    className="w-full border border-purple-100 rounded-xl px-4 py-2.5"
+  >
+    <option value="">Pilih Node</option>
+    <option value="0-0">0-0</option>
+    <option value="0-1">0-1</option>
+    <option value="0-2">0-2</option>
+    <option value="1-1">1-1</option>
+  </select>
+</div>
             <button
               type="submit"
               disabled={saving}

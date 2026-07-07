@@ -14,7 +14,6 @@ const Workshop = () => {
   const [search, setSearch] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("Semua Lokasi");
   const [activeTime, setActiveTime] = useState("Semua");
-  const [savedIds, setSavedIds] = useState([]);
   const [openMenuId, setOpenMenuId] = useState(null);
   const [detectedLocation] = useState("Yogyakarta");
 
@@ -25,13 +24,6 @@ const Workshop = () => {
     });
     return () => unsub();
   }, []);
-
-  const toggleSave = (id, e) => {
-    e.stopPropagation();
-    setSavedIds((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
-    );
-  };
 
   const handleDelete = async (item, e) => {
     e.stopPropagation();
@@ -204,9 +196,9 @@ const Workshop = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6">
             {filteredWorkshop.map((item) => {
-              const isSaved = savedIds.includes(item.id);
               const slotsLeft = (item.quota || 0) - (item.registered || 0);
               const pctFull = item.quota ? Math.round((item.registered / item.quota) * 100) : 0;
+              const xpValue = item.xp ?? item.reward ?? 0;
 
               const isOwner = user && item.createdBy === user.uid;
               const isAdmin = user?.role === "admin";
@@ -225,18 +217,16 @@ const Workshop = () => {
                       className="w-full h-40 md:h-44 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
 
-                    <button
-                      onClick={(e) => toggleSave(item.id, e)}
-                      className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur flex items-center justify-center shadow hover:scale-110 transition"
-                    >
-                      <svg className="w-4 h-4 transition" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
-                        style={isSaved ? { fill: "#EC4899", color: "#EC4899" } : { fill: "none", color: "#5B21B6" }}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 21l-7.682-8.318a4.5 4.5 0 010-6.364z" />
-                      </svg>
-                    </button>
-
                     <span className="absolute bottom-3 left-3 text-[10px] font-semibold px-2 py-1 rounded-full text-white backdrop-blur" style={{ background: "rgba(45,27,105,0.8)" }}>
                       {item.mode}
+                    </span>
+
+                    {/* Badge XP di pojok kanan atas gambar */}
+                    <span
+                      className="absolute top-3 right-3 flex items-center gap-1 text-[10px] font-bold px-2 py-1 rounded-full shadow-sm"
+                      style={{ background: "#FEF3C7", color: "#B45309" }}
+                    >
+                      ⚡ +{xpValue} XP
                     </span>
                   </div>
 

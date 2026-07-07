@@ -27,6 +27,8 @@ import PenilaianAhli from "./pages/Penilaianahli";
 import DataGuru from "./pages/Dataguru";
 import WorkshopForm from "./pages/WorkshopForm";
 import KelolaWorkshop from "./pages/KelolaWorkshop";
+import EditProfile from "./pages/EditProfile";
+import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
 
 function Layout() {
   const location = useLocation();
@@ -76,9 +78,30 @@ function Layout() {
     </ProtectedRoute>
   }
 />
-<Route path="/workshop/buat" element={<WorkshopForm />} />
-<Route path="/workshop/edit/:id" element={<WorkshopForm />} />
-<Route path="/admin/kelola-workshop" element={<KelolaWorkshop />} />
+<Route
+  path="/workshop/buat"
+  element={
+    <ProtectedRoute>
+      <WorkshopForm />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/workshop/edit/:id"
+  element={
+    <ProtectedRoute>
+      <WorkshopForm />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/admin/kelola-workshop"
+  element={
+    <ProtectedAdminRoute>
+      <KelolaWorkshop />
+    </ProtectedAdminRoute>
+  }
+/>
         <Route
           path="/skill-tree"
           element={
@@ -87,6 +110,14 @@ function Layout() {
             </ProtectedRoute>
           }
         />
+        <Route
+  path="/edit-profile"
+  element={
+    <ProtectedRoute>
+      <EditProfile />
+    </ProtectedRoute>
+  }
+/>
 <Route
   path="/tech-stack"
   element={
@@ -102,9 +133,9 @@ function Layout() {
 <Route
   path="/admin"
   element={
-    <ProtectedRoute>
+    <ProtectedAdminRoute>
       <AdminDashboard />
-    </ProtectedRoute>
+    </ProtectedAdminRoute>
   }
 />
 <Route
@@ -140,12 +171,30 @@ function Layout() {
             </ProtectedRoute>
           }
         />
-        <Route path="/admin/kelola-game" 
-        element={<KelolaGame />} />
-        <Route path="/admin/penilaian-ahli" 
-        element={<PenilaianAhli />} />
-        <Route path="/admin/data-guru" 
-        element={<DataGuru />} />
+        <Route
+  path="/admin/kelola-game"
+  element={
+    <ProtectedAdminRoute>
+      <KelolaGame />
+    </ProtectedAdminRoute>
+  }
+/>
+        <Route
+  path="/admin/penilaian-ahli"
+  element={
+    <ProtectedAdminRoute>
+      <PenilaianAhli />
+    </ProtectedAdminRoute>
+  }
+/>
+        <Route
+  path="/admin/data-guru"
+  element={
+    <ProtectedAdminRoute>
+      <DataGuru />
+    </ProtectedAdminRoute>
+  }
+/>
       </Routes>
   
     </>

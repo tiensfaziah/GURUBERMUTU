@@ -1,0 +1,26 @@
+import { useState, useEffect } from "react";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db, auth } from "../firebase";
+
+export function useUserProgress() {
+  const [progress, setProgress] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const user = auth.currentUser;
+    if (!user) {
+      setLoading(false);
+      return;
+    }
+
+    const userRef = doc(db, "users", user.uid);
+    const unsub = onSnapshot(userRef, (snap) => {
+      setProgress(snap.exists() ? snap.data() : null);
+      setLoading(false);
+    });
+
+    return () => unsub();
+  }, []);
+
+  return { progress, loading };
+}

@@ -3,6 +3,7 @@ import { auth, db } from "../firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
 import { useNavigate, useLocation } from "react-router-dom";
+import { getLevel } from "../utils/level";
 
 function Dashboard() {
   const [user, setUser] = useState(null);
@@ -44,23 +45,37 @@ function Dashboard() {
   };
 
   const xp = userData?.xp || 0;
-  const completed = userData?.completedModules || 0;
+  const levelData = getLevel(xp);
+  
 
-  const getLevelName = (xp) => {
-    if (xp >= 5000) return "Guru Inspiratif";
-    if (xp >= 3000) return "Guru Produktif";
-    if (xp >= 1500) return "Guru Kreatif";
-    if (xp >= 500) return "Guru Berkembang";
-    return "Guru Pemula";
-  };
+  
 
-  const progress = Math.floor((completed / 10) * 100);
+  const progress = Math.min(
+100,
+Math.max(
+0,
+Math.floor(
+((xp-levelData.currentXP)/
+(levelData.nextXP-levelData.currentXP))*100
+)
+)
+);
 
   const latestBadge =
     userData?.badges && userData.badges.length > 0
       ? userData.badges[userData.badges.length - 1]
       : null;
-
+  console.log("USER DATA:", userData);
+console.log("AKTIVITAS:", userData?.aktivitas);
+  const activities = [...(userData?.aktivitas || [])].sort((a,b)=>{
+    return (b.createdAt || 0) - (a.createdAt || 0);
+});
+const displayActivities =
+activities.length > 0
+? [...activities].reverse()
+: [{
+    text: "Belum ada aktivitas."
+}];
   return (
     <div className="min-h-screen" style={{ background: "#F5F3FF" }}>
 
@@ -71,7 +86,18 @@ function Dashboard() {
           {menuOpen ? "✕" : "☰"}
         </button>
       </div>
+{userData?.role === "admin" && (
 
+<button
+    onClick={()=>{
+        navigate("/admin");
+        setMenuOpen(false);
+    }}
+>
+    Admin Panel
+</button>
+
+)}
       {/* MOBILE MENU */}
       <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${menuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}>
         <div className="bg-white px-4 pb-5 pt-2 space-y-2 shadow-md border-b border-purple-100">
@@ -140,7 +166,9 @@ function Dashboard() {
 
           <nav className="space-y-1 flex-1">
             
-            <button
+            {userData?.role === "admin" && (
+
+<button
   onClick={() => navigate("/admin")}
   className={`
     w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-xl
@@ -155,6 +183,8 @@ function Dashboard() {
   <span className="text-base">⚙️</span>
   Admin Panel
 </button>
+
+)}
             {[
   { icon: "🏠", label: "Dashboard", path: "/dashboard" },
   { icon: "🌳", label: "Skill Tree", path: "/skill-tree" },
@@ -274,17 +304,18 @@ function Dashboard() {
                 <div>
                   <p className="text-purple-300 text-xs font-semibold uppercase tracking-widest mb-2">Selamat datang kembali</p>
                   <h2 className="text-2xl md:text-3xl font-bold text-white leading-snug">
-                    Halo, {user?.email?.split("@")[0]} 👋
-                  </h2>
+                    Halo, {userData?.name || user?.email?.split("@")[0]} 👋
+                    </h2>
                   <p className="text-sm mt-2 leading-relaxed" style={{ color: "rgba(255,255,255,0.75)" }}>
                     Yuk lanjut belajar dan naik level hari ini!
                   </p>
                   <button
-                    className="mt-5 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all hover:scale-105"
-                    style={{ background: "#fff", color: "#5B21B6" }}
-                  >
-                    Lanjut Belajar →
-                  </button>
+  onClick={() => navigate("/workshop")}
+  className="mt-5 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all hover:scale-105"
+  style={{ background: "#fff", color: "#5B21B6" }}
+>
+  Lanjut Belajar →
+</button>
                 </div>
 
                 {/* XP cards */}
@@ -295,7 +326,7 @@ function Dashboard() {
                   </div>
                   <div className="rounded-2xl p-4 text-center border border-white/20" style={{ background: "rgba(255,255,255,0.1)", backdropFilter: "blur(8px)" }}>
                     <p className="text-xs font-medium mb-1" style={{ color: "rgba(255,255,255,0.7)" }}>🔥 Level</p>
-                    <h3 className="text-sm font-bold text-white">{getLevelName(xp)}</h3>
+                    <h3 className="text-sm font-bold text-white">{levelData.name} ({xp} XP)</h3>
                   </div>
                 </div>
               </div>
@@ -324,7 +355,7 @@ function Dashboard() {
                   <span className="text-sm">🏅</span>
                 </div>
                 <p className="text-gray-400 text-[10px] uppercase tracking-widest font-semibold">Level</p>
-                <h3 className="text-base font-bold mt-0.5" style={{ color: "#7C3AED" }}>{getLevelName(xp)}</h3>
+                <h3 className="text-base font-bold mt-0.5" style={{ color: "#7C3AED" }}>{levelData.name} ({xp} XP)</h3>
               </div>
 
               {/* Badge */}
@@ -339,7 +370,7 @@ function Dashboard() {
                 {latestBadge ? (
                   <h3 className="text-base font-bold mt-0.5" style={{ color: "#5B21B6" }}>{latestBadge}</h3>
                 ) : (
-                  <h3 className="text-base font-bold text-gray-300 mt-0.5">Belum ada badge</h3>
+                  <h3 className="text-base font-bold text-gray-300 mt-0.5">🔒 Badge pertama terbuka di 500 XPBelum ada badge</h3>
                 )}
               </div>
             </div>
@@ -349,7 +380,9 @@ function Dashboard() {
               <div className="flex justify-between items-center mb-1">
                 <div>
                   <p className="font-semibold text-sm md:text-base text-gray-800">Progress Belajar</p>
-                  <p className="text-xs text-gray-400 mt-0.5">{getLevelName(xp)}</p>
+                  <p className="text-xs text-gray-400 mt-0.5">
+   {levelData.name}
+</p>
                 </div>
                 <span className="font-bold text-lg" style={{ color: "#7C3AED" }}>{progress}%</span>
               </div>
@@ -371,38 +404,49 @@ function Dashboard() {
                 ))}
               </div>
 
-              <p className="text-xs text-gray-400 mt-1">{completed} dari 10 modul selesai</p>
+              <p className="text-xs text-gray-400 mt-1">
+  {xp - levelData.currentXP} / {levelData.nextXP - levelData.currentXP} XP
+</p>
             </div>
 
             {/* MOBILE AKTIVITAS */}
             <div className="md:hidden bg-white p-5 rounded-2xl border border-purple-100">
               <h3 className="font-semibold mb-3">Aktivitas Terkini</h3>
               <div className="space-y-2 text-sm">
-                {userData?.aktivitas?.slice(0, 3).map((item, index) => (
-                  <div key={index} className="flex items-start gap-2 py-2 border-b border-purple-50 last:border-0">
-                    <span className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ background: "#7C3AED" }} />
-                    <p className="leading-relaxed text-gray-700">{item}</p>
-                  </div>
-                ))}
+  {displayActivities.slice(0,3).map((item,index)=>(
+  <div
+    key={index}
+    className="flex items-start gap-2 py-2 border-b border-purple-50 last:border-0"
+  >
+    <span
+      className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0"
+      style={{ background:"#7C3AED"}}
+    />
+
+    <p>
+   {typeof item === "string"
+      ? item
+      : item.text}
+</p>
+
+  </div>
+))}
               </div>
             </div>
 
             {/* MOBILE PROFILE */}
             <div className="md:hidden bg-white p-5 rounded-2xl border border-purple-100">
               <div className="flex items-center gap-4">
-                <div
-                  className="w-14 h-14 text-white rounded-full flex items-center justify-center text-lg font-bold"
-                  style={{ background: "#5B21B6" }}
-                >
-                  {user?.email?.charAt(0).toUpperCase()}
+                <div className="w-14 h-14 text-white rounded-full flex items-center justify-center text-lg font-bold"style={{ background: "#5B21B6" }}> {(userData?.name || user?.email)?.charAt(0).toUpperCase()}
                 </div>
                 <div>
-                  <h3 className="font-semibold">{user?.email?.split("@")[0]}</h3>
+                  <h3 className="font-semibold">{userData?.name || user?.email?.split("@")[0]}</h3>
                   <p className="text-xs text-gray-400 break-all">{user?.email}</p>
                 </div>
               </div>
               <div className="mt-5 space-y-2">
                 <button className="w-full border border-purple-600 text-purple-600 py-2.5 rounded-xl text-sm">
+                  onClick={() => navigate("/edit-profile")}
                   Edit Profil
                 </button>
                 <button
@@ -425,38 +469,40 @@ function Dashboard() {
             {/* Avatar */}
             <div className="text-center">
               <div className="relative mx-auto w-fit">
-                <div
-                  className="w-16 h-16 mx-auto text-white rounded-full flex items-center justify-center text-xl font-bold"
-                  style={{ background: "#5B21B6" }}
-                >
-                  {user?.email?.charAt(0).toUpperCase()}
-                </div>
+                <div className="w-16 h-16 mx-auto text-white rounded-full flex items-center justify-center text-xl font-bold"style={{ background: "#5B21B6" }}
+>
+{(userData?.name || user?.email)?.charAt(0).toUpperCase()}
+</div>
                 {/* Online dot */}
                 <span
                   className="absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-white"
                   style={{ background: "#10B981" }}
                 />
               </div>
-              <h3 className="mt-3 font-semibold text-gray-800">{user?.email?.split("@")[0]}</h3>
+              <h3 className="mt-3 font-semibold text-gray-800">{userData?.name || user?.email?.split("@")[0]}</h3>
               <p className="text-[11px] text-gray-400 mt-0.5 break-all">{user?.email}</p>
               <div
                 className="mt-2 inline-block px-3 py-1 rounded-full text-xs font-semibold"
                 style={{ background: "#EDE9FE", color: "#5B21B6" }}
               >
-                {getLevelName(xp)}
+                {levelData.name}
               </div>
             </div>
 
             <hr className="my-4 border-purple-50" />
 
             {/* Aktivitas */}
-            <div className="flex-1 overflow-hidden">
+            <div className="flex-1">
               <h3 className="font-semibold mb-3 text-sm text-gray-800">Aktivitas Terkini</h3>
               <div className="space-y-2 text-sm">
-                {userData?.aktivitas?.slice(0, 3).map((item, index) => (
+                {displayActivities.slice(0,3).map((item, index) => (
                   <div key={index} className="flex items-start gap-2 py-2 border-b border-purple-50 last:border-0">
                     <span className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ background: "#7C3AED" }} />
-                    <p className="leading-relaxed text-gray-600 text-xs">{item}</p>
+                    <p>
+   {typeof item === "string"
+      ? item
+      : item.text}
+</p>
                   </div>
                 ))}
               </div>
@@ -465,6 +511,7 @@ function Dashboard() {
             {/* Buttons */}
             <div className="mt-auto space-y-2 pt-5">
               <button
+              onClick={() => navigate("/edit-profile")}
                 className="w-full border py-2.5 rounded-xl text-sm font-medium transition hover:opacity-80"
                 style={{ borderColor: "#7C3AED", color: "#7C3AED" }}
               >
