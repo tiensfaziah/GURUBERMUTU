@@ -56,15 +56,15 @@ const handleForgotPassword = async () => {
 
 };
   return (
-    <div className="min-h-[100dvh] relative overflow-hidden bg-gradient-to-br from-[#f1bff8] via-[#e8dfea] to-[#a985cb] px-4 pt-20">
+    <div className="min-h-screen flex flex-col relative overflow-hidden bg-gradient-to-br from-[#f1bff8] via-[#e8dfea] to-[#a985cb] px-4 pt-6">
 
-  <div className="max-w-7xl mx-auto pt-6">
+  <div className="max-w-7xl mx-auto w-full">
     <NavigationButtons
       showBack={true}
       showForward={false}
     />
   </div>
-  <div className="flex justify-center items-center mt-6">
+  <div className="flex-1 flex justify-center items-center -mt-6">
       <div className="bg-white/90 backdrop-blur-lg rounded-2xl shadow-xl p-5 sm:p-6 w-full max-w-sm">
 
         <h1 className="text-2xl sm:text-3xl font-bold text-center text-[#5B21B6] mb-2">
