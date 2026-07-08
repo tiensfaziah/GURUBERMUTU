@@ -4,6 +4,8 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getLevel } from "../utils/level";
+import games from "../data/games";
+import { subscribeWorkshops } from "../services/workshopService";
 
 function Dashboard() {
   const [user, setUser] = useState(null);
@@ -12,6 +14,8 @@ function Dashboard() {
   const location = useLocation();
   const [userData, setUserData] = useState(null);
   const [currentDate, setCurrentDate] = useState("");
+  const [search, setSearch] = useState("");
+  const [workshops, setWorkshops] = useState([]);
   const isAdminActive = location.pathname.startsWith("/admin");
 
   useEffect(() => {
@@ -24,7 +28,17 @@ function Dashboard() {
     const interval = setInterval(updateDate, 60000);
     return () => clearInterval(interval);
   }, []);
+useEffect(() => {
 
+    const unsub = subscribeWorkshops((data)=>{
+
+        setWorkshops(data);
+
+    });
+
+    return ()=>unsub();
+
+},[]);
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (u) => {
       if (u) {
@@ -76,6 +90,39 @@ activities.length > 0
 : [{
     text: "Belum ada aktivitas."
 }];
+const searchItems = [
+
+    ...games.map((game)=>({
+
+        title: game.title,
+
+        category:"Tech Stack",
+
+        path:`/game/${game.slug}`
+
+    })),
+
+    ...workshops.map((workshop)=>({
+
+        title: workshop.title,
+
+        category:"Workshop",
+
+        path:`/workshop/${workshop.id}`
+
+    }))
+
+];
+const filteredItems =
+search.trim()===""
+?[]
+:searchItems.filter((item)=>
+
+item.title
+.toLowerCase()
+.includes(search.toLowerCase())
+
+);
   return (
     <div className="min-h-screen" style={{ background: "#F5F3FF" }}>
 
@@ -239,10 +286,57 @@ activities.length > 0
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
                 </svg>
                 <input
-                  type="text"
-                  placeholder="Cari modul..."
-                  className="bg-white pl-10 pr-4 py-3 rounded-xl text-sm w-full md:w-64 border border-purple-100 focus:outline-none focus:ring-2 focus:ring-purple-200"
-                />
+    type="text"
+    placeholder="Cari modul..."
+    value={search}
+    onChange={(e)=>setSearch(e.target.value)}
+    className="bg-white pl-10 pr-4 py-3 rounded-xl text-sm w-full md:w-64 border border-purple-100 focus:outline-none focus:ring-2 focus:ring-purple-200"
+/>
+{
+filteredItems.length>0&&(
+
+<div className="absolute left-0 top-14 w-full bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden z-50">
+
+{filteredItems.map((item,index)=>(
+
+<button
+
+key={index}
+
+onClick={()=>{
+navigate(item.path);
+setSearch("");
+}}
+
+className="w-full text-left px-4 py-3 hover:bg-purple-50 transition"
+
+>
+
+<p className="font-medium">
+
+{item.title}
+
+</p>
+
+<span
+  className={`inline-block mt-1 text-[11px] px-2 py-1 rounded-full ${
+    item.category === "Tech Stack"
+      ? "bg-purple-100 text-purple-700"
+      : item.category === "Workshop"
+      ? "bg-green-100 text-green-700"
+      : "bg-blue-100 text-blue-700"
+  }`}
+>
+  {item.category}
+</span>
+</button>
+
+))}
+
+</div>
+
+)
+}
               </div>
               <p className="text-xs text-gray-500 md:text-right">{currentDate}</p>
             </div>
@@ -437,8 +531,19 @@ activities.length > 0
             {/* MOBILE PROFILE */}
             <div className="md:hidden bg-white p-5 rounded-2xl border border-purple-100">
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 text-white rounded-full flex items-center justify-center text-lg font-bold"style={{ background: "#5B21B6" }}> {(userData?.name || user?.email)?.charAt(0).toUpperCase()}
-                </div>
+                <div className="w-14 h-14 rounded-full overflow-hidden bg-purple-600">
+  {userData?.photoURL ? (
+    <img
+      src={userData.photoURL}
+      alt="Foto Profil"
+      className="w-full h-full object-cover"
+    />
+  ) : (
+    <div className="w-full h-full flex items-center justify-center text-white text-lg font-bold">
+      {(userData?.name || user?.email)?.charAt(0).toUpperCase()}
+    </div>
+  )}
+</div>
                 <div>
                   <h3 className="font-semibold">{userData?.name || user?.email?.split("@")[0]}</h3>
                   <p className="text-xs text-gray-400 break-all">{user?.email}</p>
@@ -471,9 +576,18 @@ activities.length > 0
             {/* Avatar */}
             <div className="text-center">
               <div className="relative mx-auto w-fit">
-                <div className="w-16 h-16 mx-auto text-white rounded-full flex items-center justify-center text-xl font-bold"style={{ background: "#5B21B6" }}
->
-{(userData?.name || user?.email)?.charAt(0).toUpperCase()}
+                <div className="w-16 h-16 mx-auto rounded-full overflow-hidden bg-purple-600">
+  {userData?.photoURL ? (
+    <img
+      src={userData.photoURL}
+      alt="Foto Profil"
+      className="w-full h-full object-cover"
+    />
+  ) : (
+    <div className="w-full h-full flex items-center justify-center text-white text-xl font-bold">
+      {(userData?.name || user?.email)?.charAt(0).toUpperCase()}
+    </div>
+  )}
 </div>
                 {/* Online dot */}
                 <span

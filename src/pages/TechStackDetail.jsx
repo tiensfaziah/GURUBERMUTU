@@ -2,11 +2,11 @@ import { useParams } from "react-router-dom";
 import games from "../data/games";
 
 export default function TechStackDetail() {
-  const { id } = useParams();
+  const { slug } = useParams();
 
   const game = games.find(
-    (item) => item.id === Number(id)
-  );
+  (item) => item.slug === slug
+);
 
   if (!game) {
     return (

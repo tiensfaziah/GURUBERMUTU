@@ -44,6 +44,7 @@ function Layout() {
     location.pathname === "/admin/penilaian-ahli" ||
     location.pathname === "/admin/data-guru" ||
     location.pathname === "/admin/kelola-workshop" ||
+    location.pathname === "/edit-profile" ||
     location.pathname.startsWith("/workshop");
 
   return (

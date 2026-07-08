@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from "firebase/auth";
 import { auth } from "../firebase";
 import { Eye, EyeOff } from "lucide-react";
 import NavigationButtons from "../components/NavigationButtons";
@@ -22,7 +25,36 @@ function Login() {
       alert("Email atau password salah!");
     }
   };
+const handleForgotPassword = async () => {
 
+  if (!email) {
+    alert("Masukkan email terlebih dahulu.");
+    return;
+  }
+
+  try {
+
+    await sendPasswordResetEmail(auth, email);
+
+    alert(
+      "Link reset password telah dikirim ke email kamu. Silakan cek inbox atau folder spam."
+    );
+
+  } catch (error) {
+
+    console.error(error);
+
+    if (error.code === "auth/user-not-found") {
+      alert("Email belum terdaftar.");
+    } else if (error.code === "auth/invalid-email") {
+      alert("Format email tidak valid.");
+    } else {
+      alert("Gagal mengirim email reset password.");
+    }
+
+  }
+
+};
   return (
     <div className="min-h-[100dvh] relative overflow-hidden bg-gradient-to-br from-[#f1bff8] via-[#e8dfea] to-[#a985cb] px-4 pt-20">
 
@@ -79,7 +111,17 @@ function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-2 pl-10 pr-12 border rounded-lg"
               />
+              <div className="flex justify-end mt-2">
 
+  <button
+    type="button"
+    onClick={handleForgotPassword}
+    className="text-sm text-[#5B21B6] hover:underline"
+  >
+    Lupa Password?
+  </button>
+
+</div>
               <span className="absolute left-3 top-2.5 text-gray-400">
                 🔒
               </span>
