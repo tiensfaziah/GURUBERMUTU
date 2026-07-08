@@ -25,6 +25,7 @@ const WorkshopDetail = () => {
   const [isFollowing, setIsFollowing] = useState(false);
   const [hasRegistered, setHasRegistered] = useState(false);
   const [completed, setCompleted] = useState(false);
+  const [xpAdded, setXpAdded] = useState(null);
   const [organizerPhotoError, setOrganizerPhotoError] = useState(false);
 
   const [workshop, setWorkshop] = useState(null);
@@ -206,8 +207,16 @@ await addActivity(
     user.uid,
     `🎓 Menyelesaikan workshop "${workshop.title}"`
 );
-      setCompleted(true);
-      alert("🎉 XP berhasil ditambahkan!");
+
+setCompleted(true);
+
+// tampilkan popup XP
+setXpAdded(rewardXP);
+
+// hilang setelah 3,5 detik
+setTimeout(() => {
+    setXpAdded(null);
+}, 3500);
     } catch (err) {
       console.error(err);
       alert("Gagal menyimpan progress.");
@@ -216,6 +225,30 @@ await addActivity(
 
   return (
     <div className="min-h-screen pb-16" style={{ background: "#F5F3FF" }}>
+
+        {/* XP TOAST */}
+        {xpAdded && (
+            <div
+                className="fixed top-6 right-6 z-[999] flex items-center gap-3 px-5 py-4 rounded-2xl shadow-xl animate-bounce"
+                style={{
+                    background: "linear-gradient(135deg,#5B21B6,#7C3AED)",
+                    color: "white",
+                }}
+            >
+                <span className="text-2xl">🎉</span>
+
+                <div>
+                    <p className="font-bold text-sm">
+                        +{xpAdded} XP Didapat!
+                    </p>
+
+                    <p className="text-xs text-white/80">
+                        Workshop berhasil diselesaikan
+                    </p>
+                </div>
+            </div>
+        )}
+        
       {/* HERO */}
       <div className="max-w-4xl mx-auto px-4 md:px-6 pt-4 md:pt-6">
         <div

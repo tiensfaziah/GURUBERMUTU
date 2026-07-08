@@ -11,7 +11,6 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Workshop from "./pages/Workshop";
 import WorkshopDetail from "./pages/WorkshopDetail";
-import SkillTree from "./fitur/SkillTree";
 import Footer from "./components/Footer";
 import HowItWorks from "./components/HowItWorks";
 import Faq from "./components/Faq";
@@ -29,6 +28,8 @@ import WorkshopForm from "./pages/WorkshopForm";
 import KelolaWorkshop from "./pages/KelolaWorkshop";
 import EditProfile from "./pages/EditProfile";
 import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
+import SkillTree from "./pages/SkillTree";
+import Marketplace from "./pages/Marketplace";
 
 function Layout() {
   const location = useLocation();
@@ -45,6 +46,7 @@ function Layout() {
     location.pathname === "/admin/data-guru" ||
     location.pathname === "/admin/kelola-workshop" ||
     location.pathname === "/edit-profile" ||
+    location.pathname === "/marketplace" ||
     location.pathname.startsWith("/workshop");
 
   return (
@@ -103,6 +105,8 @@ function Layout() {
     </ProtectedAdminRoute>
   }
 />
+<Route path="/skill-tree" element={<SkillTree />} />
+<Route path="/marketplace" element={<Marketplace />} />
         <Route
           path="/skill-tree"
           element={

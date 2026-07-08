@@ -144,7 +144,7 @@ item.title
   { label: "🏠 Dashboard", path: "/dashboard" },
   { label: "🌳 Skill Tree", path: "/skill-tree" },
   { label: "🛠 Tech Stack", path: "/tech-stack" },
-  { label: "🛒 Marketplace", path: null },
+  { label: "🛒 Marketplace", path: "/marketplace" },
   { label: "🎓 Workshop", path: "/workshop" },
   { label: "👤 Edit Profil", path: "/edit-profile" },
 ].map(({ label, path }) => {
@@ -228,7 +228,7 @@ item.title
   { icon: "🏠", label: "Dashboard", path: "/dashboard" },
   { icon: "🌳", label: "Skill Tree", path: "/skill-tree" },
   { icon: "🛠", label: "Tech Stack", path: "/tech-stack" },
-  { icon: "🛒", label: "Marketplace", path: null },
+  { icon: "🛒", label: "Marketplace", path: "/marketplace" },
   { icon: "🎓", label: "Workshop", path: "/workshop" },
 ].map(({ icon, label, path }) => {
   const isActive = path && location.pathname === path;
