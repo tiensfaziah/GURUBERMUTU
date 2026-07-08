@@ -1,7 +1,6 @@
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import games from "../data/games";
-import curatedImage from "../assets/curated1.jpg";
 import { useNavigate } from "react-router-dom";
 
 const ITEMS_PER_PAGE = 6;
@@ -185,44 +184,64 @@ export default function TechStack() {
   return (
     <div className="min-h-screen bg-[#F8F5FF] p-6 md:p-8">
      {/* HERO */}
-      <div className="relative min-h-[520px] md:min-h-[320px] rounded-[32px] overflow-hidden mb-10">
-        <button
-  onClick={() => navigate(-1)}
-  className="absolute top-6 left-6 z-20 text-white hover:text-gray-200 transition"
->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="w-8 h-8"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-    strokeWidth={2.5}
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M15 19l-7-7 7-7"
-    />
-  </svg>
-</button>
-        <img
-          src={curatedImage}
-          alt="Curated Tech Stack"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/20" />
-        <div className="relative z-10 h-full flex items-start md:items-center">
-          <div className="max-w-3xl px-6 md:px-12 pt-10 md:pt-0 text-white">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-sm font-semibold mb-5 mt-8 md:mt-0">
-              🔬 EGQI VERIFIED
-            </div>
-            <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-4">
-              Curated Tech Stack
-            </h1>
-            <p className="text-base md:text-lg text-white/85 leading-relaxed max-w-xl">
-              Temukan game edukasi terbaik yang telah dikurasi menggunakan
-              Educational Game Quality Instrument (EGQI) untuk membantu
-              pembelajaran yang lebih interaktif dan efektif.
+      <div className="max-w-7xl mx-auto px-4 md:px-6 pt-4 md:pt-8">
+        <div
+          className="relative rounded-[24px] md:rounded-[28px] overflow-hidden"
+          style={{ background: "#2D1B69", minHeight: 260 }}
+        >
+          <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" viewBox="0 0 800 260">
+            {[0, 1, 2, 3, 4, 5].map((row) =>
+              [0, 1, 2, 3, 4, 5].map((col) => (
+                <circle key={`d-${row}-${col}`} cx={col * 40 + 20} cy={row * 40 + 10} r="1.5" fill="white" opacity="0.12" />
+              ))
+            )}
+            <circle cx="690" cy="120" r="150" fill="none" stroke="white" strokeWidth="0.8" opacity="0.1" />
+            <circle cx="690" cy="120" r="110" fill="none" stroke="white" strokeWidth="0.8" opacity="0.1" />
+            <circle cx="690" cy="120" r="70" fill="none" stroke="white" strokeWidth="0.8" opacity="0.12" />
+            <circle cx="710" cy="90" r="40" fill="#3D2380" opacity="0.8" />
+            <ellipse cx="710" cy="90" rx="55" ry="10" fill="none" stroke="white" strokeWidth="1.2" opacity="0.25" transform="rotate(-20 710 90)" />
+            {[[120, 40], [220, 25], [360, 35], [510, 20], [600, 60], [110, 190], [320, 200], [470, 220], [640, 200], [760, 150]].map(([x, y], i) => (
+              <circle key={i} cx={x} cy={y} r="1.5" fill="white" opacity="0.6" />
+            ))}
+            <g transform="translate(600, 150)" opacity="0.18">
+              <rect x="0" y="0" width="50" height="65" rx="4" fill="white" />
+              <rect x="5" y="8" width="35" height="3" rx="1.5" fill="#2D1B69" />
+              <rect x="5" y="16" width="30" height="3" rx="1.5" fill="#2D1B69" />
+              <rect x="5" y="24" width="25" height="3" rx="1.5" fill="#2D1B69" />
+              <rect x="5" y="32" width="32" height="3" rx="1.5" fill="#2D1B69" />
+            </g>
+            <g transform="translate(660, 160)" opacity="0.15">
+              <rect x="0" y="0" width="8" height="55" rx="3" fill="white" transform="rotate(-20 4 27)" />
+              <polygon points="0,-4 8,-4 4,4" fill="#F59E0B" transform="rotate(-20 4 27)" />
+            </g>
+            <g transform="translate(510, 175)" opacity="0.2">
+              <ellipse cx="18" cy="10" rx="22" ry="6" fill="white" />
+              <rect x="8" y="0" width="20" height="12" rx="2" fill="white" />
+              <rect x="16" y="-5" width="4" height="8" rx="1" fill="white" />
+              <circle cx="18" cy="-5" r="3" fill="white" />
+              <line x1="30" y1="6" x2="36" y2="18" stroke="white" strokeWidth="2" />
+              <circle cx="36" cy="20" r="3" fill="white" />
+            </g>
+          </svg>
+
+          <button
+            onClick={() => navigate(-1)}
+            className="absolute top-4 left-4 md:top-6 md:left-6 z-20 text-white hover:text-gray-200 transition"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          <div className="relative z-10 flex flex-col justify-center h-full px-6 md:px-10 py-12 md:py-16">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#F59E0B" }}>
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              </svg>
+              🎮 EGQI VERIFIED
+            </span>
+            <h1 className="text-2xl md:text-4xl font-bold text-white mb-3">Curated Tech Stack</h1>
+            <p className="text-white/75 text-sm md:text-lg max-w-2xl leading-relaxed">
+              Temukan game edukasi yang telah dikurasi menggunakan Educational Game Quality Instrument (EGQI), sehingga guru dapat memilih media pembelajaran yang berkualitas, interaktif, dan sesuai kebutuhan kelas.
             </p>
           </div>
         </div>

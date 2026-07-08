@@ -10,6 +10,20 @@ import { useCurrentUser } from "../hooks/useCurrentUser";
 
 const JENJANG_LIST = ["Semua", "SD", "SMP", "SMA", "SMK"];
 const FILE_TYPES = ["PDF", "PPT", "DOC", "Gambar", "Lainnya"];
+const getFileIcon = (type) => {
+  switch (type) {
+    case "PDF":
+      return "📕";
+    case "PPT":
+      return "📊";
+    case "DOC":
+      return "📄";
+    case "Gambar":
+      return "🖼️";
+    default:
+      return "📁";
+  }
+};
 
 const emptyForm = {
   title: "",
@@ -42,6 +56,24 @@ const Marketplace = () => {
   }, []);
 
   const filtered = resources.filter((r) => {
+    const sortedResources = [...filtered].sort((a, b) => {
+  switch (sortBy) {
+    case "Terbaru":
+      return (
+        (b.createdAt?.seconds || 0) -
+        (a.createdAt?.seconds || 0)
+      );
+
+    case "Terbanyak":
+      return (b.downloads || 0) - (a.downloads || 0);
+
+    case "A-Z":
+      return (a.title || "").localeCompare(b.title || "");
+
+    default:
+      return 0;
+  }
+});
     const matchJenjang = activeJenjang === "Semua" || r.jenjang === activeJenjang;
     const keyword = search.toLowerCase();
     const matchSearch =
@@ -111,29 +143,81 @@ const Marketplace = () => {
             </svg>
           </button>
 
-          <div className="relative z-10 pt-8 md:pt-0 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div>
-              <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#F59E0B" }}>
-                🛒 Resource Marketplace
-              </span>
-              <h1 className="text-2xl md:text-4xl font-bold text-white mb-2">Bagikan & Temukan Materi Ajar</h1>
-              <p className="text-white/70 text-sm md:text-base max-w-xl">
-                Unggah dan unduh RPP, template, media ajar, gratis untuk semua guru.
-              </p>
-            </div>
+          <div className="relative z-10">
 
-            {user && (
-              <button
-                onClick={() => setShowForm((s) => !s)}
-                className="flex-shrink-0 flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-sm font-semibold shadow-sm hover:opacity-90 active:scale-[0.98] transition"
-                style={{ background: "#fff", color: "#5B21B6" }}
-              >
-                <span className="text-base leading-none">+</span> Bagikan Materi
-              </button>
-            )}
-          </div>
-        </div>
-      </div>
+  {/* Bagian Atas Hero */}
+  <div className="pt-8 md:pt-0 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
+    <div>
+      <span
+        className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase mb-3"
+        style={{ color: "#F59E0B" }}
+      >
+        🛒 Resource Marketplace
+      </span>
+
+      <h1 className="text-2xl md:text-4xl font-bold text-white mb-2">
+        Bagikan & Temukan Materi Ajar
+      </h1>
+
+      <p className="text-white/70 text-sm md:text-base max-w-xl">
+        Unggah dan unduh RPP, template, media ajar, gratis untuk semua guru.
+      </p>
+    </div>
+
+    {user && (
+      <button
+        onClick={() => setShowForm((s) => !s)}
+        className="flex-shrink-0 flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-sm font-semibold shadow-sm hover:opacity-90 active:scale-[0.98] transition"
+        style={{ background: "#fff", color: "#5B21B6" }}
+      >
+        <span className="text-base leading-none">+</span>
+        Bagikan Materi
+      </button>
+    )}
+  </div>
+
+  {/* Statistik Marketplace */}
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+
+    <div className="bg-white/10 backdrop-blur rounded-2xl p-4 text-center border border-white/10">
+      <h2 className="text-2xl font-bold text-white">
+        {resources.length}
+      </h2>
+      <p className="text-white/70 text-sm">
+        Materi
+      </p>
+    </div>
+
+    <div className="bg-white/10 backdrop-blur rounded-2xl p-4 text-center border border-white/10">
+      <h2 className="text-2xl font-bold text-white">
+        {new Set(resources.map((r) => r.createdBy)).size}
+      </h2>
+      <p className="text-white/70 text-sm">
+        Kontributor
+      </p>
+    </div>
+
+    <div className="bg-white/10 backdrop-blur rounded-2xl p-4 text-center border border-white/10">
+      <h2 className="text-2xl font-bold text-white">
+        {resources.reduce((total, item) => total + (item.downloads || 0), 0)}
+      </h2>
+      <p className="text-white/70 text-sm">
+        Download
+      </p>
+    </div>
+    <div className="bg-white/10 backdrop-blur rounded-2xl p-4 text-center border border-white/10">
+      <h2 className="text-2xl font-bold text-white">
+        {FILE_TYPES.length}
+      </h2>
+      <p className="text-white/70 text-sm">
+        Jenis File
+      </p>
+    </div>
+  </div>
+</div>
+</div>
+</div>
 
       {/* FORM UPLOAD */}
       {showForm && (
@@ -271,6 +355,15 @@ const Marketplace = () => {
               </button>
             ))}
           </div>
+          <select
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+          className="bg-white border border-purple-100 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-200"
+          >
+            <option value="Terbaru">🆕 Terbaru</option>
+            <option value="Terbanyak">🔥 Paling Banyak Diunduh</option>
+            <option value="A-Z">🔤 A-Z</option>
+            </select>
         </div>
       </div>
 
