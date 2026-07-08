@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
 import { Eye, EyeOff } from "lucide-react";
 import NavigationButtons from "../components/NavigationButtons";
 
@@ -16,16 +17,33 @@ function Login() {
   e.preventDefault();
 
   try {
-    await signInWithEmailAndPassword(auth, email, password);
+    const credential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
 
-    if (email === "tiensvicky18@gmail.com") {
-      navigate("/admin");
-    } else {
-      alert("Akun ini bukan administrator");
+    const uid = credential.user.uid;
+
+    const userRef = doc(db, "users", uid);
+    const snap = await getDoc(userRef);
+
+    if (!snap.exists()) {
+      alert("Data pengguna tidak ditemukan.");
+      return;
     }
 
-  } catch {
-    alert("Email atau password salah!");
+    const data = snap.data();
+
+    if (data.role === "admin") {
+      navigate("/admin");
+    } else {
+      alert("Akun ini bukan administrator.");
+    }
+
+  } catch (error) {
+    console.error(error);
+    alert("Email atau password salah.");
   }
 };
 

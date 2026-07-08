@@ -133,28 +133,20 @@ item.title
           {menuOpen ? "✕" : "☰"}
         </button>
       </div>
-{userData?.role === "admin" && (
-
-<button
-    onClick={()=>{
-        navigate("/admin");
-        setMenuOpen(false);
-    }}
->
-    Admin Panel
-</button>
-
-)}
       {/* MOBILE MENU */}
       <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${menuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}>
         <div className="bg-white px-4 pb-5 pt-2 space-y-2 shadow-md border-b border-purple-100">
    {[
+  ...(userData?.role === "admin"
+    ? [{ label: "⚙️ Admin Panel", path: "/admin" }]
+    : []),
+
   { label: "🏠 Dashboard", path: "/dashboard" },
   { label: "🌳 Skill Tree", path: "/skill-tree" },
   { label: "🛠 Tech Stack", path: "/tech-stack" },
   { label: "🛒 Marketplace", path: null },
   { label: "🎓 Workshop", path: "/workshop" },
-  { label: "👤 Edit Profil", path: null },
+  { label: "👤 Edit Profil", path: "/edit-profile" },
 ].map(({ label, path }) => {
   const isActive = path && location.pathname === path;
 
