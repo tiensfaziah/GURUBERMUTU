@@ -28,6 +28,7 @@ const Marketplace = () => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [activeJenjang, setActiveJenjang] = useState("Semua");
+  const [sortBy, setSortBy] = useState("Terbaru");
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState(emptyForm);
   const [submitting, setSubmitting] = useState(false);
