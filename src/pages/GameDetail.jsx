@@ -1,4 +1,6 @@
 import { useParams } from "react-router-dom";
+import { auth, db } from "../firebase";
+import { doc, updateDoc, increment } from "firebase/firestore";
 import games from "../data/games";
 import NavigationButtons from "../components/NavigationButtons";
 import {
@@ -52,6 +54,36 @@ const COLORS = [
 
 export default function GameDetail() {
   const { slug } = useParams();
+  const handleCompleteGame = async () => {
+  try {
+
+    const user = auth.currentUser;
+
+    if (!user) {
+      alert("Silakan login terlebih dahulu.");
+      return;
+    }
+
+    const userRef = doc(db, "users", user.uid);
+
+    await updateDoc(userRef, {
+
+      [`completedNodes.game-${game.id}`]: true,
+
+      xp: increment(100),
+
+    });
+
+    alert("🎉 Selamat! Kamu mendapatkan +100 XP");
+
+  } catch (err) {
+
+    console.error(err);
+
+    alert("Gagal menyimpan progress.");
+
+  }
+};
   const game = games.find((g) => g.slug === slug);
   const egqiData = [
   {
@@ -171,6 +203,12 @@ const radarData = [
               </svg>
               Mainkan Game
             </a>
+            <button
+  onClick={handleCompleteGame}
+  className="mt-3 flex sm:inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-xl bg-green-600 text-white text-sm font-semibold hover:bg-green-700 transition"
+>
+  ✅ Saya Sudah Mencoba
+</button>
           </div>
         </div>
 

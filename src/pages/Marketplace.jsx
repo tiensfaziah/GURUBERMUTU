@@ -65,8 +65,8 @@ const Marketplace = () => {
       setForm(emptyForm);
       setShowForm(false);
     } catch (err) {
-      console.error(err);
-      alert("Gagal mengunggah materi. Coba lagi.");
+    console.error("UPLOAD ERROR:", err);
+    alert(err.message);
     } finally {
       setSubmitting(false);
     }
