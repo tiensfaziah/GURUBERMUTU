@@ -6,6 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { getLevel } from "../utils/level";
 import games from "../data/games";
 import { subscribeWorkshops } from "../services/workshopService";
+import PersonaCard from "../components/PersonaCard";
 
 function Dashboard() {
   const [user, setUser] = useState(null);
@@ -79,6 +80,7 @@ Math.floor(
     userData?.badges && userData.badges.length > 0
       ? userData.badges[userData.badges.length - 1]
       : null;
+  const badgeCount = userData?.badges?.length || 0;
   console.log("USER DATA:", userData);
 console.log("AKTIVITAS:", userData?.aktivitas);
   const activities = [...(userData?.aktivitas || [])].sort((a,b)=>{
@@ -418,6 +420,8 @@ className="w-full text-left px-4 py-3 hover:bg-purple-50 transition"
               </div>
             </div>
 
+             {/* PERSONA CARD */}
+            <PersonaCard />
             {/* STATS */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
               {/* Total XP */}
@@ -599,7 +603,7 @@ className="w-full text-left px-4 py-3 hover:bg-purple-50 transition"
 
             <hr className="my-4 border-purple-50" />
 
-            {/* Aktivitas */}
+            {/* Aktivitas + pengisi ruang kosong */}
             <div className="flex-1">
               <h3 className="font-semibold mb-3 text-sm text-gray-800">Aktivitas Terkini</h3>
               <div className="space-y-2 text-sm">
@@ -613,6 +617,26 @@ className="w-full text-left px-4 py-3 hover:bg-purple-50 transition"
 </p>
                   </div>
                 ))}
+              </div>
+
+              {/* Ringkasan Badge — mengisi ruang kosong di bawah aktivitas */}
+              <div
+                className="mt-5 rounded-2xl p-4 relative overflow-hidden"
+                style={{ background: "#F5F3FF" }}
+              >
+                <svg className="absolute right-0 bottom-0 opacity-30" width="70" height="70" viewBox="0 0 70 70">
+                  <circle cx="55" cy="55" r="42" fill="none" stroke="#7C3AED" strokeWidth="1.5" />
+                  <circle cx="55" cy="55" r="28" fill="none" stroke="#7C3AED" strokeWidth="1" />
+                </svg>
+                <p className="text-xs font-semibold text-purple-700 mb-1">🎖 Ringkasan Badge</p>
+                <p className="text-2xl font-bold" style={{ color: "#5B21B6" }}>
+                  {badgeCount}
+                </p>
+                <p className="text-xs text-purple-500 leading-relaxed mt-0.5">
+                  {badgeCount > 0
+                    ? "Badge sudah kamu kumpulkan. Terus belajar untuk buka badge berikutnya! 🎉"
+                    : "Badge pertama terbuka setelah kamu mencapai 500 XP. Semangat! 🚀"}
+                </p>
               </div>
             </div>
 

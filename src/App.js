@@ -30,6 +30,7 @@ import EditProfile from "./pages/EditProfile";
 import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
 import SkillTree from "./pages/SkillTree";
 import Marketplace from "./pages/Marketplace";
+import PersonaQuestionnaire from "./pages/PersonaQuestionnaire";
 
 function Layout() {
   const location = useLocation();
@@ -47,6 +48,7 @@ function Layout() {
     location.pathname === "/admin/kelola-workshop" ||
     location.pathname === "/edit-profile" ||
     location.pathname === "/marketplace" ||
+    location.pathname === "/persona" ||
     location.pathname.startsWith("/workshop");
 
   return (
@@ -107,6 +109,7 @@ function Layout() {
 />
 <Route path="/skill-tree" element={<SkillTree />} />
 <Route path="/marketplace" element={<Marketplace />} />
+<Route path="/persona" element={<PersonaQuestionnaire />} />
         <Route
           path="/skill-tree"
           element={
