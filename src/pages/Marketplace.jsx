@@ -265,7 +265,7 @@ payload = {
               Bagikan & Temukan Materi Ajar
             </h1>
             <p className="text-white/75 text-sm md:text-lg max-w-2xl leading-relaxed">
-              Unggah dan unduh RPP, template, media ajar — gratis untuk semua guru.
+              Unggah dan unduh RPP, template, media ajar, gratis untuk semua guru.
             </p>
 
             {/* Statistik Marketplace */}
