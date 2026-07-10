@@ -145,7 +145,11 @@ const handleThumbnail = (e) => {
   reader.readAsDataURL(file);
 };
 
-  const goBackTarget = user?.role === "admin" ? "/admin/kelola-workshop" : "/workshop";
+  const goBackTarget = isEdit
+  ? (user?.role === "admin"
+      ? "/admin/kelola-workshop"
+      : "/workshop")
+  : "/workshop";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
