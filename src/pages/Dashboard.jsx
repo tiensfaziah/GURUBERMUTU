@@ -414,11 +414,10 @@ className="w-full text-left px-4 py-3 hover:bg-purple-50 transition"
                   </div>
                   <div className="rounded-2xl p-4 text-center border border-white/20" style={{ background: "rgba(255,255,255,0.1)", backdropFilter: "blur(8px)" }}>
                     <p className="text-xs font-medium mb-1" style={{ color: "rgba(255,255,255,0.7)" }}>🔥 Level</p>
-                    <h3
-                      className="text-sm font-bold text-white truncate w-full"
-                      title={`${levelData.name} (${xp} XP)`}
-                    >
-                      {levelData.name} ({xp} XP)
+                    <h3 className="text-sm font-bold text-white leading-snug">
+                      {levelData.name}
+                      <br />
+                      ({xp} XP)
                     </h3>
                   </div>
                 </div>
@@ -450,12 +449,10 @@ className="w-full text-left px-4 py-3 hover:bg-purple-50 transition"
                   <span className="text-sm">🏅</span>
                 </div>
                 <p className="text-gray-400 text-[10px] uppercase tracking-widest font-semibold">Level</p>
-                <h3
-                  className="text-sm sm:text-base font-bold mt-0.5 truncate"
-                  style={{ color: "#7C3AED" }}
-                  title={`${levelData.name} (${xp} XP)`}
-                >
-                  {levelData.name} ({xp} XP)
+                <h3 className="text-sm sm:text-base font-bold mt-0.5 leading-snug" style={{ color: "#7C3AED" }}>
+                  {levelData.name}
+                  <br />
+                  ({xp} XP)
                 </h3>
               </div>
 
@@ -577,8 +574,8 @@ className="w-full text-left px-4 py-3 hover:bg-purple-50 transition"
 
           {/* RIGHT PANEL DESKTOP */}
           <div
-            className="hidden md:flex w-[260px] shrink-0 flex-col border-l border-purple-50 px-5 py-5 self-start mt-6 rounded-2xl"
-            style={{ background: "#fff", height: "calc(100vh - 48px)" }}
+            className="hidden md:flex w-[260px] shrink-0 flex-col border-l border-purple-50 px-5 py-5 mt-6 rounded-2xl"
+            style={{ background: "#fff" }}
           >
             {/* Avatar */}
             <div className="text-center">
@@ -614,8 +611,8 @@ className="w-full text-left px-4 py-3 hover:bg-purple-50 transition"
 
             <hr className="my-4 border-purple-50" />
 
-            {/* Aktivitas + pengisi ruang kosong */}
-            <div className="flex-1">
+            {/* Aktivitas + Ringkasan Badge */}
+            <div>
               <h3 className="font-semibold mb-3 text-sm text-gray-800">Aktivitas Terkini</h3>
               <div className="space-y-2 text-sm">
                 {displayActivities.slice(0,3).map((item, index) => (
