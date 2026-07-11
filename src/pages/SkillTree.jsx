@@ -14,12 +14,12 @@ import games from "../data/games";
 
 const dailyTips = [
   "Konsisten 15 menit tiap hari lebih efektif daripada belajar maraton sekali seminggu.",
-  "Coba praktikkan satu materi baru langsung ke kelasmu besok — belajar sambil praktik lebih nempel.",
+  "Coba praktikkan satu materi baru langsung ke kelasmu besok, belajar sambil praktik lebih nempel.",
   "Selesaikan node yang paling kamu hindari duluan, biar makin ringan ke depannya.",
-  "Ajak rekan guru lain buat saling cek progress — belajar bareng lebih semangat.",
+  "Ajak rekan guru lain buat saling cek progress, belajar bareng lebih semangat.",
   "Catat satu insight baru setiap selesai node, biar gampang direview lagi nanti.",
   "Istirahat sejenak tiap 2 node biar materi lebih nempel di ingatan.",
-  "Rayakan progress kecil — tiap node selesai artinya kamu makin dekat ke level berikutnya.",
+  "Rayakan progress kecil, tiap node selesai artinya kamu makin dekat ke level berikutnya.",
 ];
 
 const skillTreeData = [

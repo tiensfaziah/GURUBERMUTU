@@ -404,22 +404,37 @@ const handleThumbnail = (e) => {
 </div>
 <div>
   <label className="block text-sm font-medium text-gray-700 mb-1.5">
-    Skill Tree Node
+    Kompetensi Skill Tree <span className="text-red-500">*</span>
   </label>
 
   <select
     value={form.skillTreeNode}
     onChange={handleChange("skillTreeNode")}
-    className="w-full border border-purple-100 rounded-xl px-4 py-2.5"
+    className="w-full border border-purple-100 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-purple-200"
   >
-    <option value="">Pilih Node</option>
-    <option value="0-0">0-0</option>
-    <option value="0-1">0-1</option>
-    <option value="0-2">0-2</option>
-    <option value="1-1">1-1</option>
+    <option value="">Pilih Kompetensi</option>
+
+    <option value="0-0">
+      Level 1 • Beginner (Node 1)
+    </option>
+
+    <option value="0-1">
+      Level 1 • Beginner (Node 2)
+    </option>
+
+    <option value="0-2">
+      Level 1 • Beginner (Node 3)
+    </option>
+
+    <option value="1-1">
+      Level 2 • Intermediate (Node 1)
+    </option>
   </select>
-</div>
-            <button
+
+  <p className="text-xs text-gray-400 mt-1">
+    Pilih kompetensi pada Skill Tree yang akan dikembangkan melalui workshop ini.
+  </p>
+</div>            <button
               type="submit"
               disabled={saving}
               className="w-full text-white py-3 rounded-xl text-sm font-semibold transition hover:opacity-90 active:scale-[0.98] disabled:opacity-60"
