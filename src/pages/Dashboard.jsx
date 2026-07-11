@@ -414,7 +414,12 @@ className="w-full text-left px-4 py-3 hover:bg-purple-50 transition"
                   </div>
                   <div className="rounded-2xl p-4 text-center border border-white/20" style={{ background: "rgba(255,255,255,0.1)", backdropFilter: "blur(8px)" }}>
                     <p className="text-xs font-medium mb-1" style={{ color: "rgba(255,255,255,0.7)" }}>🔥 Level</p>
-                    <h3 className="text-sm font-bold text-white">{levelData.name} ({xp} XP)</h3>
+                    <h3
+                      className="text-sm font-bold text-white truncate w-full"
+                      title={`${levelData.name} (${xp} XP)`}
+                    >
+                      {levelData.name} ({xp} XP)
+                    </h3>
                   </div>
                 </div>
               </div>
@@ -445,7 +450,13 @@ className="w-full text-left px-4 py-3 hover:bg-purple-50 transition"
                   <span className="text-sm">🏅</span>
                 </div>
                 <p className="text-gray-400 text-[10px] uppercase tracking-widest font-semibold">Level</p>
-                <h3 className="text-base font-bold mt-0.5" style={{ color: "#7C3AED" }}>{levelData.name} ({xp} XP)</h3>
+                <h3
+                  className="text-sm sm:text-base font-bold mt-0.5 truncate"
+                  style={{ color: "#7C3AED" }}
+                  title={`${levelData.name} (${xp} XP)`}
+                >
+                  {levelData.name} ({xp} XP)
+                </h3>
               </div>
 
               {/* Badge */}

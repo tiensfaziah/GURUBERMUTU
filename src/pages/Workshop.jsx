@@ -5,6 +5,27 @@ import { useCurrentUser } from "../hooks/useCurrentUser";
 
 const timeFilters = ["Semua", "Untukmu", "Hari Ini", "Akhir Pekan"];
 
+// Coba parse berbagai format tanggal yang mungkin dipakai saat membuat workshop.
+const parseWorkshopDate = (dateStr) => {
+  if (!dateStr) return null;
+  const d = new Date(dateStr);
+  if (!isNaN(d.getTime())) return d;
+
+  // fallback sederhana untuk format "DD/MM/YYYY" atau "DD-MM-YYYY"
+  const match = String(dateStr).match(/(\d{1,2})[/-](\d{1,2})[/-](\d{2,4})/);
+  if (match) {
+    const [, dd, mm, yyyy] = match;
+    const parsed = new Date(`${yyyy.length === 2 ? "20" + yyyy : yyyy}-${mm}-${dd}`);
+    if (!isNaN(parsed.getTime())) return parsed;
+  }
+  return null;
+};
+
+const isSameDay = (a, b) =>
+  a.getFullYear() === b.getFullYear() &&
+  a.getMonth() === b.getMonth() &&
+  a.getDate() === b.getDate();
+
 const Workshop = () => {
   const navigate = useNavigate();
   const { user } = useCurrentUser();
@@ -44,11 +65,29 @@ const Workshop = () => {
     navigate(`/workshop/edit/${item.id}`);
   };
 
+  const today = new Date();
+
   const filteredWorkshop = workshops.filter((item) => {
     const matchLocation =
       selectedLocation === "Semua Lokasi" || item.location === selectedLocation;
     const matchSearch = (item.title || "").toLowerCase().includes(search.toLowerCase());
-    return matchLocation && matchSearch;
+
+    let matchTime = true;
+    const itemDate = parseWorkshopDate(item.date);
+
+    if (activeTime === "Hari Ini") {
+      matchTime = itemDate ? isSameDay(itemDate, today) : false;
+    } else if (activeTime === "Akhir Pekan") {
+      const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      matchTime = itemDate
+        ? (itemDate.getDay() === 0 || itemDate.getDay() === 6) && itemDate >= startOfToday
+        : false;
+    } else if (activeTime === "Untukmu") {
+      // Rekomendasi sederhana: workshop di lokasi terdeteksi pengguna
+      matchTime = item.location === detectedLocation;
+    }
+
+    return matchLocation && matchSearch && matchTime;
   });
 
   return (
@@ -122,13 +161,13 @@ const Workshop = () => {
       {/* FILTER BAR */}
       <div className="bg-white border-b border-purple-100 sticky top-0 z-10 mt-4 md:mt-6">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex flex-col gap-4">
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex gap-2 overflow-x-auto pb-1">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div className="flex gap-1.5 sm:gap-2 overflow-x-auto pb-1 -mx-1 px-1 min-w-0">
               {timeFilters.map((tf) => (
                 <button
                   key={tf}
                   onClick={() => setActiveTime(tf)}
-                  className="px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition"
+                  className="flex-shrink-0 px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap transition"
                   style={
                     activeTime === tf
                       ? { background: "#5B21B6", color: "#fff" }
@@ -143,7 +182,7 @@ const Workshop = () => {
             {user && (
               <button
                 onClick={() => navigate("/workshop/buat")}
-                className="flex-shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-xl text-white text-sm font-semibold shadow-sm hover:opacity-90 active:scale-[0.98] transition"
+                className="flex-shrink-0 flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl text-white text-sm font-semibold shadow-sm hover:opacity-90 active:scale-[0.98] transition w-full sm:w-auto"
                 style={{ background: "#5B21B6" }}
               >
                 <span className="text-base leading-none">+</span> Buat Workshop
