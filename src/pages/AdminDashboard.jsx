@@ -61,26 +61,6 @@ function DimRow({ label, score, color }) {
   );
 }
 
-function QuickMenuCard({ icon, iconBg, label, description, onClick }) {
-  return (
-    <button
-      onClick={onClick}
-      className="bg-white rounded-[18px] p-4 border border-[#f0edfb] hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(124,58,237,0.1)] transition-all text-left flex items-center gap-3"
-    >
-      <div
-        className="w-10 h-10 rounded-[11px] flex items-center justify-center text-lg flex-shrink-0"
-        style={{ background: iconBg.bg, color: iconBg.color }}
-      >
-        {icon}
-      </div>
-      <div className="min-w-0">
-        <p className="text-sm font-semibold text-gray-900">{label}</p>
-        <p className="text-xs text-gray-400 truncate">{description}</p>
-      </div>
-    </button>
-  );
-}
-
 export default function AdminDashboard() {
   const stats = useDashboardStats();
   const navigate = useNavigate();
@@ -170,24 +150,6 @@ export default function AdminDashboard() {
           label="Rata-rata EGQI"
           value={stats.overallAvg}
           trend="Skala 1–5"
-        />
-      </div>
-
-      {/* QUICK ACCESS MENU */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 mb-6">
-        <QuickMenuCard
-          icon="🗓️"
-          iconBg={{ bg: "#EEEDFE", color: "#7C3AED" }}
-          label="Kelola Workshop"
-          description="Tambah, edit, hapus workshop"
-          onClick={() => navigate("/admin/kelola-workshop")}
-        />
-        <QuickMenuCard
-          icon="👩‍🏫"
-          iconBg={{ bg: "#D1FAE5", color: "#059669" }}
-          label="Kelola Guru"
-          description="Data guru terdaftar"
-          onClick={() => navigate("/admin/data-guru")}
         />
       </div>
 
