@@ -53,18 +53,18 @@ export default function DataGuru() {
       </div>
 
       {/* MINI STATS */}
-      <div className="grid grid-cols-3 gap-3.5 mb-5">
-        <div className="bg-white rounded-2xl p-4 border border-[#f0edfb]">
-          <p className="text-[11px] text-gray-400 font-medium mb-0.5">Total Guru</p>
-          <p className="text-xl font-bold text-gray-900">{teachers.length}</p>
+      <div className="grid grid-cols-3 gap-2 sm:gap-3.5 mb-5">
+        <div className="bg-white rounded-2xl p-3 sm:p-4 border border-[#f0edfb]">
+          <p className="text-[10px] sm:text-[11px] text-gray-400 font-medium mb-0.5">Total Guru</p>
+          <p className="text-base sm:text-xl font-bold text-gray-900">{teachers.length}</p>
         </div>
-        <div className="bg-white rounded-2xl p-4 border border-[#f0edfb]">
-          <p className="text-[11px] text-gray-400 font-medium mb-0.5">Guru Aktif</p>
-          <p className="text-xl font-bold text-emerald-600">{totalActive}</p>
+        <div className="bg-white rounded-2xl p-3 sm:p-4 border border-[#f0edfb]">
+          <p className="text-[10px] sm:text-[11px] text-gray-400 font-medium mb-0.5">Guru Aktif</p>
+          <p className="text-base sm:text-xl font-bold text-emerald-600">{totalActive}</p>
         </div>
-        <div className="bg-white rounded-2xl p-4 border border-[#f0edfb]">
-          <p className="text-[11px] text-gray-400 font-medium mb-0.5">Total Penilaian</p>
-          <p className="text-xl font-bold text-[#7C3AED]">{totalReviews}</p>
+        <div className="bg-white rounded-2xl p-3 sm:p-4 border border-[#f0edfb]">
+          <p className="text-[10px] sm:text-[11px] text-gray-400 font-medium mb-0.5">Total Penilaian</p>
+          <p className="text-base sm:text-xl font-bold text-[#7C3AED]">{totalReviews}</p>
         </div>
       </div>
 

@@ -249,7 +249,7 @@ const radarData = [
     Dashboard EGQI
   </p>
 
-  <div className="h-[420px]">
+  <div className="h-[260px] sm:h-[340px] md:h-[420px]">
 
     <ResponsiveContainer width="100%" height="100%">
 

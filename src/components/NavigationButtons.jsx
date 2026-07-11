@@ -13,6 +13,7 @@ export default function NavigationButtons({
         {showBack && (
           <button
             onClick={() => navigate(-1)}
+            aria-label="Kembali"
             className="
               w-10 h-10
               rounded-xl
@@ -20,11 +21,21 @@ export default function NavigationButtons({
               border border-gray-200
               shadow-sm
               flex items-center justify-center
+              text-gray-600
               hover:bg-gray-50
               transition
             "
           >
-            &lt;
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2.5}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
           </button>
         )}
       </div>
@@ -33,6 +44,7 @@ export default function NavigationButtons({
         {showForward && (
           <button
             onClick={() => navigate(1)}
+            aria-label="Maju"
             className="
               w-10 h-10
               rounded-xl
@@ -40,11 +52,21 @@ export default function NavigationButtons({
               border border-gray-200
               shadow-sm
               flex items-center justify-center
+              text-gray-600
               hover:bg-gray-50
               transition
             "
           >
-            &gt;
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2.5}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
           </button>
         )}
       </div>

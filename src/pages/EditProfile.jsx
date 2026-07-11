@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { useState, useEffect } from "react";
 import { updatePassword } from "firebase/auth";
 
@@ -127,7 +127,7 @@ if (password !== "") {
             onClick={() => navigate("/dashboard")}
             className="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center"
           >
-            <ArrowLeft size={20} />
+            <ChevronLeft size={22} strokeWidth={2.5} />
           </button>
 
           <h1 className="font-bold text-xl">
