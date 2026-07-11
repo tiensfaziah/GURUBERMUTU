@@ -175,14 +175,14 @@ export default function AdminDashboard() {
           </div>
 
           {[
-            { name: "Rini", game: "Detective X", time: "2 jam lalu", score: 4.8, color: "linear-gradient(135deg,#7C3AED,#EC4899)" },
-            { name: "Andi", game: "Dirt Bike", time: "5 jam lalu", score: 4.5, color: "linear-gradient(135deg,#059669,#34D399)" },
-            { name: "Sari", game: "Brainie", time: "1 hari lalu", score: 4.2, color: "linear-gradient(135deg,#D97706,#FBBF24)" },
+            { name: "Rini", game: "Detective X", time: "2 jam lalu", score: 4.8 },
+            { name: "Andi", game: "Dirt Bike", time: "5 jam lalu", score: 4.5 },
+            { name: "Sari", game: "Brainie", time: "1 hari lalu", score: 4.2 },
           ].map((r) => (
             <div key={r.name} className="flex items-center gap-2.5 py-2 px-2.5 rounded-xl hover:bg-[#FAFAFF] transition">
               <div
                 className="w-8 h-8 rounded-full flex items-center justify-center text-white text-[11px] font-bold flex-shrink-0"
-                style={{ background: r.color }}
+                style={{ background: "#7C3AED" }}
               >
                 {r.name.slice(0, 2).toUpperCase()}
               </div>

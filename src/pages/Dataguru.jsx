@@ -62,7 +62,7 @@ function TeacherActions({ teacher, onView, onToggleStatus }) {
 
 function TeacherAvatar({ name }) {
   return (
-    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#7C3AED] to-[#EC4899] flex items-center justify-center text-white text-[11px] font-bold flex-shrink-0">
+    <div className="w-9 h-9 rounded-full flex items-center justify-center text-white text-[11px] font-bold flex-shrink-0" style={{ background: "#7C3AED" }}>
       {name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase()}
     </div>
   );
@@ -264,7 +264,7 @@ export default function DataGuru() {
             </button>
 
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#7C3AED] to-[#EC4899] flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+              <div className="w-12 h-12 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0" style={{ background: "#7C3AED" }}>
                 {selectedTeacher.name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase()}
               </div>
               <div className="min-w-0">
